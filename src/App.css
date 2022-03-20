@@ -1,0 +1,56 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
+/*CSS for NAV BAR */
+.icons {
+  padding-right: 5px;
+}
+
+.navbar-brand {
+  transform: translateX(-50%);
+  vertical-align: top;
+  left: 50%;
+  position: fixed;
+}
+
+#signIn {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.navbar {
+  background-color: #94d2bd;
+}
+
+/*Sidebar*/
+.Sidebar {
+  height: 100%;
+  background-color: #e8e8e4;
+}
+
+.SidebarList {
+  height: auto;
+  margin-top: 30px;
+  width: 100%;
+}
+.Sidebar .navItem {
+  width: 100%;
+  height: 50px;
+  background-color: black;
+  list-style-type: none;
+  color: gray;
+  justify-content: center;
+  align-items: center;
+}
+
+.Sidebar .navItem:hover {
+  cursor: pointer;
+  background-color: rgb(221, 221, 221);
+  color: grey;
+}
+
+.Sidebar .navItem:active {
+  color: black;
+}
