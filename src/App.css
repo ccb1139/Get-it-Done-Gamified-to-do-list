@@ -57,9 +57,26 @@
 
 /*New Habit*/
 .NewHabitForm {
+  min-width: 510px;
+  max-width: 800px !important;
   padding: 50px;
   font-size: 20px;
   background: #577590;
   border-radius: 1em;
   color: white
+}
+
+.NewHabitHeading {
+  margin: 25px auto;
+  text-align: center;
+}
+
+.text-right {
+  float: right;
+  text-align: right;
+}
+
+.text-center {
+  float: center;
+  text-align: center;
 }
