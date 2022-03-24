@@ -4,8 +4,15 @@ import github from '../img/github.svg';
 import 'bootstrap/dist/css/bootstrap.css'
 import { Container, Navbar, Nav, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import Signin from './Signin';
 
 const MainNav = () => {
+  // Open and closing signin page
+  const [show, setShow] = useState(false);
+  function openSignin() { setShow(true) }
+  function closeSignin() { setShow(false) }
+
   return (
   <div>
       <Navbar className ='navbar' sticky="top" expand="lg">
@@ -36,12 +43,13 @@ const MainNav = () => {
                 <img src={github} alt="Github Link" className = "icons" width="30" height="30"/>  
               </Nav.Link>
     
-              <Button id="signIn" size="sm" type="submit" > Sign-in </Button>
+              <Button id="signIn" size="sm" onClick={openSignin}> Sign-in </Button>
              
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <Signin show={show} close={closeSignin}/>
   </div>
 
   );
