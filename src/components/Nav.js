@@ -3,6 +3,7 @@ import setting from '../img/gear.svg';
 import github from '../img/github.svg';
 import 'bootstrap/dist/css/bootstrap.css'
 import { Container, Navbar, Nav, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const MainNav = () => {
   return (
@@ -10,25 +11,28 @@ const MainNav = () => {
       <Navbar className ='navbar' sticky="top" expand="lg">
         <Container>
           <Navbar.Brand>
-            <img src={logo} alt="Get It Done Logo" id="logoImg" heigth= "120" width = "70"/>  
+            <Nav.Link as={Link} to="/">
+              <img src={logo} alt="Get It Done Logo" id="logoImg" heigth= "120" width = "70"/>  
+            </Nav.Link>
+            
           </Navbar.Brand>
         
         <Navbar.Toggle />
         <Navbar.Collapse>
 
             <Nav className='navbar-nav nav me-auto'>
-              <Nav.Link href="#NewTasks"> New Habit</Nav.Link>
-              <Nav.Link href="#Tasks"> Lists </Nav.Link>
-              <Nav.Link href="#Achievements"> Achievements</Nav.Link>
-              <Nav.Link href="#AboutUs"> About Us</Nav.Link>
+              <Nav.Link as={Link} to="/NewHabit"> New Habit</Nav.Link>
+              <Nav.Link as={Link} to="/Tasks"> Lists </Nav.Link>
+              <Nav.Link as={Link} to="/Achievements"> Achievements</Nav.Link>
+              <Nav.Link as={Link} to="/AboutUs"> About Us</Nav.Link>
             </Nav>
 
             <Nav> 
-              <Nav.Link href="#Settings">
+              <Nav.Link as={Link} to="/Settings">
                 <img src={setting} alt="Settings" className = "icons" width="30" height="30"/>  
               </Nav.Link>
               
-              <Nav.Link href="#Settings">
+              <Nav.Link href="https://github.com/ccb1139/Get-it-Done-Gamified-to-do-list">
                 <img src={github} alt="Github Link" className = "icons" width="30" height="30"/>  
               </Nav.Link>
     

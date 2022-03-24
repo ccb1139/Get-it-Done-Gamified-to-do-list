@@ -54,3 +54,12 @@
 .Sidebar .navItem:active {
   color: black;
 }
+
+/*New Habit*/
+.NewHabitForm {
+  padding: 50px;
+  font-size: 20px;
+  background: #577590;
+  border-radius: 1em;
+  color: white
+}
