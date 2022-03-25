@@ -80,3 +80,25 @@
   float: center;
   text-align: center;
 }
+
+/*Achievements Overview*/
+.overview{
+  width: auto;
+  margin: auto;
+  padding: 50px;
+  
+}
+.achv{
+  background-color: white;
+  width: auto;
+  height: fit-content;
+
+  margin: 10px;
+}
+.achv-info{
+  text-align: center;
+}
+.acvh-img{
+  max-height: 150px;
+  max-width: 150px;
+}
