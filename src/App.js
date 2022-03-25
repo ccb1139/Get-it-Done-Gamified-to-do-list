@@ -5,6 +5,7 @@ import Home from './components/Home';
 import DailyView from './components/DailyView';
 import Achievements from './components/Achievements';
 import NewHabit from './components/NewHabit';
+import Wheelspin from './components/Wheelspin';
 import React from "react";
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
@@ -20,6 +21,8 @@ function App() {
         <Route path="/Tasks" element={<DailyView />} />
         <Route path="/Achievements" element={<Achievements />} />
         <Route path="/AboutUs" element={<Home />} />
+        {/* Temp wheel spin button on nav bar */}
+        <Route path="/Wheelspin" element={<Wheelspin/>} />
       </Routes>
 
     </Router>

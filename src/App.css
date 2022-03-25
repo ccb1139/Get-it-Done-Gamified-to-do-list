@@ -102,3 +102,11 @@
   max-height: 150px;
   max-width: 150px;
 }
+
+/* Wheel Spin */
+#WsMain{
+  border-style: dashed;
+  width: auto;
+  margin: auto;
+  text-align: center;
+}

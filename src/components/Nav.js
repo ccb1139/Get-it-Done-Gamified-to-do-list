@@ -32,6 +32,8 @@ const MainNav = () => {
               <Nav.Link as={Link} to="/Tasks"> Lists </Nav.Link>
               <Nav.Link as={Link} to="/Achievements"> Achievements</Nav.Link>
               <Nav.Link as={Link} to="/AboutUs"> About Us</Nav.Link>
+              {/* Temp wheelspin button on nav bar */}
+              <Nav.Link as={Link} to="/Wheelspin"> Wheelspin</Nav.Link>
             </Nav>
 
             <Nav> 
