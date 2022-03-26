@@ -1,49 +1,60 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
-import Select from 'react-select'
+import { useForm } from "react-hook-form";
+import InvalidInput from './InvalidInput';
 
 const NewHabit = () => {
-    const lengthUnitOptions = [{value: "Days", label: "Days"},
-    {value: "Weeks", label: "Weeks"},
-    {value: "Months", label: "Months"}];
-
-    const lengthUnitStyle = {
-        option: (provided, state) => ({
-          ...provided,
-          color: state.isSelected ? 'white' : 'black',
-          backgroundColor: state.isSelected ? '#0D6EFD' : 'white'
-        })
-    }
-
-    const [selectedLengthUnit, setSelectedLengthUnit] = useState(0);
-
-    const updateLengthUnit = (e) => {
-        setSelectedLengthUnit(e.value);
-    }
+    const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
 
     function saveHabit(e) {
+        // Check if form has any errors
+        if (isSubmitSuccessful === false) return;
+
         // Get data from form
         const habitName = document.getElementById("habitNameInput").value;
         const task = document.getElementById("taskInput").value;
         const frequency = document.getElementById("frequencyInput").value;
         const length = document.getElementById("lengthInput").value;
-        const lengthUnit = selectedLengthUnit;
+        const lengthUnit = document.getElementById("lengthUnitInput").value;
         
-        // Validate input
-        
+        // Start date
+        var today = new Date();
+        const start = {
+            year: today.getFullYear(),
+            month: today.getMonth() + 1,
+            day: today.getDate()
+        }
+
+        // Convert length to days
+        var totalDays = 0;
+        if (lengthUnit === "Days") {
+            totalDays = length
+        } else if (lengthUnit === "Weeks") {
+            totalDays = length * 7;
+        } else if (lengthUnit === "Months") {
+            totalDays = length * 30;
+        }
+
+        // End date
+        const endDate = new Date(today.setDate(today.getDate() + parseInt(totalDays)));
+        const end = {
+            year: endDate.getFullYear(),
+            month: endDate.getMonth() + 1,
+            day: endDate.getDate()
+        }
 
         // Save habit to database
         const habit = {
             habit: habitName,
             task: task,
             frequency: frequency,
-            length: length,
-            lengthUnit: lengthUnit
+            start: start,
+            end: end
         }
 
         // For now just output what will be saved to the database
-        alert(JSON.stringify(habit));
+        console.log(JSON.stringify(habit));
     }
 
     return (
@@ -51,65 +62,93 @@ const NewHabit = () => {
         <h1 className="NewHabitHeading">New Habit</h1>
 
         <Container className="NewHabitForm w-50">
-            <Form>
-                <Row className="mb-4">
-                    <Col className="col-sm-4">
+            <Form onSubmit={handleSubmit(saveHabit)}>
+                <Row className="mb-2">
+                    <Col className="col-4">
                         <Form.Label className="text-right">Habit Name</Form.Label> 
                     </Col>
 
-                    <Col className="col-sm-6">
-                        <Form.Control placeholder="Enter habit" id="habitNameInput"/>
+                    <Col className="col-6">
+                        <input className="form-control" id="habitNameInput" autoComplete="off" {...register("habitNameInput", 
+                        {required: true, maxLength: 25})}/>
+                        
                     </Col>
                 </Row>
+                <div className="text-center mb-4">
+                    {errors.habitNameInput?.type === "required" && <InvalidInput text="Habit name is required" />}
+                    {errors.habitNameInput?.type === "maxLength" && <InvalidInput text="Habit name must be less than 25 characters" />}
+                </div>
 
-                <Row className="mb-4">
-                    <Col className="col-sm-4">
+                <Row className="mb-2">
+                    <Col className="col-4">
                         <Form.Label className="text-right">Task</Form.Label> 
                     </Col>
 
-                    <Col className="col-sm-6">
-                        <Form.Control placeholder="Enter task" id="taskInput" />
+                    <Col className="col-6">
+                        <input className="form-control" id="taskInput" autoComplete="off" {...register("taskInput", 
+                        {required: true, maxLength: 25})}/>
+                        
                     </Col>
                 </Row>
+                <div className="text-center mb-4">
+                    {errors.taskInput?.type === "required" && <InvalidInput text="Task is required" />}
+                    {errors.taskInput?.type === "maxLength" && <InvalidInput text="Task must be less than 25 characters" />}
+                </div>
 
-                <Row className="mb-4">
-                    <Col className="col-sm-4">
+                <Row className="mb-2">
+                    <Col className="col-4">
                         <Form.Label className="text-right">Frequency</Form.Label> 
                     </Col>
 
-                    <Col className="col-sm-3">
-                        <Form.Control type="number" id="frequencyInput" />
+                    <Col className="col-3">
+                        <input className="form-control" id="frequencyInput" type="number" autoComplete="off" {...register("frequencyInput", 
+                        {required: true, min:1, max: 7})}/>
                     </Col>
-
-                    <Col className="col-sm-3">
+                    
+                    <Col className="col-3">
                         <Form.Label>Days</Form.Label> 
                     </Col>
                 </Row>
+                <div className="text-center mb-4">
+                    {errors.frequencyInput?.type === "required" && <InvalidInput text="Frequency is required" />}
+                    {errors.frequencyInput?.type === "min" && <InvalidInput text="Frequency must be greater than 0" />}
+                    {errors.frequencyInput?.type === "max" && <InvalidInput text="Frequency must be less than 7" />}
+                </div>
 
-                <Row className="mb-4">
-                    <Col className="col-sm-4">
+                <Row className="mb-2">
+                    <Col className="col-4">
                         <Form.Label className="text-right">Length</Form.Label> 
                     </Col>
 
-                    <Col className="col-sm-3">
-                        <Form.Control type="number" id="lengthInput" />
+                    <Col className="col-3">
+                        <input className="form-control" id="lengthInput" type="number" autoComplete="off" {...register("lengthInput", 
+                        {required: true, min:1, max: 365})}/>
                     </Col>
 
-                    <Col className="col-sm-3">
+                    <Col className="col-3">
+                        <select className="form-select" id="lengthUnitInput">
+                            <option value="Days">Days</option>
+                            <option value="Weeks">Weeks</option>
+                            <option value="Years">Years</option>
+                        </select>
+                    </Col>
+                    {/* <Col className="col-sm-3">
                         <Select id="lengthUnitInput" styles={lengthUnitStyle}
                         options={lengthUnitOptions}
                         value={lengthUnitOptions.find(obj => obj.value === selectedLengthUnit)}
                         onChange={updateLengthUnit}>
                         </Select>
-                    </Col>
+                    </Col> */}
                 </Row>
-                
+                <div className="text-center mb-4">
+                    {errors.lengthInput?.type === "required" && <InvalidInput text="Length is required" />}
+                    {errors.lengthInput?.type === "min" && <InvalidInput text="Length must be greater than 0" />}
+                    {errors.lengthInput?.type === "max" && <InvalidInput text="Length must be less than 365" />}
+                </div>
             
                 <Row>
-                    <Col className="col-sm-12 text-center" >
-                        <Button variant="primary" size="lg" onClick={saveHabit}>
-                            Create
-                        </Button>
+                    <Col className="col-12 text-center" >
+                        <Button variant="primary" size="lg" type="submit">Create</Button>
                     </Col>
                 </Row>
             </Form>
