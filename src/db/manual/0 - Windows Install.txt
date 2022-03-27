@@ -1,0 +1,29 @@
+0 - Windows Install
+
+This step is extremely easy.
+
+First grab the precompiled binary of SQLite from this link:
+https://www.sqlite.org/2022/sqlite-dll-win64-x64-3380200.zip
+
+If you're on Linux you can very likely get SQLite from your repository, check for availability.
+
+If you're a different operating system choose your correct implementation:
+https://www.sqlite.org/download.html
+
+Rest of the guide is Windows, good luck if you're otherwise. (I don't own a Mac, can't help there.)
+
+Go to your main windows drive. This is likely C:\
+
+Find the Windows folder. From there navigate to System32. (Be not afraid.)
+
+Drag the SQLite .dll and .def files into your System32 folder.
+
+Now sqlite3 is an integral part of your Windows operating system! It sounds scary on paper, but try it out!
+
+Open a command prompt and run `sqlite3`.
+
+If you see this `sqlite>` you've executed all previous steps successfully!
+
+You can exit this by typing `.exit` or just closing the terminal.
+
+You are now one step closer to using SQLite for database management!
