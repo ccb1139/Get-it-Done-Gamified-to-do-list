@@ -1,0 +1,109 @@
+Chapter 1 - Database Creation and Population
+
+You can start SQLite from the shell with `sqlite3`. Using sqlite from the command line, create a DB like so.
+
+	```
+	sqlite> .open testbed.db
+	```
+
+If you close your shell for any reason, `.open testbed.db` will reopen the DB and your progress will remain (as it should in a DB).
+
+You should only need `.save db_name.db if` you are still working with a "transient in-memory database". Changes to an open DB are permenant, and terminating the shell only closes the db. Still try to leave with `.exit` if possible.
+
+Now create a table within said DB.
+	
+	```
+	sqlite> CREATE TABLE user (id INTEGER PRIMARY KEY, username TEXT, password TEXT);
+	```
+	
+Here we've defined a user table that delcares an incrementing integer `id`, string `username`, and string `password`.
+
+Note that there is a difference between `INTEGER` and `INTEGER PRIMARY KEY`. `INTEGER` stores any normal integer as one would expect. `INTEGER PRIMARY KEY` autoincrements an integer for purposes like an UIDs (eg first ID is 1, second is 2, ad infinitum).
+
+Now that a user is defined, we should add a user. This can be done as shown below.
+	
+	```
+	sqlite> INSERT INTO user (username, password) VALUES ("admin", "Group1");
+	```
+	
+Here we choose to `INSERT` `INTO` the table `user` data in the form (`username`, `password`) with the `VALUES` (`"admin"`, `"Group1"`);
+
+The fact that I have exposed an "admin" username and password in plaintext are not lost on me. This is just a demo database.
+
+Now let's see what effect was wrought upon our system following this change. Note the use of the wildcard `*` below, declaring our intent to see everything within the `user` table.
+	
+	```
+	sqlite> select * FROM user;
+	1|admin|Group1
+	sqlite>
+	```
+
+Here we can clearly see the user id 1, username admin, and password Group1.
+
+You can also sort by attributes. First I will add some more users to demonstrate this more easily.
+
+```
+sqlite> INSERT INTO user (username, password) VALUES ("admin2", "frog");
+sqlite> INSERT INTO user (username, password) VALUES ("admin3", "dog");
+sqlite> INSERT INTO user (username, password) VALUES ("admin4", "log");
+```
+
+Now observe:
+
+```
+sqlite> SELECT * FROM user ORDER BY password ASC;
+1|admin|Group1
+3|admin3|dog
+2|admin2|frog
+4|admin4|log
+sqlite>
+```
+
+You can see here that these users, which would previously be sorted by ID, have been sorted by password name instead!
+
+You can also look up a specific entry using one of its attributes. Let's say I know the user but need to know the ID and password. A quick lookup can confirm this for me:
+
+```
+sqlite> SELECT * FROM user WHERE username="admin2";
+2|admin2|frog
+```
+
+Now we know that admin2 has an `id` of 2 and a `password` of "frog".
+
+We can also do inclusive range based searches. To find all of the users with id's from 2 to 3 inclusive:
+
+```
+sqlite> SELECT * FROM user WHERE id BETWEEN 2 and 3;
+2|admin2|frog
+3|admin3|dog
+```
+
+Previous searching rules apply to other things as well. Let's try removing a user.
+
+```
+sqlite> DELETE FROM user WHERE username="admin2";
+sqlite> select * from user;
+1|admin|Group1
+3|admin3|dog
+4|admin4|log
+sqlite>
+```
+
+Let's go all out and wipe all data entries! (This is not an invitation to do so for our main database.)
+
+```
+sqlite> DELETE FROM user;
+sqlite> select * from user;
+sqlite>
+```
+
+Gone. Reduced to ashes.
+
+Congratulations, you just created a table, added a database entry, confirmed its entry, found/sorted entries, then removed entries!
+
+Additional notes to self:
+
+Initialization of achievements table:
+```
+CREATE TABLE achievements (uniq_id INTEGER PRIMARY KEY, type_id INTEGER, user_id INTEGER, curr_donut INTEGER, max_donut INTEGER);
+```
