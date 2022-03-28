@@ -9,9 +9,9 @@ const Wheelspin = () => {
             <div id='WsMain' className='row'>
                 <div id='MysterySticky' className='col-md-6 border'>
                     <div id="pickUnlock" className="col-md-10 border">
-                        <StickyNote image={SNTmp}></StickyNote>
-                        <StickyNote image={SNTmp}></StickyNote>
-                        <StickyNote image={SNTmp}></StickyNote>
+                        <StickyNote image={SNTmp} id="clickSticky"></StickyNote>
+                        <StickyNote image={SNTmp} id="clickSticky"></StickyNote>
+                        <StickyNote image={SNTmp} id="clickSticky"></StickyNote>
                     </div>
                 </div>
                 <div className='col-md-6 border'>
