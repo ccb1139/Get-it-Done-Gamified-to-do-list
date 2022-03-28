@@ -1,9 +1,12 @@
+import DailyViewSc from '../img/DailyViewSc.png'
+import Image from 'react-bootstrap/Image'
 const DailyView = () => {
     return (
         <>
-            <p>*Insert daily view of to-do list here*</p>
+            <Image src={DailyViewSc} fluid />
         </>
     );
   }
   
+
   export default DailyView
