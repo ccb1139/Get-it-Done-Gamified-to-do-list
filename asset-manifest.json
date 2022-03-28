@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Get-it-Done-Gamified-to-do-list/static/css/main.2b18b502.css",
+    "main.js": "/Get-it-Done-Gamified-to-do-list/static/js/main.5e9b3656.js",
+    "static/js/787.28cb0dcd.chunk.js": "/Get-it-Done-Gamified-to-do-list/static/js/787.28cb0dcd.chunk.js",
+    "static/media/LandingPage.png": "/Get-it-Done-Gamified-to-do-list/static/media/LandingPage.e2add034dceea14c3010.png",
+    "static/media/badgePlaceHolder.png": "/Get-it-Done-Gamified-to-do-list/static/media/badgePlaceHolder.95d6d30e42c2a911613a.png",
+    "static/media/DailyViewPlaceHolder.png": "/Get-it-Done-Gamified-to-do-list/static/media/DailyViewPlaceHolder.03b0875bedec843b5c88.png",
+    "static/media/gear.svg": "/Get-it-Done-Gamified-to-do-list/static/media/gear.c1275a761909e3c380a19d3441b1e494.svg",
+    "index.html": "/Get-it-Done-Gamified-to-do-list/index.html",
+    "static/media/github.svg": "/Get-it-Done-Gamified-to-do-list/static/media/github.1dbcf7b2491be69d987cad6ab8eacebc.svg",
+    "main.2b18b502.css.map": "/Get-it-Done-Gamified-to-do-list/static/css/main.2b18b502.css.map",
+    "main.5e9b3656.js.map": "/Get-it-Done-Gamified-to-do-list/static/js/main.5e9b3656.js.map",
+    "787.28cb0dcd.chunk.js.map": "/Get-it-Done-Gamified-to-do-list/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2b18b502.css",
+    "static/js/main.5e9b3656.js"
+  ]
+}
