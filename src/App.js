@@ -22,6 +22,8 @@ function App() {
         <Route path="/Achievements" element={<Achievements />} />
         <Route path="/AboutUs" element={<Home />} />
         {/* Temp wheel spin button on nav bar */}
+
+        /* this is a test */
         <Route path="/Wheelspin" element={<Wheelspin/>} />
       </Routes>
 
