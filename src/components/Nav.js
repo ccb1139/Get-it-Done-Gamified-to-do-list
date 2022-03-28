@@ -8,6 +8,8 @@ import { useState } from 'react';
 import Signin from './Signin';
 
 const MainNav = () => {
+  const appname = "Get-it-Done-Gamified-to-do-list";
+
   // Open and closing signin page
   const [show, setShow] = useState(false);
   function openSignin() { setShow(true) }
@@ -18,7 +20,7 @@ const MainNav = () => {
       <Navbar className ='navbar' sticky="top" expand="lg">
         <Container>
           <Navbar.Brand>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to={appname + "/"}>
               <img src={logo} alt="Get It Done Logo" id="logoImg" heigth= "120" width = "70"/>  
             </Nav.Link>
             
@@ -28,16 +30,16 @@ const MainNav = () => {
         <Navbar.Collapse>
 
             <Nav className='navbar-nav nav me-auto'>
-              <Nav.Link as={Link} to="/NewHabit"> New Habit</Nav.Link>
-              <Nav.Link as={Link} to="/Tasks"> Lists </Nav.Link>
-              <Nav.Link as={Link} to="/Achievements"> Achievements</Nav.Link>
-              <Nav.Link as={Link} to="/AboutUs"> About Us</Nav.Link>
+              <Nav.Link as={Link} to={appname + "/NewHabit"}> New Habit</Nav.Link>
+              <Nav.Link as={Link} to={appname + "/Tasks"}> Lists </Nav.Link>
+              <Nav.Link as={Link} to={appname + "/Achievements"}> Achievements</Nav.Link>
+              <Nav.Link as={Link} to={appname + "/AboutUs"}> About Us</Nav.Link>
               {/* Temp wheelspin button on nav bar */}
-              <Nav.Link as={Link} to="/Wheelspin"> Wheelspin</Nav.Link>
+              <Nav.Link as={Link} to={appname + "/Wheelspin"}> Wheelspin</Nav.Link>
             </Nav>
 
             <Nav> 
-              <Nav.Link as={Link} to="/Settings">
+              <Nav.Link as={Link} to={appname + "/Settings"}>
                 <img src={setting} alt="Settings" className = "icons" width="30" height="30"/>  
               </Nav.Link>
               

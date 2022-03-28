@@ -11,19 +11,21 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
 function App() {
+  const appname = "Get-it-Done-Gamified-to-do-list";
+
   return (
   <div className="App"> 
     <Router>
       <MainNav />
       <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/NewHabit" element={<NewHabit />} />
-        <Route path="/Tasks" element={<DailyView />} />
-        <Route path="/Achievements" element={<Achievements />} />
-        <Route path="/AboutUs" element={<Home />} />
+        <Route path={appname + "/"} exact element={<Home />} />
+        <Route path={appname + "/NewHabit"} element={<NewHabit />} />
+        <Route path={appname + "/Tasks"} element={<DailyView />} />
+        <Route path={appname + "/Achievements"} element={<Achievements />} />
+        <Route path={appname + "/AboutUs"} element={<Home />} />
         {/* Temp wheel spin button on nav bar */}
         
-        <Route path="/Wheelspin" element={<Wheelspin/>} />
+        <Route path={appname + "/Wheelspin"} element={<Wheelspin/>} />
       </Routes>
 
     </Router>
