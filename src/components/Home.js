@@ -1,7 +1,13 @@
+import LandingPageSkeleton from '../img/LandingPage.png'
+import Image from 'react-bootstrap/Image'
 const Home = () => {
     return (
         <>
-            <p>*Insert landing page here*</p>
+            <div className="LandingPage">
+                <div>
+                    <Image src={LandingPageSkeleton} fluid />
+                </div> 
+            </div>
         </>
     );
   }
