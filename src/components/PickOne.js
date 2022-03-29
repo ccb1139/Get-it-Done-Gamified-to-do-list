@@ -68,7 +68,7 @@ function PickOne() {
             <div className="col-md-12 border ACH-p1-Head">
                 <h3>Pick one to unlock a cosmetic!</h3>
             </div>
-            <div id="pickUnlock" className="col-md-12">
+            <div id="pickUnlock" className="cosHolder col-md-12">
                 <img src={MsyBox} id="clickMsBox1" onClick={onClick}></img>
                 <img src={MsyBox} id="clickMsBox2" onClick={onClick}></img>
                 <img src={MsyBox} id="clickMsBox3" onClick={onClick}></img>
