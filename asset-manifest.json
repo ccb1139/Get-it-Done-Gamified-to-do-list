@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Get-it-Done-Gamified-to-do-list/static/css/main.2b18b502.css",
-    "main.js": "/Get-it-Done-Gamified-to-do-list/static/js/main.77ced459.js",
+    "main.css": "/Get-it-Done-Gamified-to-do-list/static/css/main.86ce4563.css",
+    "main.js": "/Get-it-Done-Gamified-to-do-list/static/js/main.bef03100.js",
     "static/js/787.28cb0dcd.chunk.js": "/Get-it-Done-Gamified-to-do-list/static/js/787.28cb0dcd.chunk.js",
     "static/media/LandingPage.png": "/Get-it-Done-Gamified-to-do-list/static/media/LandingPage.e2add034dceea14c3010.png",
     "static/media/badgePlaceHolder.png": "/Get-it-Done-Gamified-to-do-list/static/media/badgePlaceHolder.95d6d30e42c2a911613a.png",
@@ -9,12 +9,12 @@
     "static/media/gear.svg": "/Get-it-Done-Gamified-to-do-list/static/media/gear.c1275a761909e3c380a19d3441b1e494.svg",
     "index.html": "/Get-it-Done-Gamified-to-do-list/index.html",
     "static/media/github.svg": "/Get-it-Done-Gamified-to-do-list/static/media/github.1dbcf7b2491be69d987cad6ab8eacebc.svg",
-    "main.2b18b502.css.map": "/Get-it-Done-Gamified-to-do-list/static/css/main.2b18b502.css.map",
-    "main.77ced459.js.map": "/Get-it-Done-Gamified-to-do-list/static/js/main.77ced459.js.map",
+    "main.86ce4563.css.map": "/Get-it-Done-Gamified-to-do-list/static/css/main.86ce4563.css.map",
+    "main.bef03100.js.map": "/Get-it-Done-Gamified-to-do-list/static/js/main.bef03100.js.map",
     "787.28cb0dcd.chunk.js.map": "/Get-it-Done-Gamified-to-do-list/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2b18b502.css",
-    "static/js/main.77ced459.js"
+    "static/css/main.86ce4563.css",
+    "static/js/main.bef03100.js"
   ]
 }
