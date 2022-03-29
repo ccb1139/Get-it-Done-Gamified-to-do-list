@@ -1,23 +1,14 @@
 import PropTypes from 'prop-types'
 import 'bootstrap/dist/css/bootstrap.css'
-import SNTmp from "../img/StickyNotePlaceHolder.png"
+import Sticky from "../img/StickyNote.png"
+import MsyBox from "../img/mysBoxPH.png"
 
 
-const StickyNote = ({ image, color, id }) => {
-
-    const onClick = () => {
-        
-    }
-
-
+const StickyNote = ({ id, stickyImg, color}) => {
     return (
-        <img id={id} src={image} tintColor="red" onClick={onClick}></img>
-
+        <img id={id} src={Sticky}
+        style={{filter:'opacity(0.5) drop-shadow(0 0 0 ' + color + ' )'}}></img>
     )
-}
-
-StickyNote.defaultProps = {
-    image: {SNTmp},
 }
 
 export default StickyNote
