@@ -225,6 +225,13 @@
 .cosHolder{
   padding: 15px;
 }
+#ACH-Unlock-Progress{
+  padding: 15px;
+  margin: auto;
+}
+#ACH-Unlock-Info{
+  line-height: 75%;
+}
 .boxClicked{
   animation: pickedAnim 1s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal forwards;
 }
