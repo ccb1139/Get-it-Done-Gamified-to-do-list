@@ -14,7 +14,7 @@ function UnlockProgress({complete, total}) {
                     <ProgressBar now={(complete/total)*100} label={progressMsg}></ProgressBar>
                 </div>
                 <div className='col-sm-2 border'>
-                    <p>{total - complete} more donuts for an unlock!</p>
+                    <p style={{lineHeight:"50%", verticalAlign:"middle"}}>{total - complete} more donuts for an unlock!</p>
                 </div>
                 
             </div>  
