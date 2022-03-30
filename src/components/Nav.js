@@ -33,7 +33,6 @@ const MainNav = () => {
               <Nav.Link as={Link} to={appname + "/NewHabit"}> New Habit</Nav.Link>
               <Nav.Link as={Link} to={appname + "/Tasks"}> Lists </Nav.Link>
               <Nav.Link as={Link} to={appname + "/Achievements"}> Achievements</Nav.Link>
-              <Nav.Link as={Link} to={appname + "/AboutUs"}> About Us</Nav.Link>
               {/* Temp wheelspin button on nav bar */}
               <Nav.Link as={Link} to={appname + "/Wheelspin"}> Wheelspin</Nav.Link>
             </Nav>

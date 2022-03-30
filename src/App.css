@@ -73,10 +73,10 @@
   font-weight: bold;
   border: 4px black solid;
   border-radius: 10px;
-  background: #FF7575;
+  background: #ff7575;
 }
 
-#dailyViewToggle{
+#dailyViewToggle {
   width: 40px !important;
 }
 
@@ -101,15 +101,15 @@
   height: 100%;
 }
 
-.task{
+.task {
   margin: 0 auto;
   padding: 10px;
   width: 100%;
   border-radius: 0.5em;
-  background: #FF7575;
+  background: #ff7575;
 }
 
-.taskCheckBox{
+.taskCheckBox {
   width: 20px !important;
   height: 20px !important;
 }
@@ -119,7 +119,7 @@
 }
 
 .habit {
-  background: #F8D78B;
+  background: #f8d78b;
 }
 
 .closeButton {
@@ -133,7 +133,7 @@
   /* width: 50%; */
   background: transparent;
   border: none;
-  color: #FF7575;
+  color: #ff7575;
 }
 
 .addTaskForm label {
@@ -222,10 +222,10 @@
 #pickUnlock {
   margin: auto;
 }
-.cosHolder{
+.cosHolder {
   padding: 15px;
 }
-.boxClicked{
+.boxClicked {
   animation: pickedAnim 1s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal forwards;
 }
 @keyframes pickedAnim {
@@ -274,7 +274,7 @@
   }
 }
 
-.boxNotClicked{
+.boxNotClicked {
   animation: notPickedAnim 1s ease 0s 1 normal forwards;
 }
 @keyframes notPickedAnim {
@@ -287,7 +287,7 @@
   }
 }
 
-.CosPicked{
+.CosPicked {
   animation: cosShake 2s ease 0s infinite normal forwards;
 }
 @keyframes cosShake {
@@ -336,7 +336,7 @@
   }
 }
 
-.CosNotPicked{
+.CosNotPicked {
   animation: cosShrink 1s ease 0s 1 normal forwards;
 }
 @keyframes cosShrink {
@@ -347,4 +347,14 @@
   100% {
     transform: scale(0.5);
   }
+}
+
+/*Landing Page*/
+
+.difText {
+  color: #ff8686;
+}
+
+.keyFeature {
+  background-color: #e9edc9;
 }

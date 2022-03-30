@@ -15,6 +15,7 @@ function App() {
 
   return (
   <div className="App"> 
+
     <Router>
       <MainNav />
       <Routes>
@@ -22,7 +23,6 @@ function App() {
         <Route path={appname + "/NewHabit"} element={<NewHabit />} />
         <Route path={appname + "/Tasks"} element={<DailyView />} />
         <Route path={appname + "/Achievements"} element={<Achievements />} />
-        <Route path={appname + "/AboutUs"} element={<Home />} />
         {/* Temp wheel spin button on nav bar */}
         
         <Route path={appname + "/Wheelspin"} element={<Wheelspin/>} />
