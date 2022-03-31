@@ -230,7 +230,7 @@
   margin: auto;
 }
 #ACH-Unlock-Info {
-  
+  display: inline;
 }
 .boxClicked {
   animation: pickedAnim 1s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal forwards;
