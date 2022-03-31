@@ -3,6 +3,7 @@ import StickyNote from "./StickyNote"
 import SNTmp from "../img/StickyNote.png"
 import PickOne from "./PickOne"
 import 'bootstrap/dist/css/bootstrap.css'
+import UnlockProgress from './UnlockProgress'
 
 const Wheelspin = () => {
     return (
@@ -26,6 +27,7 @@ const Wheelspin = () => {
                         
                     </div>
                 </div>
+                <UnlockProgress complete={3} total={5}></UnlockProgress>
             </div>
 
         </div>

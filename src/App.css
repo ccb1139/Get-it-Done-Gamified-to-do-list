@@ -184,6 +184,20 @@
 .invaldInput span {
   color: rgb(255, 100, 100);
 }
+/* Bottom Unlock Progress */
+#pgBar{
+  background-color: #577590;
+}
+#ACH-Unlock-Progress {
+  padding: 15px;
+  margin: auto;
+}
+#ACH-Unlock-Info {
+  display: inline;
+}
+.progress-bar{
+  background-color: #F8B64C !important;
+}
 
 /*Achievements Overview*/
 .overview {
@@ -225,13 +239,7 @@
 .cosHolder {
   padding: 15px;
 }
-#ACH-Unlock-Progress {
-  padding: 15px;
-  margin: auto;
-}
-#ACH-Unlock-Info {
-  display: inline;
-}
+
 .boxClicked {
   animation: pickedAnim 1s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal forwards;
 }
