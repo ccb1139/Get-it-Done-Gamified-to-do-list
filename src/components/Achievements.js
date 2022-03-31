@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import Achievement from './Achievement'
 import badgeTmp from '../img/badgePlaceHolder.png'
-import achvList from '../achievements/ach.csv'
 import UnlockProgress from './UnlockProgress'
 import Donut from './Donut'
 

@@ -191,6 +191,7 @@
 #ACH-Unlock-Progress {
   padding: 15px;
   margin: auto;
+  background-color: white;
 }
 #ACH-Unlock-Info {
   display: inline;
