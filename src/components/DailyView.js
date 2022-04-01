@@ -12,8 +12,9 @@
 //   export default DailyView
 
 import Task from  "./Task";
+import Donut from  "./Donut";
 import AddTaskButton from "./AddTaskButton";
-import { Container, Image } from "react-bootstrap";
+import { Container, Image, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import DailyViewPlaceHolder from "../img/DailyViewPlaceHolder.png"
 
@@ -91,6 +92,7 @@ const DailyView = () => {
     const day = today.getDate();
     const year = today.getFullYear();
     today = month + "/" + day + "/" + year;
+    var listSize = tasks.length;
 
     return (
         <>
@@ -110,6 +112,19 @@ const DailyView = () => {
 
                 <div id="dailyViewStickyNotes">
                     <Image id="dailyViewPlaceHolder" src={DailyViewPlaceHolder}/>
+                </div> 
+            </Container>
+
+            <Container id="trackerContainer" fluid>
+                <div>
+                    <Row>
+                        <Col lg={9} sm={6} xs={6} id="habitDonuts">
+                            <Donut total={2} complete={listSize} size={150}></Donut>
+                        </Col>
+                        <Col lg={3} sm={6} xs={6} id="dailyDonut">
+                            <Donut total={2} complete={listSize} size={150}></Donut>
+                        </Col>
+                    </Row>
                 </div> 
             </Container>
         </>
