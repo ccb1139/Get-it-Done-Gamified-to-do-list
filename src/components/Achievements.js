@@ -1,19 +1,20 @@
 import 'bootstrap/dist/css/bootstrap.css'
+import React, { useEffect, useState } from "react";
 import Achievement from './Achievement'
 import badgeTmp from '../img/badgePlaceHolder.png'
 import UnlockProgress from './UnlockProgress'
 import Donut from './Donut'
+import achJSON from '../ach/ach.json'
 
 
 
 const Achievements = () => {
-
     return (
         <div className='overview col-10'>
-            <Achievement badge={badgeTmp} donut={<Donut total={2} complete={5} size={150}></Donut>} title="Place Holder 1"
-                description="This is an example of an achievement"/>
-            <Achievement badge={badgeTmp} donut={<Donut total={4} complete={5} size={150}></Donut>} title="Place Holder 2"
-            description="This is an example of an achievement"/>
+            {achJSON.map((data) => (
+                <Achievement key={data.ach_name} donut={<Donut total={2} complete={5} size={150}/>} badge={data.filename} 
+                    title={data.ach_name} description={data.descp}/>
+            ))}
             <UnlockProgress complete={3} total={5}></UnlockProgress>
         </div>
     );

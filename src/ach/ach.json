@@ -1,0 +1,26 @@
+[
+  {
+    "ach_name": "An Apple a Day",
+    "descp": "Complete 7 Tasks over the course of one week",
+    "filename": "An_Apple_a_Day.png",
+    "steps": 7
+  },
+  {
+    "ach_name": "Jack of All Trades",
+    "descp": "Create and maintain 3 habits for atleast one month",
+    "filename": "Jack_of_All_Trades.png",
+    "steps": ""
+  },
+  {
+    "ach_name": "9 to 5",
+    "descp": "Complete all your tasks Monday through Friday",
+    "filename": "9_to_5.png",
+    "steps": ""
+  },
+  {
+    "ach_name": "Stamp Collector",
+    "descp": "Unlock three different sticky note colors",
+    "filename": "Stamp_Collector.png",
+    "steps": 3
+  }
+]
