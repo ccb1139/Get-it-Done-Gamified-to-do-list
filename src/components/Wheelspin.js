@@ -3,6 +3,7 @@ import StickyNote from "./StickyNote"
 import SNTmp from "../img/StickyNote.png"
 import PickOne from "./PickOne"
 import 'bootstrap/dist/css/bootstrap.css'
+import '../css/Wheelspin.css'
 import UnlockProgress from './UnlockProgress'
 
 const Wheelspin = () => {
@@ -10,7 +11,7 @@ const Wheelspin = () => {
         <div className='container'>
             <div id='WsMain' className='row'>
                 <div id='MysterySticky' className='col-md-6 d-flex align-items-center justify-content-center'>
-                    <PickOne/>
+                    <PickOne unlockAvil={true}/>
                 </div>
                 <div className='col-md-6'>
                     <div id='Owned-Items' className="row">

@@ -1,0 +1,15 @@
+/* Bottom Unlock Progress */
+#pgBar {
+    background-color: #577590;
+  }
+  #ACH-Unlock-Progress {
+    padding: 15px;
+    margin: auto;
+    background-color: white;
+  }
+  #ACH-Unlock-Info {
+    display: inline;
+  }
+  .progress-bar {
+    background-color: #f8b64c !important;
+  }

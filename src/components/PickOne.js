@@ -1,14 +1,22 @@
 import StickyNote from "./StickyNote"
+import '../css/Wheelspin.css'
 import SNTmp from "../img/StickyNote.png"
 import MsyBox from "../img/mysBoxPH.png"
 import React from "react"
 
 
-function PickOne() {
-    var picked = false;
+function PickOne({unlockAvil}) {
+    var canUnlock = unlockAvil;
+
+    var blurClass = ""
+    if(canUnlock == false){
+        blurClass = "cosHolder col-md-12 blur"
+    } else {
+        blurClass = "cosHolder col-md-12"
+    }
 
     const onClick = (boxId) => {
-        if(picked) {
+        if(!canUnlock) {
             return;
         }
 
@@ -60,15 +68,14 @@ function PickOne() {
 
         })
 
-        picked = true;
+        canUnlock = false;
     }
-
     return (
         <div className="col-md-10 border">
             <div className="col-md-12 border ACH-p1-Head">
                 <h3>Pick one to unlock a cosmetic!</h3>
             </div>
-            <div id="pickUnlock" className="cosHolder col-md-12">
+            <div id="pickUnlock" className={blurClass} >
                 <img src={MsyBox} id="clickMsBox1" onClick={onClick}></img>
                 <img src={MsyBox} id="clickMsBox2" onClick={onClick}></img>
                 <img src={MsyBox} id="clickMsBox3" onClick={onClick}></img>

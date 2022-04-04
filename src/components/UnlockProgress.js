@@ -1,4 +1,5 @@
 import { ProgressBar } from 'react-bootstrap'
+import '../css/UnlockProgress.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'react-circular-progressbar/dist/styles.css';
 

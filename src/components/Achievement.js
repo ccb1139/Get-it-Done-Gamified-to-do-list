@@ -1,5 +1,5 @@
 import Image from 'react-bootstrap/Image'
-import Donut from './Donut'
+import '../css/Achievements.css'
 
 const Achievement = ({donut, badge, title, description, level}) => {
   return (
