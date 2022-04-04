@@ -1,5 +1,11 @@
-ach_name,descp,filename,steps
-An Apple a Day,Complete 7 Tasks over the course of one week,An_Apple_a_Day.png,7
-Jack of All Trades,Create and maintain 3 habits for atleast one month,Jack_of_All_Trades.png,
-9 to 5,Complete all your tasks Monday through Friday,9_to_5.png,
-Stamp Collector,Unlock three different sticky note colors,Stamp_Collector.png,3
+ach_name,descp,steps,level,id
+An Apple a Day 1,Complete 7 tasks total,7,1,001
+An Apple a Day 2,Complete 14 tasks total,14,2,001
+An Apple a Day 3,Complete 28 tasks total,28,3,001
+An Apple a Day 4,Complete 42 tasks total,42,4,001
+An Apple a Day 5,Complete 56 tasks total,56,5,001
+Sticking with it 1,Unlock 3 sticky note colors by completing donuts,3,1,002
+Sticking with it 2,Unlock 7 sticky note colors by completing donuts,7,2,002
+Sticking with it 3,Unlock 12 sticky note colors by completing donuts,12,3,002
+Sticking with it 4,Unlock 18 sticky note colors by completing donuts,18,4,002
+Sticking with it 5,Unlock 25 sticky note colors by completing donuts,25,5,002
