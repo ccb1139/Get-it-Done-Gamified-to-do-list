@@ -1,12 +1,12 @@
 import { Row, Col } from "react-bootstrap"
 import { MdClose } from "react-icons/md"
 
-const Task = ({task, onDelete}) => {
+const Task = ({task, onDelete, onComplete}) => {
     return (
         <div className={"task mb-3 " + (task.habit ? "habit" : "")} key={task.id}>
             <Row className="px-4 py-2">
                 <Col className="col-1 align-self-center">
-                    <input className="form-check-input taskCheckBox" type="checkbox"></input>
+                    <input className="form-check-input taskCheckBox" type="checkbox" onChange= {() => onComplete(task.id)}></input>
                 </Col>
 
                 <Col>

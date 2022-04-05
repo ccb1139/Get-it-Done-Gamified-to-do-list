@@ -62,6 +62,23 @@ const DailyView = () => {
         setTasks(tasks.filter((task) => task.id !== id))
     }
 
+    function completeTask(id) {
+        const updatedTasks = tasks.map(task => {
+          // if this task has the same ID as the edited task
+          if (id === task.id) {
+            // use object spread to make a new object
+            // whose `completed` prop has been inverted
+            return {...task, completed: !task.completed}
+          }
+
+          return task;
+        });
+
+        console.log(updatedTasks)
+        setTasks(updatedTasks);
+
+    }    
+
     function addTask(task) {
         // Generate random id for now
         const id = Math.floor(Math.random() * 1000) + 1;
@@ -106,7 +123,9 @@ const DailyView = () => {
 
             <Container className="taskContainer">
                 <div id="dailyViewTraditional">
-                    {tasks.map((task) => <Task key={task.id} task={task} onDelete={deleteTask}/>)}
+                    {tasks.map((task) => <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask}/>)}
+                   
+                    <AddTaskButton onAdd={addTask}/>
                     <AddTaskButton onAdd={addTask}/>
                 </div>
 
