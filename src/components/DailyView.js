@@ -136,9 +136,11 @@ const DailyView = () => {
                 <div>
                     <Row>
                         <Col lg={9} sm={6} xs={6} id="habitDonuts">
+                            ignore this one
                             <Donut complete={2} total={listSize} size={150}></Donut>
                         </Col>
                         <Col lg={3} sm={6} xs={6} id="dailyDonut">
+                            unstyled daily
                             <Donut complete={tasks.filter(task => task.completed).length} total={listSize} size={150}></Donut>
                         </Col>
                     </Row>
