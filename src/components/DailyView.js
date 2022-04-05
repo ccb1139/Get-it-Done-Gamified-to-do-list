@@ -141,7 +141,7 @@ const DailyView = () => {
                             <Donut complete={2} total={listSize} size={150}></Donut>
                         </Col>
                         <Col lg={3} sm={6} xs={6} id="dailyDonut">
-                            <Donut complete={2} total={listSize} size={150}></Donut>
+                            <Donut complete={tasks.filter(task => task.completed).length} total={listSize} size={150}></Donut>
                         </Col>
                     </Row>
                 </div> 
