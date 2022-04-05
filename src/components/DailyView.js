@@ -123,8 +123,8 @@ const DailyView = () => {
 
             <Container className="taskContainer">
                 <div id="dailyViewTraditional">
-                    {tasks.map((task) => <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask}/>)}
                     <AddTaskButton onAdd={addTask}/>
+                    {tasks.map((task) => <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask}/>)}
                 </div>
 
                 <div id="dailyViewStickyNotes">
