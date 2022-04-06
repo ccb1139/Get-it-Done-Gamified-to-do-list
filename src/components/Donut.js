@@ -10,7 +10,7 @@ import {
 // Size = the donut is in a square div so the size of one side of the div
 function Donut({complete, total, size}) {
   return (
-      <div style={{padding: "15px", maxHeight: size, maxWidth: size}}>
+      <div style={{padding: "15px", height: size, width: size}}>
           <CircularProgressbar 
             value={(complete/total) * 100}
             text={complete + " / " + total}

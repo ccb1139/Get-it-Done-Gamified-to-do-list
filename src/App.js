@@ -8,6 +8,7 @@ import NewHabit from './components/NewHabit';
 import Wheelspin from './components/Wheelspin';
 import React from "react";
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import HallOfFrame from './components/HallOfFame';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path={appname + "/Achievements"} element={<Achievements />} />
         {/* Temp wheel spin button on nav bar */}
         
+        <Route path={appname + "/HallOfFrame"} element={<HallOfFrame />} />
         <Route path={appname + "/Wheelspin"} element={<Wheelspin/>} />
       </Routes>
 
