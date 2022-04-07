@@ -1,11 +1,3 @@
-ach_name,descp,steps,level,id
-An Apple a Day 1,Complete 7 tasks total,7,1,001
-An Apple a Day 2,Complete 14 tasks total,14,2,001
-An Apple a Day 3,Complete 28 tasks total,28,3,001
-An Apple a Day 4,Complete 42 tasks total,42,4,001
-An Apple a Day 5,Complete 56 tasks total,56,5,001
-Sticking with it 1,Unlock 3 sticky note colors by completing donuts,3,1,002
-Sticking with it 2,Unlock 7 sticky note colors by completing donuts,7,2,002
-Sticking with it 3,Unlock 12 sticky note colors by completing donuts,12,3,002
-Sticking with it 4,Unlock 18 sticky note colors by completing donuts,18,4,002
-Sticking with it 5,Unlock 25 sticky note colors by completing donuts,25,5,002
+ach_name,descp,stp_req,levels,id
+An Apple a Day 1,Complete 7 tasks total,3,5,ac_1
+Sticking with it 1,Unlock 3 sticky note colors by completing donuts,3,5,ac_2

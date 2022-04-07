@@ -13,8 +13,6 @@ const Achievement = ({donut, badge, title, description, level}) => {
                     {donut}
                 </div>
                 <div className="col-md col-lg acvh-iholder">
-                    {/* <Image className='col acvh-img' id="achv-badge" 
-                        src={require('../img/badges/' + badge + "/" + level + ".png")} fluid /> */}
                     <Badge id="achv-badge" badge_path={badge}></Badge>
                 </div> 
             </div>

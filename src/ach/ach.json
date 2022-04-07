@@ -1,72 +1,20 @@
 [
   {
-    "ach_name": "An Apple a Day 1",
-    "descp": "Complete 7 tasks total",
-    "steps": 7,
-    "level": 1,
-    "id": "001"
+    "ach_name": "An Apple a Day",
+    "descp1": "Complete ",
+    "descp2": " tasks total",
+    "stp_req": 3,
+    "levels": 5,
+    "id": "001",
+    "curve": 1.05
   },
   {
-    "ach_name": "An Apple a Day 2",
-    "descp": "Complete 14 tasks total",
-    "steps": 14,
-    "level": 2,
-    "id": "001"
-  },
-  {
-    "ach_name": "An Apple a Day 3",
-    "descp": "Complete 28 tasks total",
-    "steps": 28,
-    "level": 3,
-    "id": "001"
-  },
-  {
-    "ach_name": "An Apple a Day 4",
-    "descp": "Complete 42 tasks total",
-    "steps": 42,
-    "level": 4,
-    "id": "001"
-  },
-  {
-    "ach_name": "An Apple a Day 5",
-    "descp": "Complete 56 tasks total",
-    "steps": 56,
-    "level": 5,
-    "id": "001"
-  },
-  {
-    "ach_name": "Sticking with it 1",
-    "descp": "Unlock 3 sticky note colors by completing donuts",
-    "steps": 3,
-    "level": 1,
-    "id": "002"
-  },
-  {
-    "ach_name": "Sticking with it 2",
-    "descp": "Unlock 7 sticky note colors by completing donuts",
-    "steps": 7,
-    "level": 2,
-    "id": "002"
-  },
-  {
-    "ach_name": "Sticking with it 3",
-    "descp": "Unlock 12 sticky note colors by completing donuts",
-    "steps": 12,
-    "level": 3,
-    "id": "002"
-  },
-  {
-    "ach_name": "Sticking with it 4",
-    "descp": "Unlock 18 sticky note colors by completing donuts",
-    "steps": 18,
-    "level": 4,
-    "id": "002"
-  },
-  {
-    "ach_name": "Sticking with it 5",
-    "descp": "Unlock 25 sticky note colors by completing donuts",
-    "steps": 25,
-    "level": 5,
-    "id": "002"
+    "ach_name": "Sticking with it",
+    "descp1": "Unlock ",
+    "descp2": " sticky note colors by completing donuts",
+    "stp_req": 3,
+    "levels": 5,
+    "id": "002",
+    "curve": 1
   }
 ]
