@@ -1,30 +1,23 @@
 {
   "files": {
-    "main.css": "/Get-it-Done-Gamified-to-do-list/static/css/main.21efaebb.css",
-    "main.js": "/Get-it-Done-Gamified-to-do-list/static/js/main.a813c4d2.js",
+    "main.css": "/Get-it-Done-Gamified-to-do-list/static/css/main.52a951c5.css",
+    "main.js": "/Get-it-Done-Gamified-to-do-list/static/js/main.04c42a8f.js",
     "static/js/787.28cb0dcd.chunk.js": "/Get-it-Done-Gamified-to-do-list/static/js/787.28cb0dcd.chunk.js",
     "static/media/rewards.png": "/Get-it-Done-Gamified-to-do-list/static/media/rewards.294f6e04bc651bf4150a.png",
     "static/media/tracker.png": "/Get-it-Done-Gamified-to-do-list/static/media/tracker.0724eeb2ef6d0f0d7a5a.png",
     "static/media/task.png": "/Get-it-Done-Gamified-to-do-list/static/media/task.61f77ac2b6c15f9efa7f.png",
-    "static/media/9_to_5.png": "/Get-it-Done-Gamified-to-do-list/static/media/9_to_5.eb4ca8cb976c59404b5b.png",
-    "static/media/An_Apple_a_Day.png": "/Get-it-Done-Gamified-to-do-list/static/media/An_Apple_a_Day.52db2b81d626e50dfeca.png",
     "static/media/3.png": "/Get-it-Done-Gamified-to-do-list/static/media/3.64c5afeea19492208b73.png",
     "static/media/placeholder.png": "/Get-it-Done-Gamified-to-do-list/static/media/placeholder.16b7424786c37d0428e7.png",
     "static/media/DailyViewPlaceHolder.png": "/Get-it-Done-Gamified-to-do-list/static/media/DailyViewPlaceHolder.03b0875bedec843b5c88.png",
-    "static/media/Stamp_Collector.png": "/Get-it-Done-Gamified-to-do-list/static/media/Stamp_Collector.ddc226a9c2d0ab06f518.png",
-    "static/media/1.png": "/Get-it-Done-Gamified-to-do-list/static/media/1.64c5afeea19492208b73.png",
-    "static/media/2.png": "/Get-it-Done-Gamified-to-do-list/static/media/2.64c5afeea19492208b73.png",
-    "static/media/5.png": "/Get-it-Done-Gamified-to-do-list/static/media/5.64c5afeea19492208b73.png",
-    "static/media/Jack_of_All_Trades.png": "/Get-it-Done-Gamified-to-do-list/static/media/Jack_of_All_Trades.38c04da678e1c7481afd.png",
     "static/media/gear.svg": "/Get-it-Done-Gamified-to-do-list/static/media/gear.c1275a761909e3c380a19d3441b1e494.svg",
     "index.html": "/Get-it-Done-Gamified-to-do-list/index.html",
     "static/media/github.svg": "/Get-it-Done-Gamified-to-do-list/static/media/github.1dbcf7b2491be69d987cad6ab8eacebc.svg",
-    "main.21efaebb.css.map": "/Get-it-Done-Gamified-to-do-list/static/css/main.21efaebb.css.map",
-    "main.a813c4d2.js.map": "/Get-it-Done-Gamified-to-do-list/static/js/main.a813c4d2.js.map",
+    "main.52a951c5.css.map": "/Get-it-Done-Gamified-to-do-list/static/css/main.52a951c5.css.map",
+    "main.04c42a8f.js.map": "/Get-it-Done-Gamified-to-do-list/static/js/main.04c42a8f.js.map",
     "787.28cb0dcd.chunk.js.map": "/Get-it-Done-Gamified-to-do-list/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.21efaebb.css",
-    "static/js/main.a813c4d2.js"
+    "static/css/main.52a951c5.css",
+    "static/js/main.04c42a8f.js"
   ]
 }
