@@ -13,21 +13,3 @@
     display: flex;
     justify-content: center;
 }
-
-
-
-/* Animations */
-.cardHover{
-    animation: growHOF 1s ease 0s 1 normal forwards;
-}
-@keyframes growHOF {
-    0% {
-      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-      transform: scale(1);
-    }
-  
-    100% {
-      box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
-      transform: scale(1.2);
-    }
-  }

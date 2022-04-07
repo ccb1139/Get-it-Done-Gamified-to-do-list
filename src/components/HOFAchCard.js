@@ -3,25 +3,19 @@ import '../css/HallOfFame.css'
 import Image from 'react-bootstrap/Image'
 import ReactTooltip from 'react-tooltip';
 import UnlockProgress from './UnlockProgress'
+import Badge from './Badge';
 
 function HOFAchCard({ title, badge, description }) {
-    const expandBadge = (badgeId) => {
-        badgeId.target.classList.add('cardHover');
-    }
-    const shrinkBadge = (badgeId) => {
-        badgeId.target.classList.remove('cardHover');
-    }
+    
     const toolTipStr = "You earned this achievment by " + description
+
     return (
         <div id="HOFCard" className='col-sm-3 border' data-tip={toolTipStr}>
             <div id="HOFCardHeader" className='row-sm HOFcardInfo'>
                 <h3 style={{ fontWeight: "bold" }} >{title}</h3>
             </div>
             <div className='row-sm HOFcardInfo'>
-                <Image className='col acvh-img' id="achv-badge"
-                    src={require('../img/badges/' + badge + "/3.png")}
-                    onMouseOver={expandBadge} onMouseLeave={shrinkBadge} 
-                    />
+                <Badge id="achv-badge" badge_path={badge}> </Badge>
                 
             </div>
             <div className='row-sm HOFcardInfo'>
