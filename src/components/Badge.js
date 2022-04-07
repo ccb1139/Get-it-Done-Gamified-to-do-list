@@ -1,22 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Image from 'react-bootstrap/Image'
+import Tilt from 'react-parallax-tilt';
 import '../css/Badge.css'
 
 function Badge({ id, badge_path }) {
-    const expandBadge = (badgeId) => {
-        badgeId.target.classList.add('cardHover');
-    }
-    const shrinkBadge = (badgeId) => {
-        badgeId.target.classList.remove('cardHover');
-    }
+    const [scale, setScale] = useState(1.35);
 
     return (
-        <div id="badgeConatiner">
+        <Tilt scale={scale} transitionSpeed={2500}>
             <Image className='col acvh-img' id={id}
                 src={require('../img/badges/' + badge_path + "/3.png")}
-                onMouseOver={expandBadge} onMouseLeave={shrinkBadge}
             />
-        </div>
+        </Tilt>
 
     )
 }

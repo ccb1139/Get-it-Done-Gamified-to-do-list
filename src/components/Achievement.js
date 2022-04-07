@@ -1,4 +1,5 @@
 import Image from 'react-bootstrap/Image'
+import Badge from './Badge'
 import '../css/Achievements.css'
 
 const Achievement = ({donut, badge, title, description, level}) => {
@@ -8,12 +9,13 @@ const Achievement = ({donut, badge, title, description, level}) => {
         {/* LeftSide */}
         <div className='achv-info col-lg-4 d-flex align-items-center justify-content-center border' id='achv-progress'>
             <div className='row d-flex align-items-center'>
-                <div className="col-md col-lg acvh-iholder">
+                <div className="col-md col-lg acvh-iholder d-flex justify-content-center">
                     {donut}
                 </div>
                 <div className="col-md col-lg acvh-iholder">
-                    <Image className='col acvh-img' id="achv-badge" 
-                        src={require('../img/badges/' + badge + "/" + level + ".png")} fluid />
+                    {/* <Image className='col acvh-img' id="achv-badge" 
+                        src={require('../img/badges/' + badge + "/" + level + ".png")} fluid /> */}
+                    <Badge id="achv-badge" badge_path={badge}></Badge>
                 </div> 
             </div>
         </div>

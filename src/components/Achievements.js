@@ -26,7 +26,7 @@ const Achievements = () => {
     }
 
     return (
-        <div className='overview col-10'>
+        <div className='overview container'>
             { create_ach( [{id:"001", level:3}, {id:"002", level:5}] )}
             { active_achs.map((element) => (
                 // console.log(element["ach_name"])
