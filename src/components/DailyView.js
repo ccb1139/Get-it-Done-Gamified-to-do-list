@@ -17,6 +17,7 @@ import AddTaskButton from "./AddTaskButton";
 import { Container, Image, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import DailyViewPlaceHolder from "../img/DailyViewPlaceHolder.png"
+import * as firebase from "../db/firebase";
 
 const DailyView = () => {
     // Sample list of tasks
@@ -88,6 +89,15 @@ const DailyView = () => {
         setTasks([...tasks, newTask])
 
         console.log(task);
+        const userID = "test-user";
+
+        // Add inputted task to database
+        firebase.createDocument(`users/${userID}/Tasks/`, task).then(() => {});
+
+        // All tasks saved in the database for the given user
+        firebase.getCollection(`users/${userID}/Tasks/`).then((result) => {
+            console.log(result);
+        });
     }
 
     function toggleDailyView() {

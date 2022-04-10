@@ -10,9 +10,14 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import HallOfFrame from './components/HallOfFame';
 
+// Import firebase
+import * as firebase from "./db/firebase";
 
 function App() {
   const appname = "Get-it-Done-Gamified-to-do-list";
+
+  
+
 
   return (
   <div className="App"> 
