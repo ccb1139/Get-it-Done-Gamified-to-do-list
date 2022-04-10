@@ -15,58 +15,35 @@ import Task from  "./Task";
 import Donut from  "./Donut";
 import AddTaskButton from "./AddTaskButton";
 import { Container, Image, Row, Col } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DailyViewPlaceHolder from "../img/DailyViewPlaceHolder.png"
 import * as firebase from "../db/firebase";
 
+// Temp user
+const userID = "test-user";
+
 const DailyView = () => {
-    // Sample list of tasks
-    const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            text: "Example Task 1",
-            due: "N/A",
-            completed: false,
-            habit: false,
-        },
-        {
-            id: 2,
-            text: "Example Task 2",
-            due: "N/A",
-            completed: false,
-            habit: false,
-        },
-        {
-            id: 3,
-            text: "Example Task 3",
-            due: "N/A",
-            completed: false,
-            habit: false,
-        },
-        {
-            id: 4,
-            text: "Example Task 4",
-            due: "N/A",
-            completed: false,
-            habit: false,
-        },
-        {
-            id: 5,
-            text: "Example Habit",
-            due: "N/A",
-            completed: false,
-            habit: true,
-        }
-    ])
+    const [tasks, setTasks] = useState([]);
+
+    // Get the list of tasks when the page loads
+    useEffect(() => {
+        firebase.getCollection(`users/${userID}/Tasks/`).then((result) => {
+            setTasks(result);
+        });
+    }, []);
 
     function deleteTask(id) {
         setTasks(tasks.filter((task) => task.id !== id))
+
+        firebase.deleteDocument(`users/${userID}/Tasks/${id}`).then(() => {});
     }
 
     function completeTask(id) {
         const updatedTasks = tasks.map(task => {
           // if this task has the same ID as the edited task
           if (id === task.id) {
+            firebase.updateDocument(`users/${userID}/Tasks/${id}`, {completed: !task.completed}).then(() => {});
+
             // use object spread to make a new object
             // whose `completed` prop has been inverted
             return {...task, completed: !task.completed}
@@ -75,29 +52,22 @@ const DailyView = () => {
           return task;
         });
 
-        console.log(updatedTasks)
         setTasks(updatedTasks);
-
     }    
 
     function addTask(task) {
-        // Generate random id for now
-        const id = Math.floor(Math.random() * 1000) + 1;
-        
-        const newTask = { id, ...task }
-
-        setTasks([...tasks, newTask])
-
-        console.log(task);
-        const userID = "test-user";
-
         // Add inputted task to database
-        firebase.createDocument(`users/${userID}/Tasks/`, task).then(() => {});
+        firebase.createDocument(`users/${userID}/Tasks/`, task).then((id) => {
+
+            // Use the id from the database as the id in the tasks array locally
+            const newTask = { id, ...task }
+            setTasks([...tasks, newTask])
+        });
 
         // All tasks saved in the database for the given user
-        firebase.getCollection(`users/${userID}/Tasks/`).then((result) => {
-            console.log(result);
-        });
+        // firebase.getCollection(`users/${userID}/Tasks/`).then((result) => {
+        //     console.log(result);
+        // });
     }
 
     function toggleDailyView() {

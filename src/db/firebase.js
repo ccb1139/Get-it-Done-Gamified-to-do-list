@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { collection, doc, getDoc, getDocs, updateDoc, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 
 
@@ -79,14 +79,15 @@ Parameter(s):
   {field1: "Some data", field2: "Some more data", field3: 100, field4: True}
 
 Returns:
-  Nothing
+  Reutrns the id of the document created.
 
 Example:
   firebase.createDocument("users/userID/Achievements/", {achieve: "test"}).then(() => {});
 */
 async function createDocument(col, data) {
     const docRef = collection(db, col);
-    await addDoc(docRef, data);
+    const docSnap = await addDoc(docRef, data);
+    return docSnap.id;
 }
 
 /*
@@ -106,6 +107,21 @@ async function updateDocument(document, data) {
     await updateDoc(docRef, data);
 }
 
+/*
+Parameter(s):
+  document - The path of the document to be deleted (i.e., "users/userID")
+
+Returns:
+  Nothing
+
+Example:
+  firebase.deleteDocument("users/userID").then((result) => {});
+*/
+async function deleteDocument(document) {
+  const docRef = doc(db, document);
+  await deleteDoc(docRef);
+}
 
 
-export { getDocument, getCollection, createDocument, updateDocument };
+
+export { getDocument, getCollection, createDocument, updateDocument, deleteDocument };

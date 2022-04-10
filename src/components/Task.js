@@ -6,7 +6,8 @@ const Task = ({task, onDelete, onComplete}) => {
         <div className={"task mb-3 " + (task.habit ? "habit" : "")} key={task.id}>
             <Row className="px-4 py-2">
                 <Col className="col-1 align-self-center">
-                    <input className="form-check-input taskCheckBox" type="checkbox" onChange= {() => onComplete(task.id)}></input>
+                    <input className="form-check-input taskCheckBox" type="checkbox" checked={task.completed}
+                    onChange= {() => onComplete(task.id)}></input>
                 </Col>
 
                 <Col>
