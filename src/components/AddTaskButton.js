@@ -13,12 +13,16 @@ const AddTaskButton = ({onAdd}) => {
         const task = document.getElementById("taskInput");
         
         var today = new Date();
-        const date = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
         onAdd({
             text: task.value,
             completed: false,
+            habit: false,
             due: "N/A",
-            created: date
+            created: { 
+                year: today.getFullYear(), 
+                month: today.getMonth() + 1, 
+                day: today.getDate()
+            }
         });
     }
 
