@@ -119,7 +119,7 @@ const DailyView = () => {
                 <div>
                     <Row>
                         <Col lg={9} sm={6} xs={6} id="habitDonuts">
-                            <span className="trackerText">Habits Trackers</span>
+                            <span className="trackerText">Habit Trackers</span>
                             <Donut complete={(tasks.filter(task => task.habit && task.completed).length)}
                             total={(tasks.filter(task => task.habit).length)} size={150}></Donut>
                         </Col>
