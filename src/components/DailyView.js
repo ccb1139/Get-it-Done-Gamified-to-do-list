@@ -7,12 +7,12 @@
 //         </>
 //     );
 //   }
-  
+
 
 //   export default DailyView
 
-import Task from  "./Task";
-import Donut from  "./Donut";
+import Task from "./Task";
+import Donut from "./Donut";
 import AddTaskButton from "./AddTaskButton";
 import DraggableStickyNote from "./DraggableStickyNote";
 import { Container, Image, Row, Col } from "react-bootstrap";
@@ -36,25 +36,25 @@ const DailyView = () => {
     function deleteTask(id) {
         setTasks(tasks.filter((task) => task.id !== id))
 
-        firebase.deleteDocument(`users/${userID}/Tasks/${id}`).then(() => {});
+        firebase.deleteDocument(`users/${userID}/Tasks/${id}`).then(() => { });
     }
 
     function completeTask(id) {
         const updatedTasks = tasks.map(task => {
-          // if this task has the same ID as the edited task
-          if (id === task.id) {
-            firebase.updateDocument(`users/${userID}/Tasks/${id}`, {completed: !task.completed}).then(() => {});
+            // if this task has the same ID as the edited task
+            if (id === task.id) {
+                firebase.updateDocument(`users/${userID}/Tasks/${id}`, { completed: !task.completed }).then(() => { });
 
-            // use object spread to make a new object
-            // whose `completed` prop has been inverted
-            return {...task, completed: !task.completed}
-          }
+                // use object spread to make a new object
+                // whose `completed` prop has been inverted
+                return { ...task, completed: !task.completed }
+            }
 
-          return task;
+            return task;
         });
 
         setTasks(updatedTasks);
-    }    
+    }
 
     function addTask(task) {
         // Add inputted task to database
@@ -97,40 +97,42 @@ const DailyView = () => {
             <div className="taskHeading border border-dark">
                 <h1 className="text-center">Today - {today}</h1>
                 <div className="form-switch text-center">
-                    <input id="dailyViewToggle" className="form-check-input" type="checkbox" 
-                    role="switch" onClick={toggleDailyView}/>
+                    <input id="dailyViewToggle" className="form-check-input" type="checkbox"
+                        role="switch" onClick={toggleDailyView} />
                 </div>
             </div>
 
             <Container className="taskContainer border border-dark">
-                <AddTaskButton onAdd={addTask}/>
+                <AddTaskButton onAdd={addTask} />
                 <div id="dailyViewTraditional">
-                    {tasks.map((task) => <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask}/>)}
+                    {tasks.map((task) => <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />)}
                 </div>
 
                 <div id="dailyViewStickyNotes">
                     {/* <Image id="dailyViewPlaceHolder" src={DailyViewPlaceHolder}/> */}
-                    {tasks.map((task) => <DraggableStickyNote key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask}/>)}
+                    {tasks.map((task) => <DraggableStickyNote key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />)}
                     {/* <DraggableStickyNote /> */}
-                </div> 
+                </div>
             </Container>
 
-            <Container className="fixed-bottom border border-dark" fluid>
+            <Container className="col-sm-10 fixed-bottom border border-dark" fluid>
                 <div>
                     <Row>
                         <Col lg={9} sm={6} xs={6} id="habitDonuts">
                             ignore this one
-                            <Donut complete={2} total={listSize} size={150}></Donut>
+                            <Donut complete={(tasks.filter(task => task.habit && task.completed).length)}
+                            total={(tasks.filter(task => task.habit).length)} size={150}></Donut>
                         </Col>
                         <Col lg={3} sm={6} xs={6} id="dailyDonut">
                             unstyled daily
-                            <Donut complete={tasks.filter(task => task.completed).length} total={listSize} size={150}></Donut>
+                            <Donut complete={tasks.filter(task => task.completed).length}
+                                total={listSize} size={150}></Donut>
                         </Col>
                     </Row>
-                </div> 
+                </div>
             </Container>
         </>
     );
-  }
-  
-  export default DailyView
+}
+
+export default DailyView
