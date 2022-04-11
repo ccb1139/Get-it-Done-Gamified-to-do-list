@@ -14,6 +14,7 @@
 import Task from  "./Task";
 import Donut from  "./Donut";
 import AddTaskButton from "./AddTaskButton";
+import DraggableStickyNote from "./DraggableStickyNote";
 import { Container, Image, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import DailyViewPlaceHolder from "../img/DailyViewPlaceHolder.png"
@@ -102,13 +103,15 @@ const DailyView = () => {
             </div>
 
             <Container className="taskContainer">
+                <AddTaskButton onAdd={addTask}/>
                 <div id="dailyViewTraditional">
-                    <AddTaskButton onAdd={addTask}/>
                     {tasks.map((task) => <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask}/>)}
                 </div>
 
                 <div id="dailyViewStickyNotes">
-                    <Image id="dailyViewPlaceHolder" src={DailyViewPlaceHolder}/>
+                    {/* <Image id="dailyViewPlaceHolder" src={DailyViewPlaceHolder}/> */}
+                    {tasks.map((task) => <DraggableStickyNote key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask}/>)}
+                    {/* <DraggableStickyNote /> */}
                 </div> 
             </Container>
 
