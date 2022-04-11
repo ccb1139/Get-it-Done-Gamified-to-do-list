@@ -111,6 +111,11 @@
   height: 15%;
 }
 
+.trackerText {
+  font-size: 18px;
+  font-weight: 600;
+}
+
 #dailyDonut {
   background-color: rgb(255, 255, 255);
 }

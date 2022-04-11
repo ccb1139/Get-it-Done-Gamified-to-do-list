@@ -119,12 +119,12 @@ const DailyView = () => {
                 <div>
                     <Row>
                         <Col lg={9} sm={6} xs={6} id="habitDonuts">
-                            ignore this one
+                            <span className="trackerText">Habits Trackers</span>
                             <Donut complete={(tasks.filter(task => task.habit && task.completed).length)}
                             total={(tasks.filter(task => task.habit).length)} size={150}></Donut>
                         </Col>
                         <Col lg={3} sm={6} xs={6} id="dailyDonut">
-                            unstyled daily
+                            <span className="trackerText">Daily Tracker</span>
                             <Donut complete={tasks.filter(task => task.completed).length}
                                 total={listSize} size={150}></Donut>
                         </Col>
