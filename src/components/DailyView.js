@@ -94,7 +94,7 @@ const DailyView = () => {
 
     return (
         <>
-            <div className="taskHeading">
+            <div className="taskHeading border border-dark">
                 <h1 className="text-center">Today - {today}</h1>
                 <div className="form-switch text-center">
                     <input id="dailyViewToggle" className="form-check-input" type="checkbox" 
@@ -102,7 +102,7 @@ const DailyView = () => {
                 </div>
             </div>
 
-            <Container className="taskContainer">
+            <Container className="taskContainer border border-dark">
                 <AddTaskButton onAdd={addTask}/>
                 <div id="dailyViewTraditional">
                     {tasks.map((task) => <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask}/>)}
@@ -115,7 +115,7 @@ const DailyView = () => {
                 </div> 
             </Container>
 
-            <Container id="trackerContainer" fluid>
+            <Container className="fixed-bottom border border-dark" fluid>
                 <div>
                     <Row>
                         <Col lg={9} sm={6} xs={6} id="habitDonuts">

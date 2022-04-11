@@ -5,6 +5,9 @@ import MsyBox from "../img/mysBoxPH.png"
 
 
 const StickyNote = ({ id, stickyImg, color}) => {
+    if(color[0] != "#"){
+        color = "#" + color
+    }
     return (
         <img id={id} src={Sticky}
         style={{filter:'opacity(0.5) drop-shadow(0 0 0 ' + color + ' )'}}></img>
