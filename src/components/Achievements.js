@@ -5,15 +5,26 @@ import Achievement from './Achievement'
 import UnlockProgress from './UnlockProgress'
 import Donut from './Donut'
 import achJSON from '../ach/ach.json'
+import * as firebase from "../db/firebase";
+import { async } from '@firebase/util';
 
-
+const userID = "test-user";
 
 const Achievements = () => {
+    //Firebase Stuff
+    const [curr_ach, setCurrAch] = useState([]);
+
+    useEffect(() => {
+        firebase.getCollection(`users/${userID}/inp-Achievements/`).then((result) => {
+            setCurrAch(result)
+        });
+    }, []);
+
     var ach = JSON.parse(JSON.stringify(achJSON));
     var active_achs = []
 
     function calcCurSteps(CurLevel, usrLvl, factor) {
-        if(usrLvl <= 1){return 0}
+        if (usrLvl <= 1) { return 0 }
         var prvLevel = 0;
         var tmp = 0;
         for (let i = 1; i < usrLvl; i++) {
@@ -24,13 +35,10 @@ const Achievements = () => {
         return (CurLevel);
     }
 
-
-    function create_ach(curr_ach) {
+    function create_ach() {
         active_achs = []
-        //console.log(curr_ach[0]["id"])
-
         for (var usrAch in curr_ach) {
-            
+
             for (var allAch in ach) {
                 if (curr_ach[usrAch]["id"] == ach[allAch]["id"]) {
                     var curLVL = calcCurSteps(ach[allAch]["stp_req"], curr_ach[usrAch]["level"], ach[allAch]["curve"])
@@ -41,10 +49,7 @@ const Achievements = () => {
                         "level": curLVL,
                         "nxtlevel": nxtLVL,
                         "id": ach[allAch]["id"]
-
-
                     }
-
                     active_achs.push(tmpAch)
                     break
                 }
@@ -57,7 +62,7 @@ const Achievements = () => {
     return (
         <div className='overview container'>
             {/* Put an array filled with dicts */}
-            {create_ach([{ id: "001", level: 2 }, { id: "002", level: 1 }])}
+            {create_ach()}
             {active_achs.map((element) => (
                 <Achievement key={element["ach_name"]} title={element["ach_name"]}
                     description={element["descp"]} level={element["level"]} badge={element["id"]}
