@@ -12,7 +12,7 @@ import * as firebase from "../db/firebase";
 // var firebase = require('firebase');
 // var firebaseui = require('firebaseui');
 
-const Signin = ({show, close, manageUser}) => {
+const Signin = ({show, close}) => {
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
 
     function login() {
@@ -41,7 +41,7 @@ const Signin = ({show, close, manageUser}) => {
             const user = result.user;
             
             console.log(firebase.getUserID());
-            manageUser(true);
+            localStorage.setItem("userSignedIn", true);
             close();
         }).catch((error) => {
             // Handle Errors here.

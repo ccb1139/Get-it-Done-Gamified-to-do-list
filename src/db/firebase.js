@@ -126,7 +126,7 @@ async function deleteDocument(document) {
 
 function getUserID() {
   const auth = getAuth(); 
-  return auth.currentUser.uid;
+  return auth.currentUser == null ? null : auth.currentUser.uid;
 }
 
 

@@ -21,9 +21,8 @@ const MainNav = () => {
   function openSignin() { setShow(true) }
   function closeSignin() { setShow(false) }
 
-  const [userSignedIn, setUserSignedIn] = useState(false);
   function userSignOut() {
-    setUserSignedIn(false);
+    localStorage.setItem("userSignedIn", false);
 
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -48,7 +47,7 @@ const MainNav = () => {
         
         <Navbar.Toggle />
         <Navbar.Collapse>
-        { true ? 
+        { JSON.parse(localStorage.getItem("userSignedIn")) ? 
           <>
             <Nav className='navbar-nav nav me-auto'>
               <Nav.Link as={Link} to={appname + "/NewHabit"}> New Habit</Nav.Link>
@@ -84,7 +83,7 @@ const MainNav = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Signin show={show} close={closeSignin} manageUser={setUserSignedIn}/>
+      <Signin show={show} close={closeSignin}/>
   </div>
 
   );
