@@ -39,7 +39,7 @@ const Wheelspin = () => {
                         
                     </div>
                 </div>
-                <UnlockProgress complete={3} total={5}></UnlockProgress>
+                <UnlockProgress></UnlockProgress>
             </div>
 
         </div>

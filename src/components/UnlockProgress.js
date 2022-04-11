@@ -2,8 +2,33 @@ import { ProgressBar } from 'react-bootstrap'
 import '../css/UnlockProgress.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'react-circular-progressbar/dist/styles.css';
+import { useState, useEffect } from "react";
+import * as firebase from "../db/firebase";
 
-function UnlockProgress({complete, total}) {
+// Temp user
+const userID = "test-user";
+
+function UnlockProgress() {
+    const [tasks, setTasks] = useState([]);
+
+    // Get the list of tasks when the page loads
+    useEffect(() => {
+        firebase.getCollection(`users/${userID}/Tasks/`).then((result) => {
+            setTasks(result);
+        });
+    }, []);
+
+
+
+    var total = 1;
+    var complete = 0;
+    if(tasks.filter(task => task.completed).length == tasks.length){
+        complete = 1;
+    } else {
+        complete = 0;
+    }
+
+
     const progressMsg = complete + " / " + total 
 
     return (

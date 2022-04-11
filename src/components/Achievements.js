@@ -70,7 +70,7 @@ const Achievements = () => {
                         complete={element["level"]} size={150} />}></Achievement>
             ))}
 
-            <UnlockProgress complete={3} total={5}></UnlockProgress>
+            <UnlockProgress></UnlockProgress>
         </div>
     );
 }

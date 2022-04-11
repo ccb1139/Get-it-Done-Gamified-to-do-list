@@ -48,7 +48,7 @@ const MainNav = () => {
         
         <Navbar.Toggle />
         <Navbar.Collapse>
-        { userSignedIn ? 
+        { true ? 
           <>
             <Nav className='navbar-nav nav me-auto'>
               <Nav.Link as={Link} to={appname + "/NewHabit"}> New Habit</Nav.Link>
