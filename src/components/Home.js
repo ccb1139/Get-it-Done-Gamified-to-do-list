@@ -1,6 +1,5 @@
-
 import Image from 'react-bootstrap/Image'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import rewardEx from '../img/landing/rewards.png';
 import taskEx from '../img/landing/task.png';
 import trackerEx from '../img/landing/tracker.png';
@@ -20,7 +19,7 @@ const Home = () => {
                 <Container> 
                     <Row className="m-5"> 
                         <h1 className="text-center m-2">Productivity with a <span className="difText"> Push </span> </h1> 
-                        <p className="text-center m-2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p> 
+                        <p className="text-center m-2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
                     </Row>
                 </Container>
             </div>

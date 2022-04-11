@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { collection, doc, getDoc, getDocs, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -123,5 +124,10 @@ async function deleteDocument(document) {
 }
 
 
+function getUserID() {
+  const auth = getAuth(); 
+  return auth.currentUser.uid;
+}
 
-export { getDocument, getCollection, createDocument, updateDocument, deleteDocument };
+
+export { getDocument, getCollection, createDocument, updateDocument, deleteDocument, getUserID };

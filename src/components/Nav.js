@@ -3,17 +3,37 @@ import setting from '../img/gear.svg';
 import github from '../img/github.svg';
 import 'bootstrap/dist/css/bootstrap.css'
 import { Container, Navbar, Nav, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useState } from 'react';
 import Signin from './Signin';
+import { useNavigate } from "react-router-dom";
+
+import * as firebase from "../db/firebase";
+import { getAuth, signOut } from "firebase/auth";
 
 const MainNav = () => {
   const appname = "Get-it-Done-Gamified-to-do-list";
+
+  var navigate = useNavigate();
 
   // Open and closing signin page
   const [show, setShow] = useState(false);
   function openSignin() { setShow(true) }
   function closeSignin() { setShow(false) }
+
+  const [userSignedIn, setUserSignedIn] = useState(false);
+  function userSignOut() {
+    setUserSignedIn(false);
+
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      navigate(`${appname}/`);
+
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
 
   return (
   <div>
@@ -28,7 +48,8 @@ const MainNav = () => {
         
         <Navbar.Toggle />
         <Navbar.Collapse>
-
+        { userSignedIn ? 
+          <>
             <Nav className='navbar-nav nav me-auto'>
               <Nav.Link as={Link} to={appname + "/NewHabit"}> New Habit</Nav.Link>
               <Nav.Link as={Link} to={appname + "/Tasks"}> Lists </Nav.Link>
@@ -47,13 +68,23 @@ const MainNav = () => {
                 <img src={github} alt="Github Link" className = "icons" width="30" height="30"/>  
               </Nav.Link>
     
-              <Button id="signIn" size="sm" onClick={openSignin}> Sign-in </Button>
+              
+              <Button id="signIn" size="sm" onClick={userSignOut}> Sign-out </Button> 
+              
              
             </Nav>
+          </> :
+          <>
+            <Nav className='navbar-nav nav me-auto'></Nav>
+            <Nav>
+              <Button id="signIn" size="sm" onClick={openSignin}> Sign-in </Button>
+            </Nav>
+          </>
+          }
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Signin show={show} close={closeSignin}/>
+      <Signin show={show} close={closeSignin} manageUser={setUserSignedIn}/>
   </div>
 
   );
