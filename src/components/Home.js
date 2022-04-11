@@ -19,7 +19,7 @@ const Home = () => {
             <div>
                 <Container> 
                     <Row className="m-5"> 
-                        <h1 className="text-center m-2">Productivity with a <span class="difText"> Push </span> </h1> 
+                        <h1 className="text-center m-2">Productivity with a <span className="difText"> Push </span> </h1> 
                         <p className="text-center m-2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p> 
                     </Row>
                 </Container>
@@ -29,7 +29,7 @@ const Home = () => {
                     <Row>
                         <Col lg={4} className="keyFeatureCol" >
                             <Row className="p-5">
-                                <img src={rewardEx} alt="Get It Done Logo" className= "keyImages" fluid/>  
+                                <img src={rewardEx} alt="Get It Done Logo" className= "keyImages" fluid="true"/>  
                             </Row>
                             <Row className="p-5">
                                  <p className="text-center">
@@ -42,7 +42,7 @@ const Home = () => {
         
                         <Col lg={4} className="keyFeatureCol">
                             <Row className="p-5">
-                                <img src={trackerEx} alt="Get It Done Logo" className= "keyImages" fluid/>  
+                                <img src={trackerEx} alt="Get It Done Logo" className= "keyImages" fluid="true"/>  
                             </Row>
                             <Row className="p-5">
                                 <p className="text-center">
@@ -53,8 +53,8 @@ const Home = () => {
                         </Col>
 
                         <Col lg={4} className="keyFeatureCol">
-                            <Row Row className="p-5">
-                                <img src={taskEx} alt="Get It Done Logo" className= "keyImages" fluid/>  
+                            <Row className="p-5">
+                                <img src={taskEx} alt="Get It Done Logo" className= "keyImages" fluid="true"/>  
                             </Row>
                             <Row className="p-5">
                                 <p className="text-center">
@@ -71,7 +71,7 @@ const Home = () => {
             <div>
                 <Container> 
                     <Row className="m-5"> 
-                        <h1 className="text-center m-2"> About <span class="difText"> Us </span> </h1> 
+                        <h1 className="text-center m-2"> About <span className="difText"> Us </span> </h1> 
                     </Row>
                 </Container>
             </div>
@@ -81,7 +81,7 @@ const Home = () => {
                     <Row>
                         <Col lg={4} className="p-2" >
                             <Row>
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid/>  
+                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
                             <Row>
                                 <p>
@@ -92,7 +92,7 @@ const Home = () => {
         
                         <Col lg={4} className="p-2">
                             <Row>
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid/>  
+                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
                             <Row>
                                 <p>
@@ -103,7 +103,7 @@ const Home = () => {
 
                         <Col lg={4} className="p-2">
                             <Row>
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid/>  
+                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
                             <Row>
                                 <p>
@@ -115,7 +115,7 @@ const Home = () => {
                     <Row>
                         <Col lg={4} className="p-2" >
                             <Row>
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid/>  
+                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
                             <Row>
                                 <p>
@@ -126,7 +126,7 @@ const Home = () => {
         
                         <Col lg={4} className="p-2">
                             <Row> 
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid/>  
+                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
                             <Row>
                                 <p>
