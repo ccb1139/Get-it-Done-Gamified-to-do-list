@@ -9,11 +9,16 @@ import { useState, useEffect } from "react";
 const userID = "test-user";
 
 function PickOne({unlockAvil}) {
-
-
+    const [stickies, setStickies] = useState([]);
+  
 
     function addSticky(color){
-        firebase.createDocument(`users/${userID}/collectables/`, color);
+        firebase.createDocument(`users/${userID}/collectables/`, color).then((id) => {
+
+            // Use the id from the database as the id in the tasks array locally
+            const newStickie = { id, ...stickies }
+            setStickies([...stickies, newStickie])
+        });
     }
 
 

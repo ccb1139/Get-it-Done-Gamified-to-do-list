@@ -12,12 +12,13 @@ const userID = "test-user";
 
 const Achievements = () => {
     //Firebase Stuff
-    const [curr_ach, setCurrAch] = useState([]);
+    const [_curr_ach, setCurrAch] = useState([]);
 
     useEffect(() => {
         firebase.getCollection(`users/${userID}/inp-Achievements/`).then((result) => {
             setCurrAch(result)
         });
+
     }, []);
 
     var ach = JSON.parse(JSON.stringify(achJSON));
@@ -36,6 +37,7 @@ const Achievements = () => {
     }
 
     function create_ach() {
+        const curr_ach = [{id:"001", level:1}, {id:"002", level:2}]
         active_achs = []
         for (var usrAch in curr_ach) {
 
@@ -61,6 +63,7 @@ const Achievements = () => {
     // create_ach function 
     return (
         <div className='overview container'>
+            <p className='d-flex align-items-center justify-content-center'>*Achievement trackers do not currently reflect actual progress*</p>
             {/* Put an array filled with dicts */}
             {create_ach()}
             {active_achs.map((element) => (

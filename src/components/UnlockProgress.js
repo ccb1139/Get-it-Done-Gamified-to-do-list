@@ -19,7 +19,7 @@ function UnlockProgress() {
     }, []);
 
 
-
+    // For Demo
     var total = 1;
     var complete = 0;
     if(tasks.filter(task => task.completed).length == tasks.length){
@@ -27,6 +27,7 @@ function UnlockProgress() {
     } else {
         complete = 0;
     }
+
 
 
     const progressMsg = complete + " / " + total 

@@ -18,10 +18,25 @@ function HallOfFrame() {
         });
     }, []);
 
+
+    const earned_ach_db = [{
+        description: "Unlock 12 sticky note colors by completing donuts",
+        id: "002",
+        level: 2,
+        title: "Sticking with it"
+    },
+    {
+        description: "Complete 7 tasks total",
+        id: "001",
+        level: 1,
+        title: "An Apple a Day"
+    }
+    ]
+
     return (
         <div className='container'>
             <div className='row'>
-                {earned_ach.map((element) => (
+                {earned_ach_db.map((element) => (
                     <HOFAchCard title={element["title"]} badge={element["id"]} level={element["level"]}
                         description={element["description"]} key={element["id"]}></HOFAchCard>
                 ))}
