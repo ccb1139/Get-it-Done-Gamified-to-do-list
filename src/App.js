@@ -14,7 +14,8 @@ import HallOfFrame from './components/HallOfFame';
 import * as firebase from "./db/firebase";
 
 function App() {
-  const appname = "Get-it-Done-Gamified-to-do-list";
+  // const appname = "Get-it-Done-Gamified-to-do-list";
+  const appname = "";
 
   
 
