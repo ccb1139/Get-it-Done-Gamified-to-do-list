@@ -11,9 +11,18 @@ const AddTaskButton = ({onAdd}) => {
 
     function handleSumbit() {
         const task = document.getElementById("taskInput");
-
+        
+        var today = new Date();
         onAdd({
-            text: task.value
+            text: task.value,
+            completed: false,
+            habit: false,
+            due: "N/A",
+            created: { 
+                year: today.getFullYear(), 
+                month: today.getMonth() + 1, 
+                day: today.getDate()
+            }
         });
     }
 

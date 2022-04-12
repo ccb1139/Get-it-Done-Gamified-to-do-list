@@ -3,9 +3,25 @@ import '../css/Wheelspin.css'
 import SNTmp from "../img/StickyNote.png"
 import MsyBox from "../img/mysBoxPH.png"
 import React from "react"
+import * as firebase from "../db/firebase";
+import { useState, useEffect } from "react";
 
+const userID = "test-user";
 
 function PickOne({unlockAvil}) {
+    const [stickies, setStickies] = useState([]);
+  
+
+    function addSticky(color){
+        firebase.createDocument(`users/${userID}/collectables/`, color).then((id) => {
+
+            // Use the id from the database as the id in the tasks array locally
+            const newStickie = { id, ...stickies }
+            setStickies([...stickies, newStickie])
+        });
+    }
+
+
     var canUnlock = unlockAvil;
 
     var blurClass = ""
@@ -53,6 +69,7 @@ function PickOne({unlockAvil}) {
             boxPick.style.filter = 'opacity(0.5) drop-shadow(0 0 0 #' + nc + ')'
             boxPick.classList.remove("boxClicked")
             boxPick.classList.add("CosPicked");
+            addSticky({color:nc});
 
             nc = Math.floor(Math.random()*16777215).toString(16);
             boxNPick1.src = SNTmp

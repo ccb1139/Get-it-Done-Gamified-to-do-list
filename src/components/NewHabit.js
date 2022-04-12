@@ -1,15 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import React, { useState } from 'react';
-import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import { Container, Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import InvalidInput from './InvalidInput';
+import * as firebase from "../db/firebase";
+
+// Temp user
+const userID = "test-user";
 
 const NewHabit = () => {
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
 
     function saveHabit(e) {
         // Check if form has any errors
-        if (isSubmitSuccessful === false) return;
+        // if (isSubmitSuccessful === false) {
+        //     return;
+        // }
 
         // Get data from form
         const habitName = document.getElementById("habitNameInput").value;
@@ -53,9 +59,30 @@ const NewHabit = () => {
             end: end
         }
 
-        // For now just output what will be saved to the database
+        // Save habit
+        firebase.createDocument(`users/${userID}/Habits/`, habit).then(() => {});
         console.log(JSON.stringify(habit));
+
+        // Create task related to habit
+        var habitAsTask = {
+            text: habit.task,
+            completed: false,
+            habit: true,
+            due: "N/A",
+            created: today
+        }
+        firebase.createDocument(`users/${userID}/Tasks/`, habitAsTask).then((id) => {});
+
+
+        firebase.getCollection(`users/${userID}/Habits/`).then((result) => {
+            console.log(result)
+        })
+
+        setShow(true)
     }
+
+    const [show, setShow] = useState(false);
+
 
     return (
         <>
@@ -153,6 +180,13 @@ const NewHabit = () => {
                 </Row>
             </Form>
         </Container>
+        {show ? 
+        <Container className="w-25 mt-5">
+            <Alert variant="success" onClose={() => setShow(false)} dismissible>
+                Habit successfully created!
+            </Alert>
+        </Container> : null}
+
         </>
     );
   }

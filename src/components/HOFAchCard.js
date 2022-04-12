@@ -5,14 +5,14 @@ import ReactTooltip from 'react-tooltip';
 import UnlockProgress from './UnlockProgress'
 import Badge from './Badge';
 
-function HOFAchCard({ title, badge, description }) {
+function HOFAchCard({ title, badge, description, level }) {
     
     const toolTipStr = "You earned this achievment by " + description
 
     return (
         <div id="HOFCard" className='col-sm-3 border' data-tip={toolTipStr}>
             <div id="HOFCardHeader" className='row-sm HOFcardInfo'>
-                <h3 style={{ fontWeight: "bold" }} >{title}</h3>
+                <h3 style={{ fontWeight: "bold" }} >{title + " " + level}</h3>
             </div>
             <div className='row-sm HOFcardInfo'>
                 <Badge id="achv-badge" badge_path={badge}> </Badge>
