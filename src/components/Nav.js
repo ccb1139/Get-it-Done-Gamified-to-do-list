@@ -12,8 +12,8 @@ import * as firebase from "../db/firebase";
 import { getAuth, signOut } from "firebase/auth";
 
 const MainNav = () => {
-  // const appname = "Get-it-Done-Gamified-to-do-list";
-  const appname = "";
+  const appname = "Get-it-Done-Gamified-to-do-list";
+  // const appname = "";
 
   var navigate = useNavigate();
 
