@@ -1,8 +1,8 @@
 [
   {
-    "ach_name": "An Apple a Day",
-    "descp1": "Complete ",
-    "descp2": " tasks total",
+    "ach_name": "Chicken' them off",
+    "descp1": "Complete",
+    "descp2": "tasks total",
     "stp_req": 3,
     "levels": 5,
     "id": "001",
@@ -10,11 +10,29 @@
   },
   {
     "ach_name": "Sticking with it",
-    "descp1": "Unlock ",
-    "descp2": " sticky note colors by completing donuts",
+    "descp1": "Unlock",
+    "descp2": "sticky note colors by completing donuts",
     "stp_req": 3,
     "levels": 5,
     "id": "002",
+    "curve": 1
+  },
+  {
+    "ach_name": "24/7",
+    "descp1": "Finish the day with all habits and tasks completed",
+    "descp2": "times",
+    "stp_req": 3,
+    "levels": 5,
+    "id": "003",
+    "curve": 1
+  },
+  {
+    "ach_name": "Make it yours",
+    "descp1": "Change the color of habits and tasks",
+    "descp2": "",
+    "stp_req": 2,
+    "levels": 1,
+    "id": "004",
     "curve": 1
   }
 ]

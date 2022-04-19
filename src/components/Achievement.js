@@ -13,7 +13,7 @@ const Achievement = ({donut, badge, title, description, level}) => {
                     {donut}
                 </div>
                 <div className="col-md col-lg acvh-iholder">
-                    <Badge id="achv-badge" badge_path={badge}></Badge>
+                    <Badge id="achv-badge" badge_id={badge} badge_level={level}></Badge>
                 </div> 
             </div>
         </div>

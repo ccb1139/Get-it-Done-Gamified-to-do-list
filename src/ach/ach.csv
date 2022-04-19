@@ -1,3 +1,5 @@
-ach_name,descp,stp_req,levels,id
-An Apple a Day 1,Complete 7 tasks total,3,5,ac_1
-Sticking with it 1,Unlock 3 sticky note colors by completing donuts,3,5,ac_2
+ach_name,descp1,descp2,stp_req,levels,id,curve
+An Apple a Day,Complete , tasks total,3,5,001,1.25
+Sticking with it,Unlock , sticky note colors by completing donuts,3,5,002,1
+24/7,Finish the day with all habits and tasks completed , times ,3,5,003,1
+Make it yours,Change the color of habits and tasks,,2,1,004,1
