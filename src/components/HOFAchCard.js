@@ -15,7 +15,7 @@ function HOFAchCard({ title, badge, description, level }) {
                 <h3 style={{ fontWeight: "bold" }} >{title + " " + level}</h3>
             </div>
             <div className='row-sm HOFcardInfo'>
-                <Badge id="achv-badge" badge_path={badge}> </Badge>
+                <Badge id="achv-badge" badge_id={badge} badge_level={level}> </Badge>
                 
             </div>
             <div className='row-sm HOFcardInfo'>

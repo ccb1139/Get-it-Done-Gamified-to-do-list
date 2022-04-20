@@ -14,9 +14,22 @@
 
 .achv-info {
   text-align: center;
+
 }
 
 .acvh-img {
   max-height: 150px;
   max-width: 150px;
+  padding: 10px;
+}
+
+#ach_info_popup {
+  width: 10px;
+  float: right;
+  font-size:medium;
+  padding-top: 10px;
+  color:darkcyan;
+  font-weight: bold;
+  cursor: help;
+  
 }

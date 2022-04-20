@@ -30,7 +30,10 @@ const Achievements = () => {
                         "level": 1,
                         "nxtlevel": ach[i]["stp_req"],
                         "stepsDone": 0,
-                        "id": ach[i]["id"]
+                        "id": ach[i]["id"],
+                        "curve": ach[i]["curve"],
+                        "maxlevel": ach[i]["levels"],
+                        "step_req": ach[i]["stp_req"]
                     }
 
                     result.push(inp_ach)
@@ -75,7 +78,10 @@ const Achievements = () => {
                         "level": curLVL,
                         "nxtlevel": nxtLVL,
                         "stepsDone": curr_ach[usrAch]["stepsDone"],
-                        "id": ach[allAch]["id"]
+                        "id": ach[allAch]["id"],
+                        "curve": ach[allAch]["curve"],
+                        "maxlevel": ach[allAch]["levels"],
+                        "step_req": ach[allAch]["stp_req"]
                     }
                     active_achs.push(tmpAch)
                     break
@@ -94,6 +100,7 @@ const Achievements = () => {
             {active_achs.map((element) => (
                 <Achievement key={element["ach_name"]} title={element["ach_name"]}
                     description={element["descp"]} level={element["level"] + 1} badge={element["id"]}
+                    factor={element["curve"]} max={element["maxlevel"]} step_req={element["step_req"]}
                     donut={<Donut total={element["nxtlevel"]}
                         complete={element["stepsDone"]} size={150} />}></Achievement>
             ))}

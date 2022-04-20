@@ -12,31 +12,33 @@ function HallOfFrame() {
     //Firebase Stuff
     const [earned_ach, setEarnedAch] = useState([]);
 
+    var achIds = [];
+
     useEffect(() => {
         firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result) => {
+            if(result.length === 0){
+                const placeholder = {
+                    description: "Unlock 12 sticky note colors by completing donuts",
+                    id: "002",
+                    level: 1,
+                    title: "Sticking with it"
+                }
+                result.push(placeholder)
+                firebase.createDocument(`users/${userID}/earned-Achievements/`, placeholder).then((id) => {
+                    achIds.push(id)
+                })
+            }
+
+
             setEarnedAch(result)
         });
     }, []);
 
 
-    const earned_ach_db = [{
-        description: "Unlock 12 sticky note colors by completing donuts",
-        id: "002",
-        level: 2,
-        title: "Sticking with it"
-    },
-    {
-        description: "Complete 7 tasks total",
-        id: "001",
-        level: 1,
-        title: "An Apple a Day"
-    }
-    ]
-
     return (
         <div className='container'>
             <div className='row'>
-                {earned_ach_db.map((element) => (
+                {earned_ach.map((element) => (
                     <HOFAchCard title={element["title"]} badge={element["id"]} level={element["level"]}
                         description={element["description"]} key={element["id"]}></HOFAchCard>
                 ))}
