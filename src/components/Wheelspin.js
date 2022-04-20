@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button"
 import StickyNote from "./StickyNote"
-import SNTmp from "../img/StickyNote.png"
 import PickOne from "./PickOne"
 import 'bootstrap/dist/css/bootstrap.css'
 import '../css/Wheelspin.css'
@@ -23,13 +22,19 @@ const Wheelspin = () => {
         });
     }, []);
 
-    var unlock_Avil = tasks.filter(task => task.completed).length == tasks.length? true : false;
+    function updateStickies() {
+        firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
+            setStickies(result);
+        });
+    }
+
+    var unlock_Avil = tasks.filter(task => task.completed).length == tasks.length ? true : false;
 
     return (
         <div className='container'>
             <div id='WsMain' className='row'>
                 <div id='MysterySticky' className='col-md-6 d-flex align-items-center justify-content-center'>
-                    <PickOne unlockAvil={unlock_Avil}/>
+                    <PickOne unlockAvil={unlock_Avil} updateFunc={updateStickies()} />
                 </div>
                 <div className='col-md-6'>
                     <div id='Owned-Items' className="row">
@@ -37,11 +42,11 @@ const Wheelspin = () => {
                             <h3>Owned Cosmetics</h3>
                         </div>
                         <div className="col-sm-12 border cosHolder">
-                        {stickies.map((element) => (
-                            <StickyNote color={element["color"]} key={element["color"]}></StickyNote>
-                        ))}
+                            {stickies.map((element) => (
+                                <StickyNote color={element["color"]} key={element["color"]}></StickyNote>
+                            ))}
                         </div>
-                        
+
                     </div>
                 </div>
                 <UnlockProgress></UnlockProgress>

@@ -18,10 +18,10 @@ function HallOfFrame() {
         firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result) => {
             if(result.length === 0){
                 const placeholder = {
-                    description: "Unlock 12 sticky note colors by completing donuts",
-                    id: "002",
+                    description: "Login for the first time! (place holder)",
+                    id: "001",
                     level: 1,
-                    title: "Sticking with it"
+                    title: "First timer"
                 }
                 result.push(placeholder)
                 firebase.createDocument(`users/${userID}/earned-Achievements/`, placeholder).then((id) => {

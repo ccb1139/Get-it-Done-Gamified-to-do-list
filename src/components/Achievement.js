@@ -4,22 +4,22 @@ import Badge from './Badge'
 import ReactTooltip from 'react-tooltip';
 import '../css/Achievements.css'
 
-const Achievement = ({ donut, badge, title, description, level, factor, max, step_req}) => {
-    
+const Achievement = ({ donut, badge, title, description, level, factor, max, step_req }) => {
+
 
     function levelscale(CurLevel, factor, max) {
         var levelscales = []
         var prvLevel = 0;
         var tmp = 0;
-        console.log(title)
-        for (let i = 1; i < max+1 ; i++) {
+        //console.log(title)
+        for (let i = 1; i < max + 1; i++) {
             tmp = Math.round((prvLevel + CurLevel) * factor);
             prvLevel = CurLevel;
             CurLevel = tmp;
-            console.log(("i: " + i + "\tcurLevel: " + CurLevel))
+            //console.log(("i: " + i + "\tcurLevel: " + CurLevel))
             levelscales.push(CurLevel)
         }
-        return(levelscales)
+        return (levelscales)
     }
 
     const lvlsStr = levelscale(step_req, factor, max);
@@ -46,11 +46,10 @@ const Achievement = ({ donut, badge, title, description, level, factor, max, ste
                         <p >i</p>
                     </div>
                     <ReactTooltip id={title} place="right" type="dark" effect="solid" >
-                        <ul>
-                            {lvlsStr.map((element) => (
-                                <li>{element}</li>
-                            ))}
-                        </ul>
+                        <p>Level Reqs.</p>
+                        {lvlsStr.map((element) => (
+                            <p>{element}</p>
+                        ))}
                     </ReactTooltip>
                 </h1>
                 <h3>{description}</h3>

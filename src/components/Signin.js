@@ -12,18 +12,48 @@ import * as firebase from "../db/firebase";
 // var firebase = require('firebase');
 // var firebaseui = require('firebaseui');
 
-const Signin = ({show, close}) => {
+const userID = "test-user";
+
+const Signin = ({ show, close }) => {
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
+
+    function loadNewAccount() {
+        // Load sticky notes
+        firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
+            console.log(result)
+            if (result.length === 0) {
+                firebase.createDocument(`users/${userID}/collectables/`, { color: "ff7575" }).then((id) => { });
+                firebase.createDocument(`users/${userID}/collectables/`, { color: "f8d78b" }).then((id) => { });
+            }
+        });
+        // Load Hall of fame
+        firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result) => {
+            if(result.length === 0){
+                const placeholder = {
+                    description: "Login for the first time! (place holder)",
+                    id: "001",
+                    level: 1,
+                    title: "First timer"
+                }
+                result.push(placeholder)
+                firebase.createDocument(`users/${userID}/earned-Achievements/`, placeholder).then((id) => { })
+            }
+        });
+    }
+
 
     function login() {
         if (isSubmitSuccessful === false) return;
 
         const email = document.getElementById("emailInput").value;
         const password = document.getElementById("passwordInput").value;
-        
+
         // Check with database
-        const account = {email: email, password: password};
+        const account = { email: email, password: password };
         console.log(account);
+
+        // Load new account items
+        loadNewAccount();
 
         // Close modal
         close();
@@ -32,16 +62,19 @@ const Signin = ({show, close}) => {
     function GoogleSignIn() {
         const provider = new GoogleAuthProvider()
         const auth = getAuth();
-      
+
         signInWithPopup(auth, provider).then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
-            
+
             console.log(firebase.getUserID());
             localStorage.setItem("userSignedIn", true);
+            // Load new account items
+            loadNewAccount();
+
             close();
         }).catch((error) => {
             // Handle Errors here.
@@ -52,10 +85,10 @@ const Signin = ({show, close}) => {
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
-      });
-      
+        });
+
     }
-    
+
     // Initialize the FirebaseUI Widget using Firebase.
     // var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
@@ -69,21 +102,21 @@ const Signin = ({show, close}) => {
                 <Modal.Body>
                     <Form onSubmit={handleSubmit(login)}>
                         <Form.Label>Email</Form.Label>
-                        <input type="text" className="form-control" id="emailInput" {...register("emailInput", 
-                        {required: true, pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/})}/>
+                        <input type="text" className="form-control" id="emailInput" {...register("emailInput",
+                            { required: true, pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })} />
                         <div className="text-center mb-4">
                             {errors.emailInput?.type === "required" && <InvalidInput type="Signin" text="Email is required" />}
                             {errors.emailInput?.type === "pattern" && <InvalidInput type="Signin" text="Please enter a valid email" />}
                         </div>
 
                         <Form.Label>Password</Form.Label>
-                        <input type="password" className="form-control" id="passwordInput" {...register("passwordInput", 
-                        {required: true})}/>
-                         <div className="text-center mb-4">
+                        <input type="password" className="form-control" id="passwordInput" {...register("passwordInput",
+                            { required: true })} />
+                        <div className="text-center mb-4">
                             {errors.passwordInput?.type === "required" && <InvalidInput type="Signin" text="Password is required" />}
                             {errors.passwordInput?.type === "pattern" && <InvalidInput type="Signin" text="Please enter a valid email" />}
                         </div>
- 
+
                         <Button className="w-100" type="submit">Sign-in</Button>
 
                         <div className="lineDivide mt-3 mb-5">
@@ -98,6 +131,6 @@ const Signin = ({show, close}) => {
             </Modal>
         </>
     );
-  }
-  
-  export default Signin
+}
+
+export default Signin

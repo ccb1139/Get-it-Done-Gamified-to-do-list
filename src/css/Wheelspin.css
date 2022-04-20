@@ -3,6 +3,8 @@
     width: auto;
     margin: auto;
     text-align: center;
+    align-items: baseline;
+    margin: 10px;
 }
 
 #Owned-Items {

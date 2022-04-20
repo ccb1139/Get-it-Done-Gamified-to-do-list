@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 const userID = "test-user";
 
-function PickOne({unlockAvil}) {
+function PickOne({unlockAvil, updateFunc}) {
     const [stickies, setStickies] = useState([]);
   
 
@@ -70,6 +70,7 @@ function PickOne({unlockAvil}) {
             boxPick.classList.remove("boxClicked")
             boxPick.classList.add("CosPicked");
             addSticky({color:nc});
+            
 
             nc = Math.floor(Math.random()*16777215).toString(16);
             boxNPick1.src = SNTmp
@@ -86,6 +87,7 @@ function PickOne({unlockAvil}) {
         })
 
         canUnlock = false;
+        //updateFunc();
     }
     return (
         <div className="col-md-10 border">
@@ -96,8 +98,6 @@ function PickOne({unlockAvil}) {
                 <img src={MsyBox} id="clickMsBox1" onClick={onClick}></img>
                 <img src={MsyBox} id="clickMsBox2" onClick={onClick}></img>
                 <img src={MsyBox} id="clickMsBox3" onClick={onClick}></img>
-
-                
             </div>
         </div>
 
