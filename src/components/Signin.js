@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import InvalidInput from './InvalidInput';
 
 import GoogleButton from 'react-google-button'
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, setPersistence, inMemoryPersistence } from "firebase/auth";
 import * as firebase from "../db/firebase";
 // import * as firebase from "firebase";s
 // import * as firebaseui from "firebaseui";
@@ -12,7 +12,8 @@ import * as firebase from "../db/firebase";
 // var firebase = require('firebase');
 // var firebaseui = require('firebaseui');
 
-const userID = "test-user";
+// const userID = "test-user";
+const userID = firebase.getUserID();
 
 const Signin = ({ show, close }) => {
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
@@ -62,19 +63,15 @@ const Signin = ({ show, close }) => {
     function GoogleSignIn() {
         const provider = new GoogleAuthProvider()
         const auth = getAuth();
-
         signInWithPopup(auth, provider).then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
-
-            console.log(firebase.getUserID());
+            
             localStorage.setItem("userSignedIn", true);
-            // Load new account items
-            loadNewAccount();
-
+            localStorage.setItem("userID", user.uid);
             close();
         }).catch((error) => {
             // Handle Errors here.
@@ -84,9 +81,8 @@ const Signin = ({ show, close }) => {
             const email = error.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
+            // ...   
         });
-
     }
 
     // Initialize the FirebaseUI Widget using Firebase.

@@ -12,8 +12,8 @@ import * as firebase from "../db/firebase";
 import { getAuth, signOut } from "firebase/auth";
 
 const MainNav = () => {
-  const appname = "Get-it-Done-Gamified-to-do-list";
-  // const appname = "";
+  // const appname = "Get-it-Done-Gamified-to-do-list";
+  const appname = "";
 
   var navigate = useNavigate();
 
@@ -24,6 +24,7 @@ const MainNav = () => {
 
   function userSignOut() {
     localStorage.setItem("userSignedIn", false);
+    localStorage.setItem("userID", null);
 
     const auth = getAuth();
     signOut(auth).then(() => {

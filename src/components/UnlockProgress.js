@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import * as firebase from "../db/firebase";
 
 // Temp user
-const userID = "test-user";
+// const userID = "test-user";
+const userID = firebase.getUserID();
 
 function UnlockProgress() {
     const [tasks, setTasks] = useState([]);

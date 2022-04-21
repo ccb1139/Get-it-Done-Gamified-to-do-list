@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { collection, doc, getDoc, getDocs, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged, setPersistence, browserSessionPersistence  } from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -18,10 +18,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
-const db = getFirestore();
+const db = getFirestore(app);
+
+const auth = getAuth();
+setPersistence(auth, browserSessionPersistence).then(() => {});
 
 // For running local version:
-connectFirestoreEmulator(db, 'localhost', 8080);
+// connectFirestoreEmulator(db, 'localhost', 8080);
 
 
 
@@ -123,10 +126,42 @@ async function deleteDocument(document) {
   await deleteDoc(docRef);
 }
 
+// var uid = null;
+// const auth = getAuth();
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     // User is signed in, see docs for a list of available properties
+//     // https://firebase.google.com/docs/reference/js/firebase.User
+//     // const uid = user.uid;
+//     uid = user.uid;
+//     console.log("State change, uid = ", uid);
+//   } else {
+//     // User is signed out
+//     uid = null;
+//   }
+// });
 
 function getUserID() {
-  const auth = getAuth(); 
-  return auth.currentUser == null ? null : auth.currentUser.uid;
+  const auth = getAuth();
+  console.log("auth: ", auth); 
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     // User is signed in, see docs for a list of available properties
+  //     // https://firebase.google.com/docs/reference/js/firebase.User
+  //     const uid = user.uid;
+  //     console.log("State change, uid = ", uid);
+
+  //     return user.uid;
+  //   } else {
+  //     // User is signed out
+  //     console.log("Return null")
+  //     return null;
+  //   }
+  // });
+  // console.log(auth.currentUser == null ? null : auth.currentUser.uid);
+  // return auth.currentUser == null ? null : auth.currentUser.uid;
+
+  return localStorage.getItem("userID");
 }
 
 

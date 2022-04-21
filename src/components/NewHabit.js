@@ -6,7 +6,8 @@ import InvalidInput from './InvalidInput';
 import * as firebase from "../db/firebase";
 
 // Temp user
-const userID = "test-user";
+// const userID = "test-user";
+const userID = firebase.getUserID();
 
 const NewHabit = () => {
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();

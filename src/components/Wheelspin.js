@@ -7,7 +7,8 @@ import UnlockProgress from './UnlockProgress'
 import * as firebase from "../db/firebase";
 import { useState, useEffect } from "react";
 
-const userID = "test-user";
+// const userID = "test-user";
+const userID = firebase.getUserID();
 
 const Wheelspin = () => {
     const [stickies, setStickies] = useState([]);

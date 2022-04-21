@@ -8,7 +8,8 @@ import achJSON from '../ach/ach.json'
 import * as firebase from "../db/firebase";
 import { async } from '@firebase/util';
 
-const userID = "test-user";
+// const userID = "test-user";
+const userID = firebase.getUserID();
 
 const Achievements = () => {
     //Firebase Stuff

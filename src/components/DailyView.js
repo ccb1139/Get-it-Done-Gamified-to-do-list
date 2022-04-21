@@ -21,7 +21,9 @@ import DailyViewPlaceHolder from "../img/DailyViewPlaceHolder.png"
 import * as firebase from "../db/firebase";
 
 // Temp user
-const userID = "test-user";
+// const userID = "test-user";
+const userID = firebase.getUserID();
+
 
 const DailyView = () => {
     const [tasks, setTasks] = useState([]);
