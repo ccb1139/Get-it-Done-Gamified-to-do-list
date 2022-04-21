@@ -19,9 +19,10 @@ const Signin = ({ show, close }) => {
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
 
     function loadNewAccount() {
+        //console.log("LOGIN!")
         // Load sticky notes
         firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
-            console.log(result)
+            //console.log(result)
             if (result.length === 0) {
                 firebase.createDocument(`users/${userID}/collectables/`, { color: "ff7575" }).then((id) => { });
                 firebase.createDocument(`users/${userID}/collectables/`, { color: "f8d78b" }).then((id) => { });

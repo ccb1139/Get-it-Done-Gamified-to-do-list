@@ -65,7 +65,7 @@ function PickOne({unlockAvil, updateFunc}) {
 
         boxPick.addEventListener("animationend", function (e) {
             var nc = Math.floor(Math.random()*16777215).toString(16);
-            console.log(nc)
+            //console.log(nc)
             boxPick.src = SNTmp
             boxPick.style.filter = 'opacity(0.5) drop-shadow(0 0 0 #' + nc + ')'
             boxPick.classList.remove("boxClicked")

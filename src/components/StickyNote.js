@@ -9,8 +9,11 @@ const StickyNote = ({ id, stickyImg, color }) => {
         color = "#" + color
     }
     return (
-        <img id={id} src={Sticky}
-            style={{ filter: 'opacity(0.5) drop-shadow(0 0 0 ' + color + ' )' }}></img>
+        <div className='col' id='stickyDiv'>
+            <img id={id} src={Sticky}
+                style={{ filter: 'opacity(0.5) drop-shadow(0 0 0 ' + color + ' )' }}></img>
+        </div>
+
 
     )
 }

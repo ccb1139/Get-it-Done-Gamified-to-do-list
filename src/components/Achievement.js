@@ -47,8 +47,8 @@ const Achievement = ({ donut, badge, title, description, level, factor, max, ste
                     </div>
                     <ReactTooltip id={title} place="right" type="dark" effect="solid" >
                         <p>Level Reqs.</p>
-                        {lvlsStr.map((element) => (
-                            <p>{element}</p>
+                        {lvlsStr.map((element, index) => (
+                            <p key={index+title}>{"Level " + (index + 1) + ": \t" + element + " steps"}</p>
                         ))}
                     </ReactTooltip>
                 </h1>
