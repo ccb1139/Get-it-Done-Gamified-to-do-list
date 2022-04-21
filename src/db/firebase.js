@@ -143,24 +143,6 @@ async function deleteDocument(document) {
 
 function getUserID() {
   const auth = getAuth();
-  console.log("auth: ", auth); 
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     // User is signed in, see docs for a list of available properties
-  //     // https://firebase.google.com/docs/reference/js/firebase.User
-  //     const uid = user.uid;
-  //     console.log("State change, uid = ", uid);
-
-  //     return user.uid;
-  //   } else {
-  //     // User is signed out
-  //     console.log("Return null")
-  //     return null;
-  //   }
-  // });
-  // console.log(auth.currentUser == null ? null : auth.currentUser.uid);
-  // return auth.currentUser == null ? null : auth.currentUser.uid;
-
   return localStorage.getItem("userID");
 }
 
