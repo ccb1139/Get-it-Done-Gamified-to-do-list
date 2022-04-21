@@ -73,6 +73,8 @@ const Signin = ({ show, close }) => {
             
             localStorage.setItem("userSignedIn", true);
             localStorage.setItem("userID", user.uid);
+
+            loadNewAccount();
             close();
         }).catch((error) => {
             // Handle Errors here.
