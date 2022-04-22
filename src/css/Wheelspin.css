@@ -20,6 +20,11 @@
     margin: auto;
 }
 
+.stickyTest{
+    background-blend-mode: color;
+}
+
+
 .blur {
     -webkit-filter: blur(5px);
     -moz-filter: blur(5px);
@@ -31,7 +36,30 @@
 
 .cosHolder {
     padding: 15px;
-    margin: auto;
+}
+
+.stickyDiv {
+    display: inline-block;
+    width: 125px;
+    height: 125px;
+}
+
+.stickyTilt {
+    display: inline-block;
+    background-image: url("../img/StickyNote.png");
+    background-size: 100% 100%;
+    width: 125px;
+    height: 125px;
+   
+}
+
+
+.TypeDenoter{
+    font-weight: bold;
+
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 15px;
 }
 
 .boxClicked {

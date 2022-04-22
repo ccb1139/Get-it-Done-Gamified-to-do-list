@@ -24,8 +24,10 @@ const Signin = ({ show, close }) => {
         firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
             //console.log(result)
             if (result.length === 0) {
-                firebase.createDocument(`users/${userID}/collectables/`, { color: "ff7575" }).then((id) => { });
-                firebase.createDocument(`users/${userID}/collectables/`, { color: "f8d78b" }).then((id) => { });
+                firebase.createDocument(`users/${userID}/collectables/`, 
+                ({ color: "ff7575", habit:true, task:false })).then((id) => { });
+                firebase.createDocument(`users/${userID}/collectables/`, 
+                { color: "f8d78b", habit:false, task:true }).then((id) => { });
             }
         });
         // Load Hall of fame

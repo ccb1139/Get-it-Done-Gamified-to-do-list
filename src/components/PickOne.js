@@ -70,7 +70,7 @@ function PickOne({unlockAvil, updateFunc}) {
             boxPick.style.filter = 'opacity(0.5) drop-shadow(0 0 0 #' + nc + ')'
             boxPick.classList.remove("boxClicked")
             boxPick.classList.add("CosPicked");
-            addSticky({color:nc});
+            addSticky({color:nc, habit:false, task:false});
             
 
             nc = Math.floor(Math.random()*16777215).toString(16);
