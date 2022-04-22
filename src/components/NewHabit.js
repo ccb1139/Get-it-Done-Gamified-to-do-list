@@ -62,22 +62,21 @@ const NewHabit = () => {
 
         // Save habit
         firebase.createDocument(`users/${userID}/Habits/`, habit).then(() => {});
-        console.log(JSON.stringify(habit));
 
         // Create task related to habit
         var habitAsTask = {
             text: habit.task,
             completed: false,
             habit: true,
-            due: "N/A",
-            created: today
+            due: endDate,
+            created: new Date()
         }
         firebase.createDocument(`users/${userID}/Tasks/`, habitAsTask).then((id) => {});
 
 
-        firebase.getCollection(`users/${userID}/Habits/`).then((result) => {
-            console.log(result)
-        })
+        // firebase.getCollection(`users/${userID}/Habits/`).then((result) => {
+        //     console.log(result)
+        // })
 
         setShow(true)
     }

@@ -3,6 +3,7 @@ import MainNav from './components/Nav';
 import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 import DailyView from './components/DailyView';
+import WeeklyView from './components/WeeklyView';
 import Achievements from './components/Achievements';
 import NewHabit from './components/NewHabit';
 import Wheelspin from './components/Wheelspin';
@@ -28,7 +29,8 @@ function App() {
       <Routes>
         <Route path={appname + "/"} exact element={<Home />} />
         <Route path={appname + "/NewHabit"} element={<NewHabit />} />
-        <Route path={appname + "/Tasks"} element={<DailyView />} />
+        <Route path={appname + "/DailyView"} element={<DailyView />} />
+        <Route path={appname + "/WeeklyView"} element={<WeeklyView />} />
         <Route path={appname + "/Achievements"} element={<Achievements />} />
         {/* Temp wheel spin button on nav bar */}
         

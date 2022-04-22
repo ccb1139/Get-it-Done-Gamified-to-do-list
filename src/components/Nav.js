@@ -2,7 +2,7 @@ import logo from '../img/logo.png';
 import setting from '../img/gear.svg';
 import github from '../img/github.svg';
 import 'bootstrap/dist/css/bootstrap.css'
-import { Container, Navbar, Nav, Button } from 'react-bootstrap'
+import { Container, Navbar, Nav, Button, NavDropdown } from 'react-bootstrap'
 import { Link, Navigate } from 'react-router-dom'
 import { useState } from 'react';
 import Signin from './Signin';
@@ -38,7 +38,7 @@ const MainNav = () => {
 
   return (
   <div>
-      <Navbar className ='navbar' sticky="top" expand="lg">
+      <Navbar className='navbar' sticky="top" expand="lg">
         <Container>
           <Navbar.Brand>
             <Nav.Link as={Link} to={appname + "/"}>
@@ -53,7 +53,11 @@ const MainNav = () => {
           <>
             <Nav className='navbar-nav nav me-auto'>
               <Nav.Link as={Link} to={appname + "/NewHabit"}> New Habit</Nav.Link>
-              <Nav.Link as={Link} to={appname + "/Tasks"}> Lists </Nav.Link>
+              <NavDropdown title="To-Do Lists">
+                <NavDropdown.Item as={Link} to={appname + "/DailyView"}> Daily View </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={appname + "/WeeklyView"}> Weekly View </NavDropdown.Item>
+              </NavDropdown>
+              
               <Nav.Link as={Link} to={appname + "/Achievements"}> Achievements</Nav.Link>
               {/* Temp wheelspin button on nav bar */}
               <Nav.Link as={Link} to={appname + "/HallOfFrame"}> Hall Of Fame</Nav.Link>

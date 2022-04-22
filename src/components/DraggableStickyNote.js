@@ -5,9 +5,6 @@ import { useState, useEffect } from "react";
 import * as firebase from "../db/firebase";
 
 const DraggableStickyNote = ({ color, task, onDelete, onComplete }) => {
-    console.log(task)
-
-
     return (
         <div className={"DraggableStickyNote " + (task.habit ? "DraggableStickyNoteHabit" : "")}
             style={{ filter: 'opacity(0.7) drop-shadow(0 0 0 ' + color + ' )' }}>

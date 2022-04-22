@@ -65,14 +65,26 @@
 
 /*Lists*/
 .taskHeading {
-  margin: 50px auto 0 auto;
+  margin: auto;
   padding: 20px;
   width: 60% !important;
   max-width: 750px !important;
   font-weight: bold;
   border: 4px black solid;
   border-radius: 10px;
-  background: #ff7575;
+  background: #e9edc9;
+}
+
+.viewToggleButton {
+  margin: 15px auto 15px auto;
+  padding: 8px;
+  border-radius: 8px;
+  width: fit-content;
+  background: #94d2bd;
+}
+
+.form-switch {
+  margin: 0px 15px;
 }
 
 #dailyViewToggle {
@@ -80,6 +92,7 @@
 }
 
 .taskContainer {
+  margin: 0px auto 50px auto;
   padding: 30px 50px !important;
   width: 60% !important;
   max-width: 750px !important;
@@ -89,11 +102,11 @@
   overflow: auto;
 }
 
-#dailyViewTraditional {
+.dailyViewTraditional {
   display: block;
 }
 
-#dailyViewStickyNotes {
+.dailyViewStickyNotes {
   display: none;
 }
 #dailyViewPlaceHolder {
@@ -116,11 +129,13 @@
 }
 
 #dailyDonut {
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
+  background-color: #e9edc97e;
 }
 
 #habitDonuts {
-  background-color: rgb(255, 94, 94);
+  /* background-color: rgb(255, 94, 94); */
+  background-color: #e9edc97e;
 }
 
 .task {
@@ -155,7 +170,7 @@
   /* width: 50%; */
   background: transparent;
   border: none;
-  color: #ff7575;
+  color: #e9edc9;
 }
 
 .addTaskForm label {
@@ -170,9 +185,9 @@
   max-width: 800px !important;
   padding: 50px;
   font-size: 20px;
-  background: #577590;
+  background: #e9edc9;
   border-radius: 1em;
-  color: white;
+  color: black;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -201,7 +216,7 @@
 }
 .invaldInputNewHabit {
   color: white;
-  background: rgb(56, 74, 90);
+  background: #73765c;
 }
 .invaldInput span {
   color: rgb(255, 100, 100);

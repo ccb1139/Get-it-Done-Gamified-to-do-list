@@ -1,25 +1,17 @@
-import Task from "./Task";
+import ToDoList from "./ToDoList"
 import Donut from "./Donut";
-import AddTaskButton from "./AddTaskButton";
-import DraggableStickyNote from "./DraggableStickyNote";
-import { Container, Image, Row, Col } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import ToDoList from "./ToDoList";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { MdOutlineStickyNote2 } from "react-icons/md";
-import * as firebase from "../db/firebase";
+import { Row, Col, Container } from "react-bootstrap";
+import { useState } from "react";
 
-const DailyView = () => {
+function WeeklyView() {
     const [tasks, setTasks] = useState([]);
-
-    const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    var today = new Date();
     var listSize = tasks.length;
 
     function toggleDailyView() {
         var traditionalElements = document.getElementsByClassName("dailyViewTraditional");
         var stickyElements = document.getElementsByClassName("dailyViewStickyNotes");
-
         var traditional = window.getComputedStyle(traditionalElements[0]).display;
 
         if (traditional === "block") {
@@ -30,27 +22,19 @@ const DailyView = () => {
             Array.prototype.forEach.call(stickyElements, (element) => element.style.display = "none")
         }
     }
-    
+
+    var weekDates = [];
+    var startDate = new Date();
+    startDate.setDate((startDate.getDate() - startDate.getDay() + 1)); // Start the week at monday
+    for (var i = 0; i < 7; i++) {
+        weekDates.push( new Date(startDate) ); 
+        startDate.setDate(startDate.getDate() +1);
+    }
+
+    const today = new Date();
+
     return (
         <>
-            {/* <div className="taskHeading border border-dark">
-                <h1 className="text-center">Today - {today}</h1>
-                <div className="form-switch text-center">
-                    <input id="dailyViewToggle" className="form-check-input" type="checkbox"
-                        role="switch" onClick={toggleDailyView} />
-                </div>
-            </div>
-
-            <Container className="taskContainer border border-dark">
-                <AddTaskButton onAdd={addTask} />
-                <div id="dailyViewTraditional">
-                    {tasks.map((task) => <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />)}
-                </div>
-
-                <div id="dailyViewStickyNotes">
-                    {tasks.map((task) => <DraggableStickyNote color={"#ff7575"} key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />)}
-                </div>
-            </Container> */}
             <div className="viewToggleButton text-center">
                 <AiOutlineUnorderedList className="d-inline" size="25" />
                 <div className="form-switch d-inline">
@@ -59,7 +43,13 @@ const DailyView = () => {
                 <MdOutlineStickyNote2 className="inline" size="25" />
             </div>
 
-            <ToDoList Day={dayName[today.getDay()]} curDate={today} updateTasks={setTasks} />
+            <ToDoList Day="Monday" curDate={weekDates[0]} updateTasks={today.getDay() == 1 ? setTasks : () => {} } />
+            <ToDoList Day="Tuesday" curDate={weekDates[1]} updateTasks={today.getDay() == 2 ? setTasks : () => {} } />
+            <ToDoList Day="Wednesday" curDate={weekDates[2]} updateTasks={today.getDay() == 3 ? setTasks : () => {} } />
+            <ToDoList Day="Thursday" curDate={weekDates[3]} updateTasks={today.getDay() == 4 ? setTasks : () => {} } />
+            <ToDoList Day="Friday" curDate={weekDates[4]} updateTasks={today.getDay() == 5 ? setTasks : () => {} } />
+            <ToDoList Day="Saturday" curDate={weekDates[5]} updateTasks={today.getDay() == 6 ? setTasks : () => {} } />
+            <ToDoList Day="Sunday" curDate={weekDates[6]} updateTasks={today.getDay() == 0 ? setTasks : () => {} } />
 
             <Container className="col-sm-10 fixed-bottom border border-dark" fluid>
                 <div>
@@ -78,7 +68,7 @@ const DailyView = () => {
                 </div>
             </Container>
         </>
-    );
+    )
 }
 
-export default DailyView
+export default WeeklyView

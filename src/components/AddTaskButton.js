@@ -2,7 +2,7 @@ import { Button, Collapse, Card, Form, Row, Col } from "react-bootstrap";
 import { IoIosAddCircle } from "react-icons/io";
 import { useState } from "react";
 
-const AddTaskButton = ({onAdd}) => {
+const AddTaskButton = ({onAdd, dueDate, color}) => {
     const [open, setOpen] = useState(false);
     
     function openCollapse() {
@@ -10,25 +10,27 @@ const AddTaskButton = ({onAdd}) => {
     }
 
     function handleSumbit() {
-        const task = document.getElementById("taskInput");
+        const task = document.getElementById("taskInput" + dueDate.getDay());
         
         var today = new Date();
         onAdd({
             text: task.value,
             completed: false,
             habit: false,
-            due: "N/A",
-            created: { 
-                year: today.getFullYear(), 
-                month: today.getMonth() + 1, 
-                day: today.getDate()
-            }
+            due: dueDate,
+            created: today
+            // created: { 
+            //     year: today.getFullYear(), 
+            //     month: today.getMonth() + 1, 
+            //     day: today.getDate()
+            // }
         });
     }
 
     return (
         <>
-            <button className="addTaskButton" onClick={openCollapse}><IoIosAddCircle size= {30} /></button>
+            <button className="addTaskButton" onClick={openCollapse}><IoIosAddCircle size= {30} 
+            style={{"color" : color}}/></button>
             
             <Collapse in={open} >
                 <Card body >
@@ -39,7 +41,8 @@ const AddTaskButton = ({onAdd}) => {
                             </Col>
                             
                             <Col className="col-8">
-                                <input className="form-control" placeholder="Enter a task..." id="taskInput"></input>
+                                <input className="form-control" placeholder="Enter a task..." 
+                                id={"taskInput" + dueDate.getDay()}></input>
                             </Col>
                         </Row>
                         <Row className="justify-content-center">
@@ -47,8 +50,6 @@ const AddTaskButton = ({onAdd}) => {
                                 Add
                             </Button>
                         </Row>
-                        
-                        
                     </Form>
                 </Card>
             </Collapse>

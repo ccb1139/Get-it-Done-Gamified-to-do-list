@@ -1,5 +1,6 @@
 import { Row, Col } from "react-bootstrap"
 import { MdClose } from "react-icons/md"
+import { FaHospitalSymbol } from "react-icons/fa"
 
 const Task = ({task, onDelete, onComplete}) => {
     return (
@@ -11,7 +12,8 @@ const Task = ({task, onDelete, onComplete}) => {
                 </Col>
 
                 <Col>
-                    <h5>{task.text}</h5>
+                    {/* {task.habit ? <FaHospitalSymbol className="d-inline" size={20} /> : <></>} */}
+                    <h5 className="d-inline">{task.text}</h5>
                 </Col>
 
                 <Col className="col-1 ms-auto align-self-center">
