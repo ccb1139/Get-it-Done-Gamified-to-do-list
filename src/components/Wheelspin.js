@@ -35,11 +35,10 @@ const Wheelspin = () => {
         for(var sticky in stickies) {
             console.log(stickies[sticky]);
             if(stickies[sticky].habit == true){
-                console.log("In wheelspin" + stickies[sticky].id)
+                console.log("In wheelspin " + stickies[sticky].id)
                 sethID(stickies[sticky].id);
             }
             else if(stickies[sticky].task == true){
-                console.log("huh")
                 settId(stickies[sticky].id);
             }
         }
@@ -56,8 +55,8 @@ const Wheelspin = () => {
     }
 
     function setMarker(habitEl, taskEl, index) {
-        console.log("habitStickyId: " + habitStickyId)
-        console.log("taskStickyId: " + taskStickyId)
+        // console.log("habitStickyId: " + habitStickyId)
+        // console.log("taskStickyId: " + taskStickyId)
 
         if(habitEl) {return "H";}
         if(taskEl) {return "T";}
@@ -85,7 +84,7 @@ const Wheelspin = () => {
                                 <StickyNote color={element["color"]} key={element["color"]}
                                     id={element["id"]}
                                     selectionMarker={setMarker(element["habit"], element["task"], index)}
-                                    hID={habitStickyId} tId={taskStickyId}></StickyNote>
+                                    hId={habitStickyId} tId={taskStickyId}></StickyNote>
                             ))}
                         </div>
 

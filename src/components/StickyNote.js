@@ -16,8 +16,8 @@ const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
 
     const [status, setStatus] = useState();
 
-    console.log("Hab Id: " + hId)
-    console.log("Task Id: " + tId)
+    // console.log("Hab Id: " + hId)
+    // console.log("Task Id: " + tId)
 
     if (color[0] != "#") {
         color = "#" + color
@@ -27,15 +27,31 @@ const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
         console.log("Clicked on: " + id);
     }
 
+    // denoteObj is the new label for the data base and old id is the id of the prev habit or task sticky
     function updateStickyDenote(denoteObj, oldId) {
-        console.log("Hab Id: " + hId)
-        console.log("Task Id: " + tId)
+        console.log("id: " + id)
+        console.log("oldId: " + oldId)
+        if (id === oldId) {
+            window.alert("Please select a new stickynote!");
+            return;
+        }
 
-        const labelStr = Object.keys(denoteObj)[0];
+        // If the current sticky note is the already the habit and we want it to be the task:
+        // make the task sticky not the habit sticky note and make the habit the task
+        if (oldId == hId && id == tId) {
+            console.log("Switching habits and tasks")
+            firebase.updateDocument(`users/${userID}/collectables/${hId}`, { habit: false, task: true }).then(() => { });
+            firebase.updateDocument(`users/${userID}/collectables/${tId}`, { habit: true, task: false }).then(() => { });
+        }
+        else if (oldId == tId && id == hId) {
+            console.log("Switching task and habit")
+            firebase.updateDocument(`users/${userID}/collectables/${tId}`, { habit: true, task: false }).then(() => { });
+            firebase.updateDocument(`users/${userID}/collectables/${hId}`, { habit: false, task: true }).then(() => { });
+        } else {
+            firebase.updateDocument(`users/${userID}/collectables/${oldId}`, { habit: false, task: false }).then(() => { });
+            firebase.updateDocument(`users/${userID}/collectables/${id}`, denoteObj).then(() => { });
+        }
 
-        firebase.updateDocument(`users/${userID}/collectables/${oldId}`, { habit: false, task:false }).then(() => { });
-
-        firebase.updateDocument(`users/${userID}/collectables/${id}`, denoteObj).then(() => { });
     }
 
     //style={{ filter: 'opacity(0.5) drop-shadow(0 0 0 ' + color + ' )' }}
@@ -77,7 +93,6 @@ const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
                         selectionMarker = "T";
                         updateStickyDenote({ task: true }, tId);
                     }}>Set as task sticky note</MenuItem>
-                <MenuItem>Close Menu</MenuItem>
             </ControlledMenu>
         </div>
     )
