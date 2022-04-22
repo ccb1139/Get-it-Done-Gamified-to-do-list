@@ -14,6 +14,7 @@ const userID = firebase.getUserID();
 const Achievements = () => {
     //Firebase Stuff
     const [curr_ach, setCurrAch] = useState([]);
+    const [tracker_info, setTrackerInfo] = useState([]);
     var achIds = [];
 
     var ach = JSON.parse(JSON.stringify(achJSON));
@@ -43,9 +44,10 @@ const Achievements = () => {
                     })
                 }
                 
-            } else {
-                //console.log("achivements found")
-            }
+            } 
+            firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => { 
+                setTrackerInfo(result);
+            });
             //console.log(result)
             setCurrAch(result)            
         });
@@ -66,6 +68,20 @@ const Achievements = () => {
         return (CurLevel);
     }
 
+    function getStepsCompleted(ach_id){
+        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => { 
+            setTrackerInfo(result);
+        });
+
+        for(var i in tracker_info) {
+            if(ach_id == tracker_info[i]["ach_id"]) {
+                return tracker_info[i]["stUnlocked"];
+            }
+            
+        }
+        return 0;
+    }
+
     function create_ach() {
         active_achs = []
         for (var usrAch in curr_ach) {
@@ -78,7 +94,7 @@ const Achievements = () => {
                         "descp": (ach[allAch]["descp1"] + " " + nxtLVL + " " + ach[allAch]["descp2"]),
                         "level": curLVL,
                         "nxtlevel": nxtLVL,
-                        "stepsDone": curr_ach[usrAch]["stepsDone"],
+                        "stepsDone": getStepsCompleted(ach[allAch]["id"]),
                         "id": ach[allAch]["id"],
                         "curve": ach[allAch]["curve"],
                         "maxlevel": ach[allAch]["levels"],

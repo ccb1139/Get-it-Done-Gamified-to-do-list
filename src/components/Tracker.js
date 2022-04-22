@@ -8,28 +8,30 @@ function Tracker({ stickies }) {
     const [trackers, setTrackers] = useState([]);
     
     useEffect(() => {
-        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
-            //console.log(result)
-            if (result.length === 0) {
-                firebase.createDocument(`users/${userID}/inp-Ach-Trackers/`,
-                    ({ stUnlocked: 0 })).then((id) => { });
-            } 
-    
+        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => { 
             setTrackers(result);
-            //console.log(result)
+            console.log(result)
         });
     }, []);
 
 
     //const id2 = trackers[0]["stUnlocked"]
-    //console.log(trackers)
+    console.log(trackers[0])
+
+    for(var i in trackers) {
+        if(trackers[i]["ach_id"] == "002"){
+            var stickyCount = stickies.length - 2;
+            if (stickyCount < 0) {stickyCount = 0;}
+            firebase.updateDocument(`users/${userID}/inp-Ach-Trackers/${trackers[i]["id"]}`, {stUnlocked: stickyCount}).then(()=> {});
+        }
+    }
 
     //firebase.updateDocument(`users/${userID}/inp-Ach-Trackers/`, {stUnlocked: 1}).then(()=> {});
 
 
     //console.log(stickies)
     return (
-        <div></div>
+        <></>
     )
 }
 

@@ -48,7 +48,7 @@ const Signin = ({ show, close }) => {
             //console.log(result)
             if (result.length === 0) {
                 firebase.createDocument(`users/${userID}/inp-Ach-Trackers/`,
-                    ({ stUnlocked: 0 })).then((id) => { });
+                    ({ stUnlocked: 0, ach_id: "002" })).then((id) => { });
             }
         });
     }
