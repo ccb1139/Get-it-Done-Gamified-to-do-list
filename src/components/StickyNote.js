@@ -16,21 +16,17 @@ const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
 
     const [status, setStatus] = useState();
 
-    // console.log("Hab Id: " + hId)
-    // console.log("Task Id: " + tId)
 
     if (color[0] != "#") {
         color = "#" + color
     }
 
     function stickyClicked() {
-        console.log("Clicked on: " + id);
+        //console.log("Clicked on: " + id);
     }
 
     // denoteObj is the new label for the data base and old id is the id of the prev habit or task sticky
     function updateStickyDenote(denoteObj, oldId) {
-        console.log("id: " + id)
-        console.log("oldId: " + oldId)
         if (id === oldId) {
             window.alert("Please select a new stickynote!");
             return;
@@ -39,12 +35,10 @@ const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
         // If the current sticky note is the already the habit and we want it to be the task:
         // make the task sticky not the habit sticky note and make the habit the task
         if (oldId == hId && id == tId) {
-            console.log("Switching habits and tasks")
             firebase.updateDocument(`users/${userID}/collectables/${hId}`, { habit: false, task: true }).then(() => { });
             firebase.updateDocument(`users/${userID}/collectables/${tId}`, { habit: true, task: false }).then(() => { });
         }
         else if (oldId == tId && id == hId) {
-            console.log("Switching task and habit")
             firebase.updateDocument(`users/${userID}/collectables/${tId}`, { habit: true, task: false }).then(() => { });
             firebase.updateDocument(`users/${userID}/collectables/${hId}`, { habit: false, task: true }).then(() => { });
         } else {
@@ -66,7 +60,6 @@ const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
 
                     setAnchorPoint({ x: e.clientX, y: e.clientY });
 
-                    //console.log(list.length)
                     if (list.length === 0) {
                         toggleMenu(true);
                     }

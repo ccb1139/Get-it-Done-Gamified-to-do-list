@@ -112,7 +112,7 @@ const DailyView = () => {
 
                 <div id="dailyViewStickyNotes">
                     {/* <Image id="dailyViewPlaceHolder" src={DailyViewPlaceHolder}/> */}
-                    {tasks.map((task) => <DraggableStickyNote key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />)}
+                    {tasks.map((task) => <DraggableStickyNote color={"#ff7575"} key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />)}
                     {/* <DraggableStickyNote /> */}
                 </div>
             </Container>

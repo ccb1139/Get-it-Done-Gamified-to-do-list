@@ -24,15 +24,15 @@ const Signin = ({ show, close }) => {
         firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
             //console.log(result)
             if (result.length === 0) {
-                firebase.createDocument(`users/${userID}/collectables/`, 
-                ({ color: "ff7575", habit:true, task:false })).then((id) => { });
-                firebase.createDocument(`users/${userID}/collectables/`, 
-                { color: "f8d78b", habit:false, task:true }).then((id) => { });
+                firebase.createDocument(`users/${userID}/collectables/`,
+                    ({ color: "ff7575", habit: true, task: false })).then((id) => { });
+                firebase.createDocument(`users/${userID}/collectables/`,
+                    { color: "f8d78b", habit: false, task: true }).then((id) => { });
             }
         });
         // Load Hall of fame
         firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result) => {
-            if(result.length === 0){
+            if (result.length === 0) {
                 const placeholder = {
                     description: "Login for the first time! (place holder)",
                     id: "001",
@@ -41,6 +41,14 @@ const Signin = ({ show, close }) => {
                 }
                 result.push(placeholder)
                 firebase.createDocument(`users/${userID}/earned-Achievements/`, placeholder).then((id) => { })
+            }
+        });
+        //Load inprogress achivment trackers
+        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
+            //console.log(result)
+            if (result.length === 0) {
+                firebase.createDocument(`users/${userID}/inp-Ach-Trackers/`,
+                    ({ stUnlocked: 0 })).then((id) => { });
             }
         });
     }
@@ -72,7 +80,7 @@ const Signin = ({ show, close }) => {
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
-            
+
             localStorage.setItem("userSignedIn", true);
             localStorage.setItem("userID", user.uid);
 

@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { Menu, MenuItem, ControlledMenu, SubMenu, useMenuState } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
+import Tracker from "./Tracker"
 
 // const userID = "test-user";
 const userID = firebase.getUserID();
@@ -23,52 +24,55 @@ const Wheelspin = () => {
     useEffect(() => {
         firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
             setStickies(result);
-            setHab_Task_taskStickyId();  
+            setHab_Task_taskStickyId();
         });
-              
+
         firebase.getCollection(`users/${userID}/Tasks/`).then((result) => {
             setTasks(result);
         });
     }, []);
 
-    function setHab_Task_taskStickyId(){
-        for(var sticky in stickies) {
-            console.log(stickies[sticky]);
-            if(stickies[sticky].habit == true){
-                console.log("In wheelspin " + stickies[sticky].id)
+    function setHab_Task_taskStickyId() {
+        for (var sticky in stickies) {
+            if (stickies[sticky].habit == true) {
                 sethID(stickies[sticky].id);
             }
-            else if(stickies[sticky].task == true){
+            else if (stickies[sticky].task == true) {
                 settId(stickies[sticky].id);
             }
         }
-        
+
     }
 
-    function updateStickies(){
+    function updateStickies() {
         firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
             setStickies(result);
             setHab_Task_taskStickyId();
         });
-        
-        
+
+        //console.log(countStickies(countStickies))
+
     }
 
     function setMarker(habitEl, taskEl, index) {
-        // console.log("habitStickyId: " + habitStickyId)
-        // console.log("taskStickyId: " + taskStickyId)
-
-        if(habitEl) {return "H";}
-        if(taskEl) {return "T";}
+        if (habitEl) { return "H"; }
+        if (taskEl) { return "T"; }
         return "";
     }
+    function test(){
+        return Math.random();
+    }
+    function animationEndUpdate(){
+        setTimeout(() => {updateStickies()}, 1000);
+    }
+
 
     var unlock_Avil = tasks.filter(task => task.completed).length == tasks.length ? true : false;
 
     return (
         <div className='container' onMouseUp={updateStickies}>
             <div id='WsMain' className='row'>
-                <div id='MysterySticky' className='col-md-6 d-flex align-items-center justify-content-center'>
+                <div id='MysterySticky' className='col-md-6 d-flex align-items-center justify-content-center' onMouseUp={animationEndUpdate} >
                     <PickOne unlockAvil={unlock_Avil} />
                 </div>
                 <div className='col-md-6'>
@@ -79,7 +83,7 @@ const Wheelspin = () => {
                         <div className="col-sm-12 border cosHolder">
 
                             {stickies.map((element, index) => (
-                                
+
 
                                 <StickyNote color={element["color"]} key={element["color"]}
                                     id={element["id"]}
@@ -90,9 +94,9 @@ const Wheelspin = () => {
 
                     </div>
                 </div>
+                <Tracker stickies={stickies}></Tracker>
                 <UnlockProgress></UnlockProgress>
             </div>
-
         </div>
     )
 }
