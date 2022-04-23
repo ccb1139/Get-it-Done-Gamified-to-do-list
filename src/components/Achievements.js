@@ -22,9 +22,9 @@ const Achievements = () => {
 
     useEffect(() => {
         firebase.getCollection(`users/${userID}/inp-Achievements/`).then((result) => {
-            
-            if(result.length === 0){
-                for(var i in ach){
+
+            if (result.length === 0) {
+                for (var i in ach) {
                     //console.log("No achivements detected")
                     const inp_ach = {
                         "ach_name": (ach[i]["ach_name"] + " 1"),
@@ -43,18 +43,18 @@ const Achievements = () => {
                         achIds.push(id)
                     })
                 }
-                
-            } 
-            firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => { 
+
+            }
+            firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
                 setTrackerInfo(result);
             });
             //console.log(result)
-            setCurrAch(result)            
+            setCurrAch(result)
         });
 
     }, []);
 
-    
+
 
     function calcCurSteps(CurLevel, usrLvl, factor) {
         if (usrLvl <= 1) { return 0 }
@@ -64,42 +64,57 @@ const Achievements = () => {
             tmp = Math.round((prvLevel + CurLevel) * factor);
             prvLevel = CurLevel;
             CurLevel = tmp;
+            //console.log("prvLevel: " + prvLevel + "\t curLevel: " + CurLevel)
         }
         return (CurLevel);
     }
 
-    function getStepsCompleted(ach_id){
-        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => { 
+    function getStepsCompleted(ach_id) {
+        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
             setTrackerInfo(result);
         });
 
-        for(var i in tracker_info) {
-            if(ach_id == tracker_info[i]["ach_id"]) {
+        for (var i in tracker_info) {
+            if (ach_id == tracker_info[i]["ach_id"]) {
                 return tracker_info[i]["stUnlocked"];
             }
-            
+
         }
         return 0;
     }
 
+
     function create_ach() {
         active_achs = []
+
         for (var usrAch in curr_ach) {
             for (var allAch in ach) {
                 if (curr_ach[usrAch]["id"] == ach[allAch]["id"]) {
+
+                    const StepsDone = getStepsCompleted(ach[allAch]["id"]);
+
                     var curLVL = calcCurSteps(ach[allAch]["stp_req"], curr_ach[usrAch]["level"], ach[allAch]["curve"])
                     var nxtLVL = calcCurSteps(ach[allAch]["stp_req"], (curr_ach[usrAch]["level"] + 1), ach[allAch]["curve"])
+
+                    var i = 1;
+                    while (StepsDone > nxtLVL) {
+                        curLVL = calcCurSteps(ach[allAch]["stp_req"], (curr_ach[usrAch]["level"] + i), ach[allAch]["curve"])
+                        nxtLVL = calcCurSteps(ach[allAch]["stp_req"], (curr_ach[usrAch]["level"] + (i + 1)), ach[allAch]["curve"])
+                        i++;
+                    }
+
                     var tmpAch = {
-                        "ach_name": (ach[allAch]["ach_name"] + " " + curr_ach[usrAch]["level"]),
+                        "ach_name": (ach[allAch]["ach_name"] + " " + (i - 1)),
                         "descp": (ach[allAch]["descp1"] + " " + nxtLVL + " " + ach[allAch]["descp2"]),
-                        "level": curLVL,
+                        "level": i - 1,
                         "nxtlevel": nxtLVL,
-                        "stepsDone": getStepsCompleted(ach[allAch]["id"]),
+                        "stepsDone": StepsDone,
                         "id": ach[allAch]["id"],
                         "curve": ach[allAch]["curve"],
                         "maxlevel": ach[allAch]["levels"],
                         "step_req": ach[allAch]["stp_req"]
                     }
+                    //console.log(tmpAch)
                     active_achs.push(tmpAch)
                     break
                 }
