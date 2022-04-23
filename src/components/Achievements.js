@@ -58,13 +58,15 @@ const Achievements = () => {
         });
         firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result) => {
             setComplete_ach(result);
-            create_ach();
+
         });
-
-
-
-
-
+        create_ach();
+        setAllAch(active_achs.map((element) => (
+            <Achievement key={element["ach_name"]} title={element["ach_name"]}
+                description={element["descp"]} level={element["level"] + 1} badge={element["id"]}
+                factor={element["curve"]} max={element["maxlevel"]} step_req={element["step_req"]}
+                donut={<Donut total={element["nxtlevel"]}
+                    complete={element["stepsDone"]} size={150} />}></Achievement>)));
     }, []);
     console.log(allAch)
 
@@ -171,7 +173,9 @@ const Achievements = () => {
                         "maxlevel": ach[allAch]["levels"],
                         "step_req": ach[allAch]["stp_req"]
                     }
-                    //console.log(tmpAch)
+
+
+
                     active_achs.push(tmpAch)
                     break
                 }
@@ -188,13 +192,8 @@ const Achievements = () => {
     return (
         <div className='overview container'>
             {/* Put an array filled with dicts */}
-            {/* {allAch.map((element) => (
-                <Achievement key={element["ach_name"]} title={element["ach_name"]}
-                    description={element["descp"]} level={element["level"] + 1} badge={element["id"]}
-                    factor={element["curve"]} max={element["maxlevel"]} step_req={element["step_req"]}
-                    donut={<Donut total={element["nxtlevel"]}
-                        complete={element["stepsDone"]} size={150} />}></Achievement>))} */}
             {allAch}
+
             <UnlockProgress />
             <NotificationContainer />
         </div>
