@@ -8,10 +8,9 @@ import achJSON from '../ach/ach.json'
 import * as firebase from "../db/firebase";
 import { async } from '@firebase/util';
 
-// const userID = "test-user";
-const userID = firebase.getUserID();
-
 const Achievements = () => {
+    const userID = firebase.getUserID();
+
     //Firebase Stuff
     const [curr_ach, setCurrAch] = useState([]);
     const [tracker_info, setTrackerInfo] = useState([]);

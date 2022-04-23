@@ -7,10 +7,9 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import * as firebase from "../db/firebase";
 
-
-const userID = firebase.getUserID();
-
 const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
+    const userID = firebase.getUserID();
+
     const [menuProps, toggleMenu] = useMenuState();
     const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
 

@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import * as firebase from "../db/firebase";
 
-// const userID = "test-user";
-const userID = firebase.getUserID();
-
 function Tracker({ stickies }) {
+    const userID = firebase.getUserID();
+    
     const [trackers, setTrackers] = useState([]);
     
     useEffect(() => {

@@ -5,11 +5,9 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useState, useEffect } from "react";
 import * as firebase from "../db/firebase";
 
-// Temp user
-// const userID = "test-user";
-const userID = firebase.getUserID();
-
 function UnlockProgress() {
+    const userID = firebase.getUserID();
+
     const [tasks, setTasks] = useState([]);
 
     // Get the list of tasks when the page loads

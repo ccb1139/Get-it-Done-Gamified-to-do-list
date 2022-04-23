@@ -1,22 +1,20 @@
 import "../css/Signin.css"
-import { Modal, Form, Button } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 import InvalidInput from './InvalidInput';
-
+import Signup from "./Signup";
+import { Modal, Form, Button, Container, Alert } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { useState } from 'react';
 import GoogleButton from 'react-google-button'
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, setPersistence, inMemoryPersistence } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import * as firebase from "../db/firebase";
-// import * as firebase from "firebase";s
-// import * as firebaseui from "firebaseui";
-
-// var firebase = require('firebase');
-// var firebaseui = require('firebaseui');
-
-// const userID = "test-user";
-const userID = firebase.getUserID();
 
 const Signin = ({ show, close }) => {
+    const userID = firebase.getUserID();
+
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
+
+
+    const [showLoginError, setShowLoginError] = useState(false);
 
     function loadNewAccount() {
         //console.log("LOGIN!")
@@ -53,22 +51,32 @@ const Signin = ({ show, close }) => {
         });
     }
 
-
     function login() {
-        if (isSubmitSuccessful === false) return;
+        // if (isSubmitSuccessful === false) return;
 
         const email = document.getElementById("emailInput").value;
         const password = document.getElementById("passwordInput").value;
+        // const email = "test@test.com";
+        // const password = "ThisIsATest";
 
-        // Check with database
-        const account = { email: email, password: password };
-        console.log(account);
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
 
-        // Load new account items
-        loadNewAccount();
+            localStorage.setItem("userSignedIn", true);
+            // localStorage.removeItem("userID");
+            localStorage.setItem("userID", user.uid);
 
-        // Close modal
-        close();
+            loadNewAccount();
+            close();
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log("Error signing in: ", errorCode);
+            setShowLoginError(true);
+        });
     }
 
     function GoogleSignIn() {
@@ -82,6 +90,7 @@ const Signin = ({ show, close }) => {
             const user = result.user;
 
             localStorage.setItem("userSignedIn", true);
+            localStorage.removeItem("userID");
             localStorage.setItem("userID", user.uid);
 
             loadNewAccount();
@@ -98,8 +107,20 @@ const Signin = ({ show, close }) => {
         });
     }
 
-    // Initialize the FirebaseUI Widget using Firebase.
-    // var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    function createAccount() {
+        const auth = getAuth();
+        const email = "test@test.com";
+        const password = "ThisIsATest";
+        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            const user = userCredential.user;
+            console.log("Created account");
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log("Error creating account: ", errorCode);
+        });
+    }
 
     return (
         <>
@@ -126,9 +147,19 @@ const Signin = ({ show, close }) => {
                             {errors.passwordInput?.type === "pattern" && <InvalidInput type="Signin" text="Please enter a valid email" />}
                         </div>
 
+                        {showLoginError ? 
+                        <Container>
+                            {/* <Alert variant="danger">
+                                Habit successfully created!
+                            </Alert> */}
+                            <InvalidInput type="Signin" text="Incorrect email or password." />
+                        </Container> : null}
+
+                        <p>Don't have an account? <a onClick={createAccount}>Create one!</a></p>
+
                         <Button className="w-100" type="submit">Sign-in</Button>
 
-                        <div className="lineDivide mt-3 mb-5">
+                        <div className="lineDivide">
                             <span className="lineDivideText">
                                 OR
                             </span>

@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { collection, doc, getDoc, getDocs, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
-import { getAuth, onAuthStateChanged, setPersistence, browserSessionPersistence  } from "firebase/auth";
+import { getAuth, onAuthStateChanged, setPersistence, browserSessionPersistence, connectAuthEmulator  } from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -22,6 +22,20 @@ const db = getFirestore(app);
 
 const auth = getAuth();
 setPersistence(auth, browserSessionPersistence).then(() => {});
+
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     // User is signed in, see docs for a list of available properties
+//     // https://firebase.google.com/docs/reference/js/firebase.User
+//     const uid = user.uid;
+//     // ...
+//   } else {
+//     // window.location.reload(false);
+//     console.log(auth);
+//     console.log("User signed out! state change");
+//     console.log("userID = ", localStorage.getItem("userID"))
+//   }
+// });
 
 // For running local version:
 // connectFirestoreEmulator(db, 'localhost', 8080);

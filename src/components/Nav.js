@@ -25,11 +25,13 @@ const MainNav = () => {
   function userSignOut() {
     localStorage.setItem("userSignedIn", false);
     localStorage.setItem("userID", null);
+    localStorage.removeItem("userID");
 
     const auth = getAuth();
     signOut(auth).then(() => {
       // Sign-out successful.
       navigate(`${appname}/`);
+      // window.location.reload(false);
 
     }).catch((error) => {
       // An error happened.

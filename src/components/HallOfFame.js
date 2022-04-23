@@ -5,11 +5,9 @@ import Achievement from './Achievement'
 import Donut from './Donut'
 import * as firebase from "../db/firebase";
 
-// Temp user
-// const userID = "test-user";
-const userID = firebase.getUserID();
-
 function HallOfFrame() {
+    const userID = firebase.getUserID();
+    
     //Firebase Stuff
     const [earned_ach, setEarnedAch] = useState([]);
 

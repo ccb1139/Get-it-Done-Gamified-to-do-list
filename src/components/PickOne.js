@@ -6,10 +6,9 @@ import React from "react"
 import * as firebase from "../db/firebase";
 import { useState, useEffect } from "react";
 
-// const userID = "test-user";
-const userID = firebase.getUserID();
-
 function PickOne({unlockAvil, updateFunc}) {
+    const userID = firebase.getUserID();
+
     const [stickies, setStickies] = useState([]);
   
 

@@ -49,7 +49,9 @@ function WeeklyView() {
             <ToDoList Day="Thursday" curDate={weekDates[3]} updateTasks={today.getDay() == 4 ? setTasks : () => {} } />
             <ToDoList Day="Friday" curDate={weekDates[4]} updateTasks={today.getDay() == 5 ? setTasks : () => {} } />
             <ToDoList Day="Saturday" curDate={weekDates[5]} updateTasks={today.getDay() == 6 ? setTasks : () => {} } />
-            <ToDoList Day="Sunday" curDate={weekDates[6]} updateTasks={today.getDay() == 0 ? setTasks : () => {} } />
+            <ToDoList Day="Sunday" curDate={weekDates[6]} updateTasks={today.getDay() == 0 ? setTasks : () => {} }/>
+
+            <div style={{"height": "500px"}}></div>
 
             <Container className="col-sm-10 fixed-bottom border border-dark" fluid>
                 <div>

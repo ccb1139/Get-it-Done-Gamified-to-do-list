@@ -8,9 +8,9 @@ import { AiOutlineUnorderedList } from "react-icons/ai";
 import { MdOutlineStickyNote2 } from "react-icons/md";
 import * as firebase from "../db/firebase";
 
-const userID = firebase.getUserID();
-
 function ToDoList({Day, curDate, updateTasks}) {
+    const userID = firebase.getUserID();
+
     const [tasks, setTasks] = useState([]);
 
     function updateTaskLists(tasks) {
