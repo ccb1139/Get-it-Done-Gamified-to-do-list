@@ -1,20 +1,21 @@
 import "../css/Signin.css"
 import InvalidInput from './InvalidInput';
 import Signup from "./Signup";
-import { Modal, Form, Button, Container, Alert } from "react-bootstrap";
+import { Modal, Form, Button, Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import GoogleButton from 'react-google-button'
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import * as firebase from "../db/firebase";
+import { useBootstrapPrefix } from "react-bootstrap/esm/ThemeProvider";
 
-const Signin = ({ show, close }) => {
+const Signin = ({ showSignin, closeSignin, showSignup, closeSignup, openSignup }) => {
     const userID = firebase.getUserID();
 
     const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm();
 
-
     const [showLoginError, setShowLoginError] = useState(false);
+    // const [showSignup, setShowSignup] = useState(false);
 
     function loadNewAccount(_userID) {
         //console.log(_userID)
@@ -57,24 +58,21 @@ const Signin = ({ show, close }) => {
 
         const email = document.getElementById("emailInput").value;
         const password = document.getElementById("passwordInput").value;
-        // const email = "test@test.com";
-        // const password = "ThisIsATest";
 
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            // Signed in 
             const user = userCredential.user;
 
             localStorage.setItem("userSignedIn", true);
-            // localStorage.removeItem("userID");
+            localStorage.removeItem("userID");
             localStorage.setItem("userID", user.uid);
 
             loadNewAccount(user.uid);
-            close();
+            setShowLoginError(false);
+            closeSignin();
         })
         .catch((error) => {
             const errorCode = error.code;
-            const errorMessage = error.message;
             console.log("Error signing in: ", errorCode);
             setShowLoginError(true);
         });
@@ -84,10 +82,6 @@ const Signin = ({ show, close }) => {
         const provider = new GoogleAuthProvider()
         const auth = getAuth();
         signInWithPopup(auth, provider).then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            // The signed-in user info.
             const user = result.user;
 
             localStorage.setItem("userSignedIn", true);
@@ -95,37 +89,13 @@ const Signin = ({ show, close }) => {
             localStorage.setItem("userID", user.uid);
 
             loadNewAccount(user.uid);
-            close();
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...   
-        });
-    }
-
-    function createAccount() {
-        const auth = getAuth();
-        const email = "test@test.com";
-        const password = "ThisIsATest";
-        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            const user = userCredential.user;
-            console.log("Created account");
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log("Error creating account: ", errorCode);
+            closeSignin();
         });
     }
 
     return (
         <>
-            <Modal show={show} onHide={close} centered>
+            <Modal show={showSignin} onHide={closeSignin} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Sign-in</Modal.Title>
                 </Modal.Header>
@@ -145,18 +115,14 @@ const Signin = ({ show, close }) => {
                             { required: true })} />
                         <div className="text-center mb-4">
                             {errors.passwordInput?.type === "required" && <InvalidInput type="Signin" text="Password is required" />}
-                            {errors.passwordInput?.type === "pattern" && <InvalidInput type="Signin" text="Please enter a valid email" />}
                         </div>
 
                         {showLoginError ? 
                         <Container>
-                            {/* <Alert variant="danger">
-                                Habit successfully created!
-                            </Alert> */}
-                            <InvalidInput type="Signin" text="Incorrect email or password." />
-                        </Container> : null}
+                            <InvalidInput type="Signin" text="Incorrect email or password" />
+                        </Container> : <></>}
 
-                        <p>Don't have an account? <a onClick={createAccount}>Create one!</a></p>
+                        <p>Don't have an account? <span className="link" onClick={() => {closeSignin(); openSignup();}}>Create one!</span></p>
 
                         <Button className="w-100" type="submit">Sign-in</Button>
 
@@ -170,6 +136,7 @@ const Signin = ({ show, close }) => {
                     </Form>
                 </Modal.Body>
             </Modal>
+            {showSignup ? <Signup show={showSignup} close={closeSignup} /> : <></>}
         </>
     );
 }

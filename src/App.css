@@ -28,6 +28,12 @@
   margin-bottom: auto;
 }
 
+.link {
+  color: #0D6EFD;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .navbar {
   background-color: #94d2bd;
 }

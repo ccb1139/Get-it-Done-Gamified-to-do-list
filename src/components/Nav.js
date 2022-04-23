@@ -18,9 +18,12 @@ const MainNav = () => {
   var navigate = useNavigate();
 
   // Open and closing signin page
-  const [show, setShow] = useState(false);
-  function openSignin() { setShow(true) }
-  function closeSignin() { setShow(false) }
+  const [showSignin, setShowSignin] = useState(false);
+  function openSignin() { setShowSignin(true) }
+  function closeSignin() { setShowSignin(false) }
+  const [showSignup, setShowSignup] = useState(false);
+  function openSignup() { setShowSignup(true) }
+  function closeSignup() { setShowSignup(false) }
 
   function userSignOut() {
     localStorage.setItem("userSignedIn", false);
@@ -31,10 +34,6 @@ const MainNav = () => {
     signOut(auth).then(() => {
       // Sign-out successful.
       navigate(`${appname}/`);
-      // window.location.reload(false);
-
-    }).catch((error) => {
-      // An error happened.
     });
   }
 
@@ -91,7 +90,7 @@ const MainNav = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Signin show={show} close={closeSignin}/>
+      <Signin showSignin={showSignin} closeSignin={closeSignin} showSignup={showSignup} closeSignup={closeSignup} openSignup={openSignup} />
   </div>
 
   );
