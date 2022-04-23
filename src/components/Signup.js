@@ -45,7 +45,7 @@ const Signup = ({show, close}) => {
                             <InvalidInput type="Signin" text="Incorrect email or password." />
                         </Container> : null}
 
-                        <p>Don't have an account? <a onClick={createAccount}>Create one!</a></p>
+                        {/* <p>Don't have an account? <a onClick={createAccount}>Create one!</a></p> */}
 
                         <Button className="w-100" type="submit">Sign-in</Button>
 
