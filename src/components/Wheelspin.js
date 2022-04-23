@@ -69,7 +69,7 @@ const Wheelspin = () => {
     var unlock_Avil = tasks.filter(task => task.completed).length == tasks.length ? true : false;
 
     return (
-        <div className='container' onMouseUp={updateStickies}>
+        <div className='container' >
             <div id='WsMain' className='row'>
                 <div id='MysterySticky' className='col-md-6 d-flex align-items-center justify-content-center' onMouseUp={animationEndUpdate} >
                     <PickOne unlockAvil={unlock_Avil} />

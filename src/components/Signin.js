@@ -16,36 +16,37 @@ const Signin = ({ show, close }) => {
 
     const [showLoginError, setShowLoginError] = useState(false);
 
-    function loadNewAccount() {
-        //console.log("LOGIN!")
+    function loadNewAccount(_userID) {
+        //console.log(_userID)
         // Load sticky notes
-        firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
-            //console.log(result)
+        firebase.getCollection(`users/${_userID}/collectables/`).then((result) => {
+            
             if (result.length === 0) {
-                firebase.createDocument(`users/${userID}/collectables/`,
+                firebase.createDocument(`users/${_userID}/collectables/`,
                     ({ color: "ff7575", habit: true, task: false })).then((id) => { });
-                firebase.createDocument(`users/${userID}/collectables/`,
+                firebase.createDocument(`users/${_userID}/collectables/`,
                     { color: "f8d78b", habit: false, task: true }).then((id) => { });
             }
         });
         // Load Hall of fame
-        firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result) => {
+        firebase.getCollection(`users/${_userID}/earned-Achievements/`).then((result) => {
+            console.log(result)
             if (result.length === 0) {
                 const placeholder = {
                     description: "Login for the first time! (place holder)",
-                    id: "001",
+                    ach_id: "005",
                     level: 1,
                     title: "First timer"
                 }
                 result.push(placeholder)
-                firebase.createDocument(`users/${userID}/earned-Achievements/`, placeholder).then((id) => { })
+                firebase.createDocument(`users/${_userID}/earned-Achievements/`, placeholder).then((id) => { })
             }
         });
         //Load inprogress achivment trackers
-        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
+        firebase.getCollection(`users/${_userID}/inp-Ach-Trackers/`).then((result) => {
             //console.log(result)
             if (result.length === 0) {
-                firebase.createDocument(`users/${userID}/inp-Ach-Trackers/`,
+                firebase.createDocument(`users/${_userID}/inp-Ach-Trackers/`,
                     ({ stUnlocked: 0, ach_id: "002" })).then((id) => { });
             }
         });
@@ -68,7 +69,7 @@ const Signin = ({ show, close }) => {
             // localStorage.removeItem("userID");
             localStorage.setItem("userID", user.uid);
 
-            loadNewAccount();
+            loadNewAccount(user.uid);
             close();
         })
         .catch((error) => {
@@ -93,7 +94,7 @@ const Signin = ({ show, close }) => {
             localStorage.removeItem("userID");
             localStorage.setItem("userID", user.uid);
 
-            loadNewAccount();
+            loadNewAccount(user.uid);
             close();
         }).catch((error) => {
             // Handle Errors here.

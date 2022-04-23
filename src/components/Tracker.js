@@ -15,13 +15,12 @@ function Tracker({ stickies }) {
 
 
     //const id2 = trackers[0]["stUnlocked"]
-    console.log(trackers[0])
 
     for(var i in trackers) {
         if(trackers[i]["ach_id"] == "002"){
             var stickyCount = stickies.length - 2;
             if (stickyCount < 0) {stickyCount = 0;}
-            firebase.updateDocument(`users/${userID}/inp-Ach-Trackers/${trackers[i]["id"]}`, {stUnlocked: stickyCount}).then(()=> {});
+            //firebase.updateDocument(`users/${userID}/inp-Ach-Trackers/${trackers[i]["id"]}`, {stUnlocked: stickyCount}).then(()=> {});
         }
     }
 

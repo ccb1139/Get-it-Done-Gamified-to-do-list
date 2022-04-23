@@ -15,20 +15,6 @@ function HallOfFrame() {
 
     useEffect(() => {
         firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result) => {
-            if(result.length === 0){
-                const placeholder = {
-                    description: "Login for the first time! (place holder)",
-                    id: "001",
-                    level: 1,
-                    title: "First timer"
-                }
-                result.push(placeholder)
-                firebase.createDocument(`users/${userID}/earned-Achievements/`, placeholder).then((id) => {
-                    achIds.push(id)
-                })
-            }
-
-
             setEarnedAch(result)
         });
     }, []);
@@ -38,7 +24,7 @@ function HallOfFrame() {
         <div className='container'>
             <div className='row'>
                 {earned_ach.map((element) => (
-                    <HOFAchCard title={element["title"]} badge={element["id"]} level={element["level"]}
+                    <HOFAchCard title={element["title"]} badge={element["ach_id"]} level={element["level"]}
                         description={element["description"]} key={element["id"]}></HOFAchCard>
                 ))}
             </div>

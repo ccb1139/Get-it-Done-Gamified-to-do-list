@@ -6,14 +6,19 @@ import UnlockProgress from './UnlockProgress'
 import Donut from './Donut'
 import achJSON from '../ach/ach.json'
 import * as firebase from "../db/firebase";
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 import { async } from '@firebase/util';
 
 const Achievements = () => {
     const userID = firebase.getUserID();
 
     //Firebase Stuff
+    const [achLoaded, setachLoaded] = useState(false);
     const [curr_ach, setCurrAch] = useState([]);
     const [tracker_info, setTrackerInfo] = useState([]);
+    const [complete_ach, setComplete_ach] = useState([]);
+    const [allAch, setAllAch] = useState([]);
     var achIds = [];
 
     var ach = JSON.parse(JSON.stringify(achJSON));
@@ -44,15 +49,24 @@ const Achievements = () => {
                 }
 
             }
-            firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
-                setTrackerInfo(result);
-            });
+
             //console.log(result)
             setCurrAch(result)
         });
+        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
+            setTrackerInfo(result);
+        });
+        firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result) => {
+            setComplete_ach(result);
+            create_ach();
+        });
+
+
+
+
 
     }, []);
-
+    console.log(allAch)
 
 
     function calcCurSteps(CurLevel, usrLvl, factor) {
@@ -69,10 +83,6 @@ const Achievements = () => {
     }
 
     function getStepsCompleted(ach_id) {
-        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
-            setTrackerInfo(result);
-        });
-
         for (var i in tracker_info) {
             if (ach_id == tracker_info[i]["ach_id"]) {
                 return tracker_info[i]["stUnlocked"];
@@ -84,6 +94,7 @@ const Achievements = () => {
 
 
     function create_ach() {
+        console.log("CREATED ACH")
         active_achs = []
 
         for (var usrAch in curr_ach) {
@@ -92,20 +103,67 @@ const Achievements = () => {
 
                     const StepsDone = getStepsCompleted(ach[allAch]["id"]);
 
-                    var curLVL = calcCurSteps(ach[allAch]["stp_req"], curr_ach[usrAch]["level"], ach[allAch]["curve"])
-                    var nxtLVL = calcCurSteps(ach[allAch]["stp_req"], (curr_ach[usrAch]["level"] + 1), ach[allAch]["curve"])
+                    var curLVL = calcCurSteps(ach[allAch]["stp_req"],
+                        curr_ach[usrAch]["level"], ach[allAch]["curve"])
+                    var nxtLVL = calcCurSteps(ach[allAch]["stp_req"],
+                        (curr_ach[usrAch]["level"] + 1), ach[allAch]["curve"])
 
                     var i = 1;
-                    while (StepsDone > nxtLVL) {
-                        curLVL = calcCurSteps(ach[allAch]["stp_req"], (curr_ach[usrAch]["level"] + i), ach[allAch]["curve"])
-                        nxtLVL = calcCurSteps(ach[allAch]["stp_req"], (curr_ach[usrAch]["level"] + (i + 1)), ach[allAch]["curve"])
-                        i++;
+                    if (StepsDone >= nxtLVL) {
+                        var nxtLvlTmp = nxtLVL
+                        while (StepsDone >= nxtLVL) {
+                            curLVL = calcCurSteps(ach[allAch]["stp_req"],
+                                (curr_ach[usrAch]["level"] + i), ach[allAch]["curve"])
+                            nxtLVL = calcCurSteps(ach[allAch]["stp_req"],
+                                (curr_ach[usrAch]["level"] + (i + 1)), ach[allAch]["curve"])
+                            i++;
+                        }
+                        //console.log(StepsDone + " === " + nxtLvlTmp)
+                        if (StepsDone === nxtLvlTmp) {
+                            var foundAch = false;
+
+
+
+                            for (var cmp_ach in complete_ach) {
+
+
+                                // console.log(complete_ach.length)
+                                // Find if achviment has already been completed 
+                                if ((curr_ach[usrAch]["id"] == complete_ach[cmp_ach]["ach_id"])
+                                    && ((i - 1) == complete_ach[cmp_ach]["level"])) {
+                                    //console.log("Achivment already in database!");
+                                    foundAch = true;
+                                }
+                                if (cmp_ach === (complete_ach.length - 1)) {
+                                    if (foundAch === false) {
+                                        console.log(curr_ach[usrAch]["id"] + " == " + complete_ach[cmp_ach]["ach_id"])
+                                        console.log((i - 1) + " == " + complete_ach[cmp_ach]["level"])
+
+                                        firebase.createDocument(`users/${userID}/earned-Achievements/`,
+                                            {
+                                                ach_id: curr_ach[usrAch]["id"],
+                                                description: (curr_ach[usrAch]["descp1"] + " " + nxtLVL + " " + curr_ach[usrAch]["descp2"]),
+                                                level: i - 1,
+                                                title: ach[allAch]["ach_name"]
+                                            }
+                                        ).then((id) => { console.log("Unlocked achivment") })
+                                    }
+                                }
+                            }
+
+                        }
+
                     }
 
+
+
+
+                    const levelStr = (i === 1) ? "" : (i).toString();
+
                     var tmpAch = {
-                        "ach_name": (ach[allAch]["ach_name"] + " " + (i - 1)),
+                        "ach_name": (ach[allAch]["ach_name"] + " " + levelStr),
                         "descp": (ach[allAch]["descp1"] + " " + nxtLVL + " " + ach[allAch]["descp2"]),
-                        "level": i - 1,
+                        "level": (i - 1),
                         "nxtlevel": nxtLVL,
                         "stepsDone": StepsDone,
                         "id": ach[allAch]["id"],
@@ -118,8 +176,11 @@ const Achievements = () => {
                     break
                 }
             }
+
         }
         //console.log(active_achs)
+        setachLoaded(true);
+
     }
 
     // To load an achievment you need to enter the users achivement ids and then their current levels into the 
@@ -127,16 +188,15 @@ const Achievements = () => {
     return (
         <div className='overview container'>
             {/* Put an array filled with dicts */}
-            {create_ach()}
-            {active_achs.map((element) => (
+            {/* {allAch.map((element) => (
                 <Achievement key={element["ach_name"]} title={element["ach_name"]}
                     description={element["descp"]} level={element["level"] + 1} badge={element["id"]}
                     factor={element["curve"]} max={element["maxlevel"]} step_req={element["step_req"]}
                     donut={<Donut total={element["nxtlevel"]}
-                        complete={element["stepsDone"]} size={150} />}></Achievement>
-            ))}
-
-            <UnlockProgress></UnlockProgress>
+                        complete={element["stepsDone"]} size={150} />}></Achievement>))} */}
+            {allAch}
+            <UnlockProgress />
+            <NotificationContainer />
         </div>
     );
 }

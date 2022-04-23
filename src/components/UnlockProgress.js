@@ -14,6 +14,7 @@ function UnlockProgress() {
     useEffect(() => {
         firebase.getCollection(`users/${userID}/Tasks/`).then((result) => {
             setTasks(result);
+            //console.log(result)
         });
     }, []);
 

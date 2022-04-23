@@ -28,11 +28,20 @@
   },
   {
     "ach_name": "Make it yours",
-    "descp1": "Change the color of habits and tasks",
+    "descp1": "Change the color of your habit and task",
     "descp2": "",
     "stp_req": 2,
     "levels": 1,
     "id": "004",
+    "curve": 1
+  },
+  {
+    "ach_name": "First Timer",
+    "descp1": "Change the color of your habit and task",
+    "descp2": "",
+    "stp_req": 2,
+    "levels": 1,
+    "id": "005",
     "curve": 1
   }
 ]
