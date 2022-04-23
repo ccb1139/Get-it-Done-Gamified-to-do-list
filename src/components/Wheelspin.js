@@ -11,8 +11,10 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import Tracker from "./Tracker"
 
+const userID = firebase.getUserID();
+
 const Wheelspin = () => {
-    const userID = firebase.getUserID();
+    // const userID = firebase.getUserID();
 
     const [stickies, setStickies] = useState([]);
     const [tasks, setTasks] = useState([]);

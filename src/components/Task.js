@@ -2,9 +2,9 @@ import { Row, Col } from "react-bootstrap"
 import { MdClose } from "react-icons/md"
 import { FaHospitalSymbol } from "react-icons/fa"
 
-const Task = ({task, onDelete, onComplete}) => {
+const Task = ({color, task, onDelete, onComplete}) => {
     return (
-        <div className={"task mb-3 " + (task.habit ? "habit" : "")} key={task.id}>
+        <div className={"task mb-3 " + (task.habit ? "habit" : "")} key={task.id} style={{ filter: 'opacity(0.7) drop-shadow(0 0 0 ' + color + ' )' }}>
             <Row className="px-4 py-2">
                 <Col className="col-1 align-self-center">
                     <input className="form-check-input taskCheckBox" type="checkbox" checked={task.completed}

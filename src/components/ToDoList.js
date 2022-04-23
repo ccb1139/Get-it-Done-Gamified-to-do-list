@@ -10,8 +10,9 @@ import * as firebase from "../db/firebase";
 
 function ToDoList({Day, curDate, updateTasks}) {
     const userID = firebase.getUserID();
-
     const [tasks, setTasks] = useState([]);
+    const [taskColor, setTaskColor] = useState("#FFFFFF");
+    const [habitColor, setHabitColor] = useState("#FFFFFF");
 
     function updateTaskLists(tasks) {
         setTasks(tasks);
@@ -34,6 +35,18 @@ function ToDoList({Day, curDate, updateTasks}) {
                 }
             })
             updateTaskLists(tasksToAdd)
+        });
+
+        firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
+            result.forEach(sticky => {
+                if (sticky.habit) {
+                    setHabitColor("#" + sticky.color);
+                }
+                if (sticky.task) {
+                    setTaskColor("#" + sticky.color);
+                }
+            });
+            console.log(result);
         });
     }, []);
 
@@ -95,11 +108,11 @@ function ToDoList({Day, curDate, updateTasks}) {
                 <AddTaskButton onAdd={addTask} dueDate={curDate} color={(curDate.getDate() === today.getDate()) ? todayColor : ""} />
                 <div className="dailyViewTraditional">
                     {tasks.map((task) => 
-                    <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />)}
+                    <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} color={task.habit ? habitColor : taskColor} />)}
                 </div>
 
                 <div className="dailyViewStickyNotes">
-                    {tasks.map((task) => <DraggableStickyNote key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />)}
+                    {tasks.map((task) => <DraggableStickyNote key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} color={task.habit ? habitColor : taskColor} />)}
                 </div>
             </Container>
         </>

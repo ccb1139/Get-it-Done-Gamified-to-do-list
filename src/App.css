@@ -149,7 +149,8 @@
   padding: 10px;
   width: 100%;
   border-radius: 0.5em;
-  background: #ff7575;
+  background: white;
+  /* background: #ff7575; */
 }
 
 .taskCheckBox {
@@ -161,9 +162,9 @@
   margin: 0;
 }
 
-.habit {
+/* .habit {
   background: #f8d78b;
-}
+} */
 
 .closeButton {
   background: transparent;
