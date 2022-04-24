@@ -14,8 +14,7 @@ const Achievements = () => {
     const userID = firebase.getUserID();
 
     //Firebase Stuff
-    const [achLoaded, setachLoaded] = useState(false);
-    const [curr_ach, setCurrAch] = useState([]);
+    const [curr__ach, setCurrAch] = useState([]);
     const [tracker_info, setTrackerInfo] = useState([]);
     const [complete_ach, setComplete_ach] = useState([]);
     const [allAch, setAllAch] = useState([]);
@@ -50,8 +49,9 @@ const Achievements = () => {
 
             }
 
-            //console.log(result)
+            console.log("curr_ach loaded")
             setCurrAch(result)
+            create_ach(result);
         });
         firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
             setTrackerInfo(result);
@@ -60,16 +60,11 @@ const Achievements = () => {
             setComplete_ach(result);
 
         });
-        create_ach();
-        setAllAch(active_achs.map((element) => (
-            <Achievement key={element["ach_name"]} title={element["ach_name"]}
-                description={element["descp"]} level={element["level"] + 1} badge={element["id"]}
-                factor={element["curve"]} max={element["maxlevel"]} step_req={element["step_req"]}
-                donut={<Donut total={element["nxtlevel"]}
-                    complete={element["stepsDone"]} size={150} />}></Achievement>)));
-    }, []);
-    console.log(allAch)
+        ach = JSON.parse(JSON.stringify(achJSON));
 
+        
+
+    }, []);
 
     function calcCurSteps(CurLevel, usrLvl, factor) {
         if (usrLvl <= 1) { return 0 }
@@ -95,9 +90,12 @@ const Achievements = () => {
     }
 
 
-    function create_ach() {
+
+    function create_ach(curr_ach) {
         console.log("CREATED ACH")
         active_achs = []
+        console.log(curr_ach)
+        console.log(ach)
 
         for (var usrAch in curr_ach) {
             for (var allAch in ach) {
@@ -174,7 +172,7 @@ const Achievements = () => {
                         "step_req": ach[allAch]["stp_req"]
                     }
 
-
+                    //setAllAch(tmpAch)
 
                     active_achs.push(tmpAch)
                     break
@@ -183,8 +181,7 @@ const Achievements = () => {
 
         }
         //console.log(active_achs)
-        setachLoaded(true);
-
+        setAllAch(active_achs);
     }
 
     // To load an achievment you need to enter the users achivement ids and then their current levels into the 
@@ -192,7 +189,12 @@ const Achievements = () => {
     return (
         <div className='overview container'>
             {/* Put an array filled with dicts */}
-            {allAch}
+            {allAch.map((element) => (
+                <Achievement key={element["ach_name"]} title={element["ach_name"]}
+                    description={element["descp"]} level={element["level"] + 1} badge={element["id"]}
+                    factor={element["curve"]} max={element["maxlevel"]} step_req={element["step_req"]}
+                    donut={<Donut total={element["nxtlevel"]}
+                        complete={element["stepsDone"]} size={150} />}></Achievement>))}
 
             <UnlockProgress />
             <NotificationContainer />

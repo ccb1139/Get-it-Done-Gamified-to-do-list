@@ -9,7 +9,6 @@ function Tracker({ stickies }) {
     useEffect(() => {
         firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => { 
             setTrackers(result);
-            console.log(result)
         });
     }, []);
 

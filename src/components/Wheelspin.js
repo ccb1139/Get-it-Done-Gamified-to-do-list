@@ -6,10 +6,12 @@ import '../css/Wheelspin.css'
 import UnlockProgress from './UnlockProgress'
 import * as firebase from "../db/firebase";
 import { useState, useEffect } from "react";
+import React, { useCallback } from 'react';
 import { Menu, MenuItem, ControlledMenu, SubMenu, useMenuState } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import Tracker from "./Tracker"
+import { set } from "react-hook-form"
 
 const userID = firebase.getUserID();
 
@@ -22,24 +24,27 @@ const Wheelspin = () => {
     const [habitStickyId, sethID] = useState([]);
     const [taskStickyId, settId] = useState([]);
 
+    const [testguy, setTest] = useState("");
+
     useEffect(() => {
         firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
             setStickies(result);
-            setHab_Task_taskStickyId();
+            setHab_Task_taskStickyId(result);
         });
 
         firebase.getCollection(`users/${userID}/Tasks/`).then((result) => {
             setTasks(result);
         });
+
     }, []);
 
-    function setHab_Task_taskStickyId() {
-        for (var sticky in stickies) {
-            if (stickies[sticky].habit == true) {
-                sethID(stickies[sticky].id);
+    function setHab_Task_taskStickyId(_stickies) {
+        for (var sticky in _stickies) {
+            if (_stickies[sticky].habit == true) {
+                sethID(_stickies[sticky].id);
             }
-            else if (stickies[sticky].task == true) {
-                settId(stickies[sticky].id);
+            else if (_stickies[sticky].task == true) {
+                settId(_stickies[sticky].id);
             }
         }
 
@@ -50,9 +55,6 @@ const Wheelspin = () => {
             setStickies(result);
             setHab_Task_taskStickyId();
         });
-
-        //console.log(countStickies(countStickies))
-
     }
 
     function setMarker(habitEl, taskEl, index) {
@@ -60,18 +62,46 @@ const Wheelspin = () => {
         if (taskEl) { return "T"; }
         return "";
     }
-    function test(){
-        return Math.random();
-    }
-    function animationEndUpdate(){
-        setTimeout(() => {updateStickies()}, 1000);
+
+
+    function animationEndUpdate() {
+        setTimeout(() => { updateStickies() }, 1000);
     }
 
+    // Function gets and array:
+    // First slot is the new habit ID and second is the new Task ID
+    // [NewHabitId, NewTaskId]
+    function getStickyData(stickyData) {
+        const oldHabId = habitStickyId;
+        const oldTaskId = taskStickyId;
+
+        sethID(stickyData[0])
+        settId(stickyData[1])
+
+        // If there are is a new habit or task
+        if ((stickyData[0] != oldHabId) || (stickyData[1] != oldTaskId)) {
+            // If the habit is the same as before just update the task
+            if (stickyData[0] === oldHabId) {
+                firebase.updateDocument(`users/${userID}/collectables/${stickyData[1]}`, { habit: false, task: true }).then(() => { });
+                firebase.updateDocument(`users/${userID}/collectables/${oldTaskId}`, { habit: false, task: false }).then(() => { });
+            }
+            // If the task is the same just update the habit
+            if (stickyData[1] === oldTaskId) {
+                firebase.updateDocument(`users/${userID}/collectables/${stickyData[0]}`, { habit: true, task: false }).then(() => { });
+                firebase.updateDocument(`users/${userID}/collectables/${oldHabId}`, { habit: false, task: false }).then(() => { });
+            }
+            // Swap them if they need to be swapped
+            if((oldHabId === stickyData[1]) && (oldTaskId === stickyData[0])){
+                firebase.updateDocument(`users/${userID}/collectables/${stickyData[0]}`, { habit: true, task: false }).then(() => { });
+                firebase.updateDocument(`users/${userID}/collectables/${stickyData[1]}`, { habit: false, task: true }).then(() => { });
+            }
+        }
+    }
 
     var unlock_Avil = tasks.filter(task => task.completed).length == tasks.length ? true : false;
 
     return (
-        <div className='container' >
+        <div className='container'>
             <div id='WsMain' className='row'>
                 <div id='MysterySticky' className='col-md-6 d-flex align-items-center justify-content-center' onMouseUp={animationEndUpdate} >
                     <PickOne unlockAvil={unlock_Avil} />
@@ -88,8 +118,8 @@ const Wheelspin = () => {
 
                                 <StickyNote color={element["color"]} key={element["color"]}
                                     id={element["id"]}
-                                    selectionMarker={setMarker(element["habit"], element["task"], index)}
-                                    hId={habitStickyId} tId={taskStickyId}></StickyNote>
+                                    hId={habitStickyId} tId={taskStickyId} idSender={getStickyData}
+                                    test2={testguy}></StickyNote>
                             ))}
                         </div>
 

@@ -6,52 +6,71 @@ import { Menu, MenuItem, ControlledMenu, SubMenu, useMenuState } from '@szhsin/r
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import * as firebase from "../db/firebase";
+import { memo } from "react";
 
-const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
+const StickyNote = ({ id, idSender, color, hId, tId }) => {
     const userID = firebase.getUserID();
 
     const [menuProps, toggleMenu] = useMenuState();
     const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
 
-    const [status, setStatus] = useState();
-
+    //const [selectionMarker, setSelectionMarker] = useState("");
 
     if (color[0] != "#") {
         color = "#" + color
     }
 
-    function stickyClicked() {
-        //console.log("Clicked on: " + id);
+    useEffect(() => {
+
+
+    }, []);
+
+    const selectionMarker = (_id, habId, taskId) => {
+        if (_id === habId) {
+            // setSelectionMarker("H");
+            return ("H");
+        } else if (_id === taskId) {
+            // setSelectionMarker("T");
+            return ("T");
+        } else {
+            // setSelectionMarker("");
+            return ("");
+        }
     }
 
     // denoteObj is the new label for the data base and old id is the id of the prev habit or task sticky
-    function updateStickyDenote(denoteObj, oldId) {
-        if (id === oldId) {
-            window.alert("Please select a new stickynote!");
-            return;
-        }
+    // newStatus = 0 for habit, 1 for task
+    function updateStickyDenote(newStatus, curStickyId, habID, taskID) {
+
 
         // If the current sticky note is the already the habit and we want it to be the task:
         // make the task sticky not the habit sticky note and make the habit the task
-        if (oldId == hId && id == tId) {
-            firebase.updateDocument(`users/${userID}/collectables/${hId}`, { habit: false, task: true }).then(() => { });
-            firebase.updateDocument(`users/${userID}/collectables/${tId}`, { habit: true, task: false }).then(() => { });
+
+        //Return a 2d array with the first index 
+        //Switch habit and task with the cur sticky being the new habit
+        if (curStickyId == taskID && newStatus == 0) {
+            sendHabitAndTask([curStickyId, habID])
         }
-        else if (oldId == tId && id == hId) {
-            firebase.updateDocument(`users/${userID}/collectables/${tId}`, { habit: true, task: false }).then(() => { });
-            firebase.updateDocument(`users/${userID}/collectables/${hId}`, { habit: false, task: true }).then(() => { });
-        } else {
-            firebase.updateDocument(`users/${userID}/collectables/${oldId}`, { habit: false, task: false }).then(() => { });
-            firebase.updateDocument(`users/${userID}/collectables/${id}`, denoteObj).then(() => { });
+        // Switch task and habit with the cur sticky being the new task
+        else if (curStickyId == habID && newStatus == 1) {
+            sendHabitAndTask([taskID, curStickyId])
+        } 
+        //set cur sticky to new status
+        else {
+            if (newStatus === 0) { sendHabitAndTask([curStickyId, taskID]) }
+            else if (newStatus === 1) { sendHabitAndTask([habID, curStickyId]) }
         }
 
     }
 
-    //style={{ filter: 'opacity(0.5) drop-shadow(0 0 0 ' + color + ' )' }}
+    function sendHabitAndTask(type) {
+        idSender(type);
+    }
+
 
     return (
         <div className='stickyDiv'>
-            <div onClick={stickyClicked}
+            <div
                 onContextMenu={e => {
                     e.preventDefault();
                     var list = document.getElementsByClassName("szh-menu--state-open")
@@ -66,7 +85,7 @@ const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
 
                 <Tilt className='stickyTilt' tiltEnable={false} scale={1.17}
                     style={{ filter: 'opacity(0.7) drop-shadow(0 0 0 ' + color + ' )' }}>
-                    <p className='TypeDenoter'>{selectionMarker}</p>
+                    <p className='TypeDenoter'>{selectionMarker(id, hId, tId)}</p>
                 </Tilt>
             </div>
 
@@ -76,14 +95,12 @@ const StickyNote = ({ id, stickyImg, color, selectionMarker, hId, tId }) => {
 
                 <MenuItem value="HabitNote"
                     onClick={(e) => {
-                        selectionMarker = "H";
-                        updateStickyDenote({ habit: true }, hId);
+                        updateStickyDenote(0, id, hId, tId);
                     }}
                 >Set as habbit sticky note</MenuItem>
                 <MenuItem value="TaskNote"
                     onClick={(e) => {
-                        selectionMarker = "T";
-                        updateStickyDenote({ task: true }, tId);
+                        updateStickyDenote(1, id, hId, tId);
                     }}>Set as task sticky note</MenuItem>
             </ControlledMenu>
         </div>
