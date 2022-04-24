@@ -4,6 +4,7 @@ import rewardEx from '../img/landing/rewards.png';
 import taskEx from '../img/landing/task.png';
 import trackerEx from '../img/landing/tracker.png';
 import face from '../img/landing/faces/placeholder.png';
+import john from '../img/landing/faces/johnface.png';
 
 /*
 var sectionStyle = {
@@ -17,9 +18,9 @@ const Home = () => {
         <>
             <div>
                 <Container> 
-                    <Row className="m-5"> 
-                        <h1 className="text-center m-2">Productivity with a <span className="difText"> Push </span> </h1> 
-                        <p className="text-center m-2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
+                    <Row className="m-5">
+						<h1 className="text-center m-2">Get it Done</h1> 
+                        <h2 className="text-center m-2">Productivity with a <span className="difText"> Push</span> </h2>
                     </Row>
                 </Container>
             </div>
@@ -32,9 +33,7 @@ const Home = () => {
                             </Row>
                             <Row className="p-5">
                                  <p className="text-center">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas mi turpis, 
-                                    ac bibendum neque faucibus et. Vivamus sodales lacus tristique justo dapibus, non aliquam magna volutpat. 
-                                     
+                                    Earn cool collectables and cosmetics for completing tasks and sticking to habits!
                                 </p>
                             </Row>
                         </Col>
@@ -45,8 +44,7 @@ const Home = () => {
                             </Row>
                             <Row className="p-5">
                                 <p className="text-center">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas mi turpis, 
-                                    ac bibendum neque faucibus et. Vivamus sodales lacus tristique justo dapibus, non aliquam magna volutpat. 
+                                    Keep track of upcoming tasks, daily chores, and consistent habits with convenient trackers!
                                 </p>
                             </Row>
                         </Col>
@@ -57,9 +55,7 @@ const Home = () => {
                             </Row>
                             <Row className="p-5">
                                 <p className="text-center">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas mi turpis, 
-                                    ac bibendum neque faucibus et. Vivamus sodales lacus tristique justo dapibus, non aliquam magna volutpat. 
-
+                                    View upcoming tasks in either a traditional list view or an intuitive sticky-note view!
                                 </p>
                             </Row>
                         </Col>
@@ -80,57 +76,52 @@ const Home = () => {
                     <Row>
                         <Col lg={4} className="p-2" >
                             <Row>
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
+                                <img src={face} alt="Rebecca Alvez" className="rounded-circle w-50 mx-auto" fluid="true"/>
                             </Row>
-                            <Row>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas mi turpis
-                                </p>
+                            <Row style={{textAlign: "center"}} className="mx-auto">
+								<h1>Rebecca Alvez</h1>
+								<h3>Programmer</h3>
                             </Row>
                         </Col>
         
                         <Col lg={4} className="p-2">
                             <Row>
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
+                                <img src={face} alt="Caleb Bergen" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
-                            <Row>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas mi turpis
-                                </p>
+                            <Row style={{textAlign: "center"}} className="mx-auto">
+								<h1>Caleb Bergen</h1>
+								<h3>Programmer</h3>
                             </Row>
                         </Col>
 
                         <Col lg={4} className="p-2">
                             <Row>
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
+                                <img src={face} alt="Michael McGilvray" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
-                            <Row>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas mi turpis
-                                </p>
+                            <Row style={{textAlign: "center"}} className="mx-auto">
+								<h1>Michael McGilvray</h1>
+								<h3>Programmer</h3>
                             </Row>
                         </Col>
                     </Row>  
                     <Row>
                         <Col lg={4} className="p-2" >
                             <Row>
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
+                                <img src={john} alt="John O'Neill" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
-                            <Row>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas mi turpis
-                                </p>
+                            <Row style={{textAlign: "center"}} className="mx-auto">
+								<h1>John O'Neill</h1>
+								<h3>Programmer / Backend</h3>
                             </Row>
                         </Col>
         
                         <Col lg={4} className="p-2">
                             <Row> 
-                                <img src={face} alt="Get It Done Logo" className="rounded-circle w-50 mx-auto" fluid="true"/>  
+                                <img src={face} alt="Ankit Lalotra" className="rounded-circle w-50 mx-auto" fluid="true"/> 
                             </Row>
-                            <Row>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas mi turpis
-                                </p>
+                            <Row style={{textAlign: "center"}} className="mx-auto">
+								<h1>Ankit Lalotra</h1>
+								<h3>Programmer</h3>
                             </Row>
                         </Col>
                     </Row>      
