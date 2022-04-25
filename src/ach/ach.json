@@ -6,7 +6,8 @@
     "stp_req": 3,
     "levels": 5,
     "id": "001",
-    "curve": 1.25
+    "curve": 1.25,
+    "showStpRq": true
   },
   {
     "ach_name": "Sticking with it",
@@ -15,7 +16,8 @@
     "stp_req": 3,
     "levels": 5,
     "id": "002",
-    "curve": 1
+    "curve": 1,
+    "showStpRq": true
   },
   {
     "ach_name": "24 / 7 / 365",
@@ -24,24 +26,27 @@
     "stp_req": 3,
     "levels": 5,
     "id": "003",
-    "curve": 1
+    "curve": 1,
+    "showStpRq": true
   },
   {
     "ach_name": "Make it yours",
-    "descp1": "Change the color of your habit and task",
+    "descp1": "Change the color of your habit and task sticky notes",
     "descp2": "",
     "stp_req": 2,
     "levels": 1,
     "id": "004",
-    "curve": 1
+    "curve": 1,
+    "showStpRq": false
   },
   {
     "ach_name": "First Timer",
-    "descp1": "Change the color of your habit and task",
+    "descp1": "Login for the first time!",
     "descp2": "",
-    "stp_req": 2,
+    "stp_req": 1,
     "levels": 1,
     "id": "005",
-    "curve": 1
+    "curve": 1,
+    "showStpRq": false
   }
 ]

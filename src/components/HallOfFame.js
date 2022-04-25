@@ -4,6 +4,7 @@ import HOFAchCard from './HOFAchCard'
 import Achievement from './Achievement'
 import Donut from './Donut'
 import * as firebase from "../db/firebase";
+import UnlockProgress from './UnlockProgress'
 
 function HallOfFrame() {
     const userID = firebase.getUserID();
@@ -28,7 +29,7 @@ function HallOfFrame() {
                         description={element["description"]} key={element["id"]}></HOFAchCard>
                 ))}
             </div>
-
+            <UnlockProgress _canWrite={false}></UnlockProgress>
         </div>
     )
 }

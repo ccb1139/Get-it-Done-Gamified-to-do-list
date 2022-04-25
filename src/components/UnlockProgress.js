@@ -2,10 +2,11 @@ import { ProgressBar } from 'react-bootstrap'
 import '../css/UnlockProgress.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'react-circular-progressbar/dist/styles.css';
+import Tracker from "./Tracker"
 import { useState, useEffect } from "react";
 import * as firebase from "../db/firebase";
 
-function UnlockProgress() {
+function UnlockProgress(_canWrite) {
     const userID = firebase.getUserID();
 
     const [tasks, setTasks] = useState([]);
@@ -42,7 +43,8 @@ function UnlockProgress() {
                     <p id="ACH-Unlock-Info" >{total - complete} more donuts for an unlock!</p>
                 </div>
                 
-            </div>  
+            </div> 
+            <Tracker canwrite={_canWrite}></Tracker> 
         </div>
         
         

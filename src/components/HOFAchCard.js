@@ -23,7 +23,6 @@ function HOFAchCard({ title, badge, description, level }) {
             </div>
             <ReactTooltip place="bottom" type="dark" effect="solid" />
 
-            <UnlockProgress complete={3} total={5}></UnlockProgress>
         </div>
     )
 }

@@ -21,7 +21,7 @@ const Signin = ({ showSignin, closeSignin, showSignup, closeSignup, openSignup }
         //console.log(_userID)
         // Load sticky notes
         firebase.getCollection(`users/${_userID}/collectables/`).then((result) => {
-            
+
             if (result.length === 0) {
                 firebase.createDocument(`users/${_userID}/collectables/`,
                     ({ color: "ff7575", habit: true, task: false })).then((id) => { });
@@ -34,7 +34,7 @@ const Signin = ({ showSignin, closeSignin, showSignup, closeSignup, openSignup }
             console.log(result)
             if (result.length === 0) {
                 const placeholder = {
-                    description: "Login for the first time! (place holder)",
+                    description: "Login for the first time!",
                     ach_id: "005",
                     level: 1,
                     title: "First timer"
@@ -49,6 +49,10 @@ const Signin = ({ showSignin, closeSignin, showSignup, closeSignup, openSignup }
             if (result.length === 0) {
                 firebase.createDocument(`users/${_userID}/inp-Ach-Trackers/`,
                     ({ stUnlocked: 0, ach_id: "002" })).then((id) => { });
+                firebase.createDocument(`users/${_userID}/inp-Ach-Trackers/`,
+                    ({ stUnlocked: 0, ach_id: "001" })).then((id) => { });
+                firebase.createDocument(`users/${_userID}/inp-Ach-Trackers/`,
+                    ({ stUnlocked: 0, ach_id: "004", habit:"ff7575", task:"f8d78b" })).then((id) => { });
             }
         });
     }
@@ -71,11 +75,11 @@ const Signin = ({ showSignin, closeSignin, showSignup, closeSignup, openSignup }
             setShowLoginError(false);
             closeSignin();
         })
-        .catch((error) => {
-            const errorCode = error.code;
-            console.log("Error signing in: ", errorCode);
-            setShowLoginError(true);
-        });
+            .catch((error) => {
+                const errorCode = error.code;
+                console.log("Error signing in: ", errorCode);
+                setShowLoginError(true);
+            });
     }
 
     function GoogleSignIn() {
@@ -117,12 +121,12 @@ const Signin = ({ showSignin, closeSignin, showSignup, closeSignup, openSignup }
                             {errors.passwordInput?.type === "required" && <InvalidInput type="Signin" text="Password is required" />}
                         </div>
 
-                        {showLoginError ? 
-                        <Container>
-                            <InvalidInput type="Signin" text="Incorrect email or password" />
-                        </Container> : <></>}
+                        {showLoginError ?
+                            <Container>
+                                <InvalidInput type="Signin" text="Incorrect email or password" />
+                            </Container> : <></>}
 
-                        <p>Don't have an account? <span className="link" onClick={() => {closeSignin(); openSignup();}}>Create one!</span></p>
+                        <p>Don't have an account? <span className="link" onClick={() => { closeSignin(); openSignup(); }}>Create one!</span></p>
 
                         <Button className="w-100" type="submit">Sign-in</Button>
 

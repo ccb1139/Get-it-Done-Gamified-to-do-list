@@ -6,12 +6,13 @@ import UnlockProgress from './UnlockProgress'
 import Donut from './Donut'
 import achJSON from '../ach/ach.json'
 import * as firebase from "../db/firebase";
-import { NotificationContainer, NotificationManager } from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
 import { async } from '@firebase/util';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Achievements = () => {
     const userID = firebase.getUserID();
+    //console.log(userID)
 
     //Firebase Stuff
     const [curr__ach, setCurrAch] = useState([]);
@@ -53,6 +54,18 @@ const Achievements = () => {
 
             setCurrAch(result);
             firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result2) => {
+                if (result2.length === 1) {
+                    toast.success(("First Timer unlocked!"), {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+
                 setComplete_ach(result2);
 
                 firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result1) => {
@@ -95,7 +108,7 @@ const Achievements = () => {
 
     function shrinkLvlArray(lvlProg) {
         var rtnArray = []
-        for (var i = 1; i < lvlProg.length; i++){
+        for (var i = 1; i < lvlProg.length; i++) {
             rtnArray.push(lvlProg[i]);
         }
         return rtnArray;
@@ -103,7 +116,8 @@ const Achievements = () => {
 
     // Function creates an array of all the achivments to be displayed
     function create_ach(curr_ach, tracker__info, complete__ach) {
-        active_achs = []
+        active_achs = [];
+        var fully_completed_ach = ["005"];
         for (var usrAch in curr_ach) {
             for (var allAch in ach) {
                 // If the current users achivments are in the list of all achivments 
@@ -112,18 +126,21 @@ const Achievements = () => {
                     // Check how many steps of this achivment are done
                     const StepsDone = getStepsCompleted(ach[allAch]["id"], tracker__info);
 
+                    // Finds the first level and then the next level
                     var curLVL = calcCurSteps(ach[allAch]["stp_req"],
                         curr_ach[usrAch]["level"], ach[allAch]["curve"])
                     var nxtLVL = calcCurSteps(ach[allAch]["stp_req"],
                         (curr_ach[usrAch]["level"] + 1), ach[allAch]["curve"])
-
                     var i = 1;
 
 
-
+                    // If the amout of steps completed for this achivment are greater than the 2nd level
+                    // Figure out what the next teir is
                     if (StepsDone >= nxtLVL) {
                         var nxtLvlTmp = nxtLVL
                         var lvlPrg = [nxtLVL];
+
+                        // Loop through until next teir is found
                         while (StepsDone >= nxtLVL) {
                             curLVL = calcCurSteps(ach[allAch]["stp_req"],
                                 (curr_ach[usrAch]["level"] + i), ach[allAch]["curve"])
@@ -133,12 +150,15 @@ const Achievements = () => {
                             lvlPrg.push(nxtLVL);
                         }
                         var foundAch = false;
+
                         for (var cmp_ach in complete__ach) {
                             // Find if achviment has already been completed 
                             if ((curr_ach[usrAch]["id"] == complete__ach[cmp_ach]["ach_id"])) {
                                 if ((i - 1) == complete__ach[cmp_ach]["level"]) {
                                     foundAch = true;
                                 }
+                                // If lower levels of this achivment have been found then make sure more arent added
+                                // to the database
                                 if ((i - 1) > complete__ach[cmp_ach]["level"]) {
                                     lvlPrg = shrinkLvlArray(lvlPrg);
                                 }
@@ -146,9 +166,20 @@ const Achievements = () => {
 
                             // This part cant happen unless we have iterated through all the achivments to see if one was found
                             if (cmp_ach == (complete__ach.length - 1)) {
+                                // Add new achivment to the database
                                 if (foundAch === false) {
                                     var ind = lvlPrg.length - 2;
                                     for (var j = i - 1; j > 0; j--) {
+                                        toast.success((ach[allAch]["ach_name"] + " " + j + " unlocked!"), {
+                                            position: "top-right",
+                                            autoClose: 5000,
+                                            hideProgressBar: false,
+                                            closeOnClick: true,
+                                            pauseOnHover: true,
+                                            draggable: true,
+                                            progress: undefined,
+                                        });
+
                                         firebase.createDocument(`users/${userID}/earned-Achievements/`,
                                             {
                                                 ach_id: curr_ach[usrAch]["id"],
@@ -156,29 +187,40 @@ const Achievements = () => {
                                                 level: j,
                                                 title: ach[allAch]["ach_name"]
                                             }
-                                        ).then((id) => {})
+                                        ).then((id) => { })
 
-                                        if(ind <= 0){
+                                        if (ind <= 0) {
                                             break;
                                         }
                                         ind--;
                                     }
-
                                 }
                             }
+                            
+                            if (foundAch === true) {
+                                //console.log((ach[allAch]))
+                                if ((ach[allAch]["levels"] === complete__ach[cmp_ach]["level"])
+                                    && !(fully_completed_ach.includes(curr_ach[usrAch]["id"]))) {
+                                    fully_completed_ach.push(curr_ach[usrAch]["id"])
+                                }
+                            }
+
                         }
 
                     }
 
-
-
-
-
+                    // Add achivment to list that will be displayed 
                     const levelStr = (i === 1) ? "" : (i).toString();
+                    var descpString = ach[allAch]["descp1"]
+                    if (ach[allAch]["showStpRq"]) {
+                        descpString += " " + nxtLVL + " " + ach[allAch]["descp2"]
+                    }
+
+                    
 
                     var tmpAch = {
                         "ach_name": (ach[allAch]["ach_name"] + " " + levelStr),
-                        "descp": (ach[allAch]["descp1"] + " " + nxtLVL + " " + ach[allAch]["descp2"]),
+                        "descp": (descpString),
                         "level": (i - 1),
                         "nxtlevel": nxtLVL,
                         "stepsDone": StepsDone,
@@ -188,8 +230,9 @@ const Achievements = () => {
                         "step_req": ach[allAch]["stp_req"]
                     }
 
-                    //setAllAch(tmpAch)
 
+
+                    if (fully_completed_ach.includes(curr_ach[usrAch]["id"])) { break }
                     active_achs.push(tmpAch)
                     break
                 }
@@ -213,8 +256,21 @@ const Achievements = () => {
                     donut={<Donut total={element["nxtlevel"]}
                         complete={element["stepsDone"]} size={150} />}></Achievement>))}
 
-            <UnlockProgress />
-            <NotificationContainer />
+
+            <UnlockProgress  _canWrite={true}/>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+            {/* Same as */}
+            <ToastContainer />
         </div>
     );
 }
