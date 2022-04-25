@@ -5,6 +5,7 @@ import taskEx from '../img/landing/task.png';
 import trackerEx from '../img/landing/tracker.png';
 import face from '../img/landing/faces/placeholder.png';
 import john from '../img/landing/faces/johnface.png';
+import michael from '../img/landing/faces/michaelface.jpg';
 
 /*
 var sectionStyle = {
@@ -96,7 +97,7 @@ const Home = () => {
 
                         <Col lg={4} className="p-2">
                             <Row>
-                                <img src={face} alt="Michael McGilvray" className="rounded-circle w-50 mx-auto" fluid="true"/>  
+                                <img src={michael} alt="Michael McGilvray" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
                             <Row style={{textAlign: "center"}} className="mx-auto">
 								<h1>Michael McGilvray</h1>
