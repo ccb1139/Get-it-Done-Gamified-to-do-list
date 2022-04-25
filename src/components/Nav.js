@@ -1,5 +1,4 @@
 import logo from '../img/logo.png';
-import setting from '../img/gear.svg';
 import github from '../img/github.svg';
 import 'bootstrap/dist/css/bootstrap.css'
 import { Container, Navbar, Nav, Button, NavDropdown } from 'react-bootstrap'
@@ -53,6 +52,7 @@ const MainNav = () => {
         { JSON.parse(localStorage.getItem("userSignedIn")) ? 
           <>
             <Nav className='navbar-nav nav me-auto'>
+              <Nav.Link as={Link} to={appname + "/HowTo"}> How To Use </Nav.Link>
               <Nav.Link as={Link} to={appname + "/NewHabit"}> New Habit</Nav.Link>
               <NavDropdown title="To-Do Lists">
                 <NavDropdown.Item as={Link} to={appname + "/DailyView"}> Daily View </NavDropdown.Item>

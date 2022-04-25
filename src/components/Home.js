@@ -1,4 +1,3 @@
-import Image from 'react-bootstrap/Image'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import rewardEx from '../img/landing/rewards.png';
 import taskEx from '../img/landing/task.png';

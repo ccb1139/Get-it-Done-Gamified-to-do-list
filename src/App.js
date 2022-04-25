@@ -1,6 +1,6 @@
 import './App.css';
 import MainNav from './components/Nav';
-import Sidebar from './components/Sidebar';
+import HowTo from './components/HowTo';
 import Home from './components/Home';
 import DailyView from './components/DailyView';
 import WeeklyView from './components/WeeklyView';
@@ -28,6 +28,7 @@ function App() {
       <MainNav />
       <Routes>
         <Route path={appname + "/"} exact element={<Home />} />
+        <Route path={appname + "/HowTo"} element={<HowTo />} />
         <Route path={appname + "/NewHabit"} element={<NewHabit />} />
         <Route path={appname + "/DailyView"} element={<DailyView />} />
         <Route path={appname + "/WeeklyView"} element={<WeeklyView />} />
