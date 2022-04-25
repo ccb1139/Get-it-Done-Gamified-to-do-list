@@ -101,21 +101,16 @@ const Achievements = () => {
         return rtnArray;
     }
 
-
+    // Function creates an array of all the achivments to be displayed
     function create_ach(curr_ach, tracker__info, complete__ach) {
         active_achs = []
-        // console.log(curr_ach)
-        // console.log(ach)
-        // console.log(tracker__info)
-        // console.log(complete__ach)
-
-        // console.log("ACH DEBGGGING ##############################")
         for (var usrAch in curr_ach) {
             for (var allAch in ach) {
+                // If the current users achivments are in the list of all achivments 
                 if (curr_ach[usrAch]["id"] == ach[allAch]["id"]) {
 
+                    // Check how many steps of this achivment are done
                     const StepsDone = getStepsCompleted(ach[allAch]["id"], tracker__info);
-                    //console.log(ach[allAch]["id"] + " steps done: " + StepsDone)
 
                     var curLVL = calcCurSteps(ach[allAch]["stp_req"],
                         curr_ach[usrAch]["level"], ach[allAch]["curve"])
@@ -127,7 +122,6 @@ const Achievements = () => {
 
 
                     if (StepsDone >= nxtLVL) {
-                        // console.log("StepsDone: " + StepsDone + " >= " + "nxtLVL: " + nxtLVL)
                         var nxtLvlTmp = nxtLVL
                         var lvlPrg = [nxtLVL];
                         while (StepsDone >= nxtLVL) {
@@ -138,54 +132,23 @@ const Achievements = () => {
                             i++;
                             lvlPrg.push(nxtLVL);
                         }
-                        // console.log(lvlPrg)
-                        // console.log(StepsDone + " === " + nxtLvlTmp)
                         var foundAch = false;
                         for (var cmp_ach in complete__ach) {
-
-                            // console.log("curr_ach[usrAch][id]: " + curr_ach[usrAch]["id"] + " == " + 'complete__ach[cmp_ach]["ach_id"]: ' + complete__ach[cmp_ach]["ach_id"])
-                            // //console.log(((curr_ach[usrAch]["id"] == complete__ach[cmp_ach]["ach_id"])))
-                            // console.log("(i - 1): " + (i - 1) + " == " + 'complete__ach[cmp_ach]["level"]): ' + complete__ach[cmp_ach]["level"])
-                            // // console.log(((i - 1) == complete__ach[cmp_ach]["level"]))
-                            // console.log((curr_ach[usrAch]["id"] == complete__ach[cmp_ach]["ach_id"])
-                            //     && ((i - 1) == complete__ach[cmp_ach]["level"]))
                             // Find if achviment has already been completed 
-
-                            // if ((curr_ach[usrAch]["id"] == complete__ach[cmp_ach]["ach_id"])
-                            //     && ((i - 1) == complete__ach[cmp_ach]["level"])) {
-                            //     console.log("Achivment already in database!");
-                            //     foundAch = true;
-                            // }
-                            //console.log("curr_ach[usrAch][id]: " + curr_ach[usrAch]["id"] + " == " + 'complete__ach[cmp_ach]["ach_id"]: ' + complete__ach[cmp_ach]["ach_id"])
                             if ((curr_ach[usrAch]["id"] == complete__ach[cmp_ach]["ach_id"])) {
                                 if ((i - 1) == complete__ach[cmp_ach]["level"]) {
-                                    //console.log("Achivment already in database!");
                                     foundAch = true;
                                 }
-                                //console.log("(i - 1): " + (i - 1) + " > " + 'complete__ach[cmp_ach]["level"]): ' + complete__ach[cmp_ach]["level"])
                                 if ((i - 1) > complete__ach[cmp_ach]["level"]) {
-                                    // console.log("Found Level Below!");
-                                    // console.log("(i - 1): " + (i - 1) + " < " + 'complete__ach[cmp_ach]["level"]: ' + complete__ach[cmp_ach]["level"])
-                                    // console.log(lvlPrg)
                                     lvlPrg = shrinkLvlArray(lvlPrg);
-                                    //console.log(lvlPrg)
                                 }
-
-
-
                             }
 
                             // This part cant happen unless we have iterated through all the achivments to see if one was found
                             if (cmp_ach == (complete__ach.length - 1)) {
-                                //console.log("foundAch: " + foundAch);
                                 if (foundAch === false) {
-                                    // console.log(curr_ach[usrAch]["id"] + " == " + complete__ach[cmp_ach]["ach_id"])
-                                    // console.log((i - 1) + " == " + complete__ach[cmp_ach]["level"])
-
                                     var ind = lvlPrg.length - 2;
-                                    //console.log("ind: " + ind + " i - 1: " + (i - 1))
                                     for (var j = i - 1; j > 0; j--) {
-
                                         firebase.createDocument(`users/${userID}/earned-Achievements/`,
                                             {
                                                 ach_id: curr_ach[usrAch]["id"],
