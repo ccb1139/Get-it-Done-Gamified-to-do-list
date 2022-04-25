@@ -1,13 +1,26 @@
 import ToDoList from "./ToDoList"
 import Donut from "./Donut";
+import TrackerContainer from "./TrackerContainer";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { MdOutlineStickyNote2 } from "react-icons/md";
 import { Row, Col, Container } from "react-bootstrap";
 import { useState } from "react";
 
 function WeeklyView() {
-    const [tasks, setTasks] = useState([]);
-    var listSize = tasks.length;
+    const [tasks, setTasks] = useState({ Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: [], Sunday: []});
+    const [mondayTasks, setMondayTasks] = useState([]);
+    const [tuesdayTasks, setTuesdayTasks] = useState([]);
+    const [wednesdayTasks, setWednesdayTasks] = useState([]);
+    const [thursdayTasks, setThursdayTasks] = useState([]);
+    const [fridayTasks, setFridayTasks] = useState([]);
+    const [saturdayTasks, setSaturdayTasks] = useState([]);
+    const [sundayTasks, setSundayTasks] = useState([]);
+    
+    function getTasks() {
+        setTasks({ Monday: mondayTasks, Tuesday: tuesdayTasks, Wednesday: wednesdayTasks, Thursday: thursdayTasks, Friday: fridayTasks, Saturday: saturdayTasks, Sunday: sundayTasks})
+        // return { Monday: mondayTasks, Tuesday: tuesdayTasks, Wednesday: wednesdayTasks, Thursday: thursdayTasks, Friday: fridayTasks, Saturday: saturdayTasks, Sunday: sundayTasks} ;
+        return tasks;
+    }
 
     function toggleDailyView() {
         var traditionalElements = document.getElementsByClassName("dailyViewTraditional");
@@ -25,14 +38,12 @@ function WeeklyView() {
 
     var weekDates = [];
     var startDate = new Date();
-    startDate.setDate((startDate.getDate() - startDate.getDay() + 1)); // Start the week at monday
+    startDate.setDate((startDate.getDate() - startDate.getDay()));
     for (var i = 0; i < 7; i++) {
         weekDates.push( new Date(startDate) ); 
-        startDate.setDate(startDate.getDate() +1);
+        startDate.setDate(startDate.getDate() + 1);
     }
-
-    const today = new Date();
-
+    
     return (
         <>
             <div className="viewToggleButton text-center">
@@ -43,17 +54,28 @@ function WeeklyView() {
                 <MdOutlineStickyNote2 className="inline" size="25" />
             </div>
 
-            <ToDoList Day="Monday" curDate={weekDates[0]} updateTasks={today.getDay() == 1 ? setTasks : () => {} } />
-            <ToDoList Day="Tuesday" curDate={weekDates[1]} updateTasks={today.getDay() == 2 ? setTasks : () => {} } />
-            <ToDoList Day="Wednesday" curDate={weekDates[2]} updateTasks={today.getDay() == 3 ? setTasks : () => {} } />
-            <ToDoList Day="Thursday" curDate={weekDates[3]} updateTasks={today.getDay() == 4 ? setTasks : () => {} } />
-            <ToDoList Day="Friday" curDate={weekDates[4]} updateTasks={today.getDay() == 5 ? setTasks : () => {} } />
-            <ToDoList Day="Saturday" curDate={weekDates[5]} updateTasks={today.getDay() == 6 ? setTasks : () => {} } />
-            <ToDoList Day="Sunday" curDate={weekDates[6]} updateTasks={today.getDay() == 0 ? setTasks : () => {} }/>
+            {/* <ToDoList Day="Sunday" curDate={weekDates[0]} updateTasks={today.getDay() === 0 ? setTasks : () => {} }/>
+            <ToDoList Day="Monday" curDate={weekDates[1]} updateTasks={today.getDay() === 1 ? setTasks : () => {} } />
+            <ToDoList Day="Tuesday" curDate={weekDates[2]} updateTasks={today.getDay() === 2 ? setTasks : () => {} } />
+            <ToDoList Day="Wednesday" curDate={weekDates[3]} updateTasks={today.getDay() === 3 ? setTasks : () => {} } />
+            <ToDoList Day="Thursday" curDate={weekDates[4]} updateTasks={today.getDay() === 4 ? setTasks : () => {} } />
+            <ToDoList Day="Friday" curDate={weekDates[5]} updateTasks={today.getDay() === 5 ? setTasks : () => {} } />
+            <ToDoList Day="Saturday" curDate={weekDates[6]} updateTasks={today.getDay() === 6 ? setTasks : () => {} } /> */}
+            <ToDoList Day="Sunday" curDate={weekDates[0]} getTasks={getTasks} updateTasks={setSundayTasks}/>
+            <ToDoList Day="Monday" curDate={weekDates[1]} getTasks={getTasks} updateTasks={setMondayTasks} />
+            <ToDoList Day="Tuesday" curDate={weekDates[2]} getTasks={getTasks} updateTasks={setTuesdayTasks} />
+            <ToDoList Day="Wednesday" curDate={weekDates[3]} getTasks={getTasks} updateTasks={setWednesdayTasks} />
+            <ToDoList Day="Thursday" curDate={weekDates[4]} getTasks={getTasks} updateTasks={setThursdayTasks} />
+            <ToDoList Day="Friday" curDate={weekDates[5]} getTasks={getTasks} updateTasks={setFridayTasks} />
+            <ToDoList Day="Saturday" curDate={weekDates[6]} getTasks={getTasks} updateTasks={setSaturdayTasks} />
 
-            <div style={{"height": "500px"}}></div>
+            <div style={{"height": "75px"}}></div>
 
-            <Container className="col-sm-10 fixed-bottom border border-dark" fluid>
+            <TrackerContainer view={"weekly"} getTasks={getTasks} 
+            mondayTasks={mondayTasks} tuesdayTasks={tuesdayTasks} wednesdayTasks={wednesdayTasks} thursdayTasks={thursdayTasks} 
+            fridayTasks={fridayTasks} saturdayTasks={saturdayTasks} sundayTasks={sundayTasks} />
+
+            {/* <Container className="col-sm-10 fixed-bottom border border-dark" fluid>
                 <div>
                     <Row>
                         <Col lg={9} sm={6} xs={6} id="habitDonuts">
@@ -68,7 +90,7 @@ function WeeklyView() {
                         </Col>
                     </Row>
                 </div>
-            </Container>
+            </Container> */}
         </>
     )
 }

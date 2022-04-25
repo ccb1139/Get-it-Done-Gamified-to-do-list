@@ -7,8 +7,9 @@ import { useState, useEffect } from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { MdOutlineStickyNote2 } from "react-icons/md";
 import * as firebase from "../db/firebase";
+import { arrayUnion, arrayRemove } from "firebase/firestore";
 
-function ToDoList({Day, curDate, updateTasks}) {
+function ToDoList({Day, curDate, getTasks, updateTasks}) {
     const userID = firebase.getUserID();
     const [tasks, setTasks] = useState([]);
     const [taskColor, setTaskColor] = useState("#FFFFFF");
@@ -16,8 +17,23 @@ function ToDoList({Day, curDate, updateTasks}) {
 
     function updateTaskLists(tasks) {
         setTasks(tasks);
+        // const globalTasks = getTasks();
         updateTasks(tasks);
     }
+
+    function getHabit(element) {
+        if (element.tasks.length === 0) { return false; }
+        return element.tasks.filter(element => {
+            // Check if the element is {}
+            if (Object.keys(element).length === 0) { return false;}
+
+            const converted = new Date(element.due.seconds * 1000);
+            return curDate.getDate() === converted.getDate() 
+            && curDate.getMonth() === converted.getMonth()
+            && curDate.getYear() === converted.getYear()
+        })[0];
+    }
+
 
     // Get the list of tasks when the page loads
     useEffect(() => {
@@ -30,9 +46,19 @@ function ToDoList({Day, curDate, updateTasks}) {
                     if (elementDueDate.getDate() === curDate.getDate()) {
                         tasksToAdd.push(element);
                     }
-                } else if (elementDueDate >= curDate && curDate >= elementStartDate) {
-                    tasksToAdd.push(element);
+                } else {
+                    const habitPart = getHabit(element);
+                    if (habitPart) {
+                        const habit = {parentid: element.id, ...habitPart};
+                        tasksToAdd.push(habit);
+                    }
+
+
+                    // if (elementDueDate >= curDate && curDate >= elementStartDate) {
+                    //     tasksToAdd.push(element);
+                    // }
                 }
+
             })
             updateTaskLists(tasksToAdd)
         });
@@ -46,21 +72,48 @@ function ToDoList({Day, curDate, updateTasks}) {
                     setTaskColor("#" + sticky.color);
                 }
             });
-            console.log(result);
         });
     }, []);
 
     function deleteTask(id) {
         updateTaskLists(tasks.filter((task) => task.id !== id))
 
-        firebase.deleteDocument(`users/${userID}/Tasks/${id}`).then(() => { });
+        tasks.map(task => {
+            if (id === task.id) {
+                if (task.habit) {
+                    firebase.getDocument(`users/${userID}/Tasks/${task.parentid}`).then((result) => {
+                        const index = task.id.substring(task.id.indexOf("___") + 3);
+                        // result.tasks.splice(index, 1);
+                        result.tasks[index] = {};
+
+                        firebase.updateDocument(`users/${userID}/Tasks/${task.parentid}`, {tasks: result.tasks}).then(() => { });
+                    });
+                } else {
+                    firebase.deleteDocument(`users/${userID}/Tasks/${id}`).then(() => { });
+                }
+            }
+        });
+
     }
 
     function completeTask(id) {
         const updatedTasks = tasks.map(task => {
             // if this task has the same ID as the edited task
             if (id === task.id) {
-                firebase.updateDocument(`users/${userID}/Tasks/${id}`, { completed: !task.completed }).then(() => { });
+                if (task.habit) {
+                    firebase.getDocument(`users/${userID}/Tasks/${task.parentid}`).then((result) => {
+                        const updatedTask = { ...task, completed: !task.completed };
+                        // delete updatedTask.parentid;
+                        // console.log(task);
+
+                        const index = task.id.substring(task.id.indexOf("___") + 3);
+                        result.tasks[index] = updatedTask;
+
+                        firebase.updateDocument(`users/${userID}/Tasks/${task.parentid}`, {tasks: result.tasks}).then(() => { });
+                    });
+                } else {
+                    firebase.updateDocument(`users/${userID}/Tasks/${id}`, { completed: !task.completed }).then(() => { });
+                }
 
                 // use object spread to make a new object
                 // whose `completed` prop has been inverted

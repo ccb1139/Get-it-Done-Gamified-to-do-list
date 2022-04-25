@@ -3,6 +3,7 @@ import Donut from "./Donut";
 import AddTaskButton from "./AddTaskButton";
 import DraggableStickyNote from "./DraggableStickyNote";
 import { Container, Image, Row, Col } from "react-bootstrap";
+import TrackerContainer from "./TrackerContainer";
 import { useState, useEffect } from "react";
 import ToDoList from "./ToDoList";
 import { AiOutlineUnorderedList } from "react-icons/ai";
@@ -61,7 +62,9 @@ const DailyView = () => {
 
             <ToDoList Day={dayName[today.getDay()]} curDate={today} updateTasks={setTasks} />
 
-            <Container className="col-sm-10 fixed-bottom border border-dark" fluid>
+            <TrackerContainer tasks={tasks} view={"daily"} />
+
+            {/* <Container className="col-sm-10 fixed-bottom border border-dark" fluid>
                 <div>
                     <Row>
                         <Col lg={9} sm={6} xs={6} id="habitDonuts">
@@ -76,7 +79,7 @@ const DailyView = () => {
                         </Col>
                     </Row>
                 </div>
-            </Container>
+            </Container> */}
         </>
     );
 }

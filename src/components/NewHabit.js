@@ -61,13 +61,21 @@ const NewHabit = () => {
         // Save habit
         firebase.createDocument(`users/${userID}/Habits/`, habit).then(() => {});
 
+        var tasks = []
+        for (var i = 0; i < totalDays; i++) {
+            const todayTemp = new Date();
+            const dueDate = new Date(todayTemp.setDate(todayTemp.getDate() + parseInt(i)));
+            tasks.push({id: habitName + "___" + i, completed: false, due: dueDate, text: habit.task, habit: true})
+        }
+
         // Create task related to habit
         var habitAsTask = {
             text: habit.task,
-            completed: false,
+            // completed: false,
             habit: true,
             due: endDate,
-            created: new Date()
+            created: new Date(),
+            tasks: tasks
         }
         firebase.createDocument(`users/${userID}/Tasks/`, habitAsTask).then((id) => {});
 

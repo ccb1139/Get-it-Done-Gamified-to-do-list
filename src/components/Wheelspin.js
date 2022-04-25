@@ -98,7 +98,45 @@ const Wheelspin = () => {
         }
     }
 
-    var unlock_Avil = tasks.filter(task => task.completed).length == tasks.length ? true : false;
+    // var unlock_Avil = tasks.filter(task => task.completed).length == tasks.length ? true : false;
+    var unlock_Avil = tasks.filter(task => {
+        // console.log(task)
+        var completed = true;
+        const today = new Date();
+
+        var weekDates = [];
+        var startDate = new Date();
+        startDate.setDate((startDate.getDate() - startDate.getDay()));
+        for (var i = 0; i < 7; i++) {
+            weekDates.push( new Date(startDate) ); 
+            startDate.setDate(startDate.getDate() + 1);
+        }
+
+        if (task.habit) {
+            task.tasks.forEach((habit) => {
+                for (var i = 0; i < weekDates.length; i++) {
+                    // Check if the element is {}
+                    if (Object.keys(habit).length === 0) { continue; }
+
+                    const dueDate = new Date(habit.due.seconds * 1000);
+
+                    // Check that the habit is today
+                    if ((dueDate.getDate() === today.getDate() && dueDate.getMonth() === today.getMonth() && dueDate.getYear() === today.getYear())) {
+                        // Check if the habit is completed
+                        if (!habit.completed) {
+                            console.log(habit);
+                            completed = false
+                        }
+                    }
+                }
+
+            });
+        }
+
+        // If its a normal task just check if its completed, if its a habit
+        // check if the habit is for today and it is completed
+        return task.completed || completed
+    }).length == tasks.length ? true : false;
 
     return (
         <div className='container'>
