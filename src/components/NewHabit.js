@@ -98,12 +98,16 @@ const NewHabit = () => {
             <Form onSubmit={handleSubmit(saveHabit)}>
                 <Row className="mb-2">
                     <Col className="col-4">
-                        <Form.Label className="text-right">Habit Name</Form.Label> 
+                        <Form.Label htmlFor="habitNameInput" className="text-right">Habit Name</Form.Label> 
                     </Col>
 
                     <Col className="col-6">
-                        <input className="form-control" id="habitNameInput" autoComplete="off" {...register("habitNameInput", 
-                        {required: true, maxLength: 25})}/>
+                        <input className="form-control"  
+                        id="habitNameInput" 
+                        autoComplete="off" 
+                        {...register("habitNameInput", {required: true, maxLength: 25})}
+                        aria-required="true"
+                        />
                         
                     </Col>
                 </Row>
@@ -114,12 +118,16 @@ const NewHabit = () => {
 
                 <Row className="mb-2">
                     <Col className="col-4">
-                        <Form.Label className="text-right">Task</Form.Label> 
+                        <Form.Label htmlFor="taskInput" className="text-right">Task</Form.Label> 
                     </Col>
 
                     <Col className="col-6">
-                        <input className="form-control" id="taskInput" autoComplete="off" {...register("taskInput", 
-                        {required: true, maxLength: 25})}/>
+                        <input className="form-control" 
+                        id="taskInput" 
+                        autoComplete="off" 
+                        {...register("taskInput", {required: true, maxLength: 25})}
+                        aria-required="true"
+                        />
                         
                     </Col>
                 </Row>
@@ -130,12 +138,16 @@ const NewHabit = () => {
 
                 <Row className="mb-2">
                     <Col className="col-4">
-                        <Form.Label className="text-right">Frequency</Form.Label> 
+                        <Form.Label htmlFor="frequencyInput" className="text-right">Frequency</Form.Label> 
                     </Col>
 
                     <Col className="col-3">
-                        <input className="form-control" id="frequencyInput" type="number" autoComplete="off" {...register("frequencyInput", 
-                        {required: true, min:1, max: 7})}/>
+                        <input className="form-control" 
+                        id="frequencyInput" 
+                        type="number" autoComplete="off" 
+                        {...register("frequencyInput", {required: true, min:1, max: 7})}
+                        aria-required="true"
+                        />
                     </Col>
                     
                     <Col className="col-3">
@@ -150,12 +162,16 @@ const NewHabit = () => {
 
                 <Row className="mb-2">
                     <Col className="col-4">
-                        <Form.Label className="text-right">Length</Form.Label> 
+                        <Form.Label htmlFor="lengthInput" className="text-right">Length</Form.Label> 
                     </Col>
 
                     <Col className="col-3">
-                        <input className="form-control" id="lengthInput" type="number" autoComplete="off" {...register("lengthInput", 
-                        {required: true, min:1, max: 365})}/>
+                        <input className="form-control" 
+                        id="lengthInput" 
+                        type="number" 
+                        autoComplete="off" {...register("lengthInput", {required: true, min:1, max: 365})}
+                        aria-required="true"
+                        />
                     </Col>
 
                     <Col className="col-3">
@@ -181,7 +197,7 @@ const NewHabit = () => {
             
                 <Row>
                     <Col className="col-12 text-center" >
-                        <Button variant="primary" size="lg" type="submit">Create</Button>
+                        <Button variant="primary" name="submit" size="lg" type="submit">Create</Button>
                     </Col>
                 </Row>
             </Form>
