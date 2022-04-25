@@ -23,7 +23,7 @@ const Achievement = ({ donut, badge, title, description, level, factor, max, ste
     }
 
     const lvlsStr = levelscale(step_req, factor, max);
-    console.log("HEY")
+
     return (
         //   Whole Card
         <div className='achv row border border-dark rounded mb-10'>

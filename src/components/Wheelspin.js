@@ -125,7 +125,7 @@ const Wheelspin = () => {
 
                     </div>
                 </div>
-                <Tracker stickies={stickies}></Tracker>
+                <Tracker _stickies={stickies}></Tracker>
                 <UnlockProgress></UnlockProgress>
             </div>
         </div>

@@ -26,6 +26,8 @@ const Achievements = () => {
     useEffect(() => {
         firebase.getCollection(`users/${userID}/inp-Achievements/`).then((result) => {
 
+
+
             if (result.length === 0) {
                 for (var i in ach) {
                     //console.log("No achivements detected")
@@ -49,20 +51,23 @@ const Achievements = () => {
 
             }
 
-            console.log("curr_ach loaded")
-            setCurrAch(result)
-            create_ach(result);
-        });
-        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
-            setTrackerInfo(result);
-        });
-        firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result) => {
-            setComplete_ach(result);
+            setCurrAch(result);
+            firebase.getCollection(`users/${userID}/earned-Achievements/`).then((result2) => {
+                setComplete_ach(result2);
 
+                firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result1) => {
+                    setTrackerInfo(result1);
+                    create_ach(result, result1, result2);
+                });
+            });
+
+            console.log("pulling from database")
+            //create_ach(result);
         });
+
         ach = JSON.parse(JSON.stringify(achJSON));
 
-        
+
 
     }, []);
 
@@ -74,34 +79,43 @@ const Achievements = () => {
             tmp = Math.round((prvLevel + CurLevel) * factor);
             prvLevel = CurLevel;
             CurLevel = tmp;
-            //console.log("prvLevel: " + prvLevel + "\t curLevel: " + CurLevel)
         }
         return (CurLevel);
     }
 
-    function getStepsCompleted(ach_id) {
-        for (var i in tracker_info) {
-            if (ach_id == tracker_info[i]["ach_id"]) {
-                return tracker_info[i]["stUnlocked"];
+    function getStepsCompleted(ach_id, tracker__info) {
+        for (var i in tracker__info) {
+            if (ach_id == tracker__info[i]["ach_id"]) {
+                return tracker__info[i]["stUnlocked"];
             }
 
         }
         return 0;
     }
 
+    function shrinkLvlArray(lvlProg) {
+        var rtnArray = []
+        for (var i = 1; i < lvlProg.length; i++){
+            rtnArray.push(lvlProg[i]);
+        }
+        return rtnArray;
+    }
 
 
-    function create_ach(curr_ach) {
-        console.log("CREATED ACH")
+    function create_ach(curr_ach, tracker__info, complete__ach) {
         active_achs = []
-        console.log(curr_ach)
-        console.log(ach)
+        // console.log(curr_ach)
+        // console.log(ach)
+        // console.log(tracker__info)
+        // console.log(complete__ach)
 
+        // console.log("ACH DEBGGGING ##############################")
         for (var usrAch in curr_ach) {
             for (var allAch in ach) {
                 if (curr_ach[usrAch]["id"] == ach[allAch]["id"]) {
 
-                    const StepsDone = getStepsCompleted(ach[allAch]["id"]);
+                    const StepsDone = getStepsCompleted(ach[allAch]["id"], tracker__info);
+                    //console.log(ach[allAch]["id"] + " steps done: " + StepsDone)
 
                     var curLVL = calcCurSteps(ach[allAch]["stp_req"],
                         curr_ach[usrAch]["level"], ach[allAch]["curve"])
@@ -109,51 +123,90 @@ const Achievements = () => {
                         (curr_ach[usrAch]["level"] + 1), ach[allAch]["curve"])
 
                     var i = 1;
+
+
+
                     if (StepsDone >= nxtLVL) {
+                        // console.log("StepsDone: " + StepsDone + " >= " + "nxtLVL: " + nxtLVL)
                         var nxtLvlTmp = nxtLVL
+                        var lvlPrg = [nxtLVL];
                         while (StepsDone >= nxtLVL) {
                             curLVL = calcCurSteps(ach[allAch]["stp_req"],
                                 (curr_ach[usrAch]["level"] + i), ach[allAch]["curve"])
                             nxtLVL = calcCurSteps(ach[allAch]["stp_req"],
                                 (curr_ach[usrAch]["level"] + (i + 1)), ach[allAch]["curve"])
                             i++;
+                            lvlPrg.push(nxtLVL);
                         }
-                        //console.log(StepsDone + " === " + nxtLvlTmp)
-                        if (StepsDone === nxtLvlTmp) {
-                            var foundAch = false;
+                        // console.log(lvlPrg)
+                        // console.log(StepsDone + " === " + nxtLvlTmp)
+                        var foundAch = false;
+                        for (var cmp_ach in complete__ach) {
 
+                            // console.log("curr_ach[usrAch][id]: " + curr_ach[usrAch]["id"] + " == " + 'complete__ach[cmp_ach]["ach_id"]: ' + complete__ach[cmp_ach]["ach_id"])
+                            // //console.log(((curr_ach[usrAch]["id"] == complete__ach[cmp_ach]["ach_id"])))
+                            // console.log("(i - 1): " + (i - 1) + " == " + 'complete__ach[cmp_ach]["level"]): ' + complete__ach[cmp_ach]["level"])
+                            // // console.log(((i - 1) == complete__ach[cmp_ach]["level"]))
+                            // console.log((curr_ach[usrAch]["id"] == complete__ach[cmp_ach]["ach_id"])
+                            //     && ((i - 1) == complete__ach[cmp_ach]["level"]))
+                            // Find if achviment has already been completed 
 
-
-                            for (var cmp_ach in complete_ach) {
-
-
-                                // console.log(complete_ach.length)
-                                // Find if achviment has already been completed 
-                                if ((curr_ach[usrAch]["id"] == complete_ach[cmp_ach]["ach_id"])
-                                    && ((i - 1) == complete_ach[cmp_ach]["level"])) {
+                            // if ((curr_ach[usrAch]["id"] == complete__ach[cmp_ach]["ach_id"])
+                            //     && ((i - 1) == complete__ach[cmp_ach]["level"])) {
+                            //     console.log("Achivment already in database!");
+                            //     foundAch = true;
+                            // }
+                            //console.log("curr_ach[usrAch][id]: " + curr_ach[usrAch]["id"] + " == " + 'complete__ach[cmp_ach]["ach_id"]: ' + complete__ach[cmp_ach]["ach_id"])
+                            if ((curr_ach[usrAch]["id"] == complete__ach[cmp_ach]["ach_id"])) {
+                                if ((i - 1) == complete__ach[cmp_ach]["level"]) {
                                     //console.log("Achivment already in database!");
                                     foundAch = true;
                                 }
-                                if (cmp_ach === (complete_ach.length - 1)) {
-                                    if (foundAch === false) {
-                                        console.log(curr_ach[usrAch]["id"] + " == " + complete_ach[cmp_ach]["ach_id"])
-                                        console.log((i - 1) + " == " + complete_ach[cmp_ach]["level"])
+                                //console.log("(i - 1): " + (i - 1) + " > " + 'complete__ach[cmp_ach]["level"]): ' + complete__ach[cmp_ach]["level"])
+                                if ((i - 1) > complete__ach[cmp_ach]["level"]) {
+                                    // console.log("Found Level Below!");
+                                    // console.log("(i - 1): " + (i - 1) + " < " + 'complete__ach[cmp_ach]["level"]: ' + complete__ach[cmp_ach]["level"])
+                                    // console.log(lvlPrg)
+                                    lvlPrg = shrinkLvlArray(lvlPrg);
+                                    //console.log(lvlPrg)
+                                }
+
+
+
+                            }
+
+                            // This part cant happen unless we have iterated through all the achivments to see if one was found
+                            if (cmp_ach == (complete__ach.length - 1)) {
+                                //console.log("foundAch: " + foundAch);
+                                if (foundAch === false) {
+                                    // console.log(curr_ach[usrAch]["id"] + " == " + complete__ach[cmp_ach]["ach_id"])
+                                    // console.log((i - 1) + " == " + complete__ach[cmp_ach]["level"])
+
+                                    var ind = lvlPrg.length - 2;
+                                    //console.log("ind: " + ind + " i - 1: " + (i - 1))
+                                    for (var j = i - 1; j > 0; j--) {
 
                                         firebase.createDocument(`users/${userID}/earned-Achievements/`,
                                             {
                                                 ach_id: curr_ach[usrAch]["id"],
-                                                description: (curr_ach[usrAch]["descp1"] + " " + nxtLVL + " " + curr_ach[usrAch]["descp2"]),
-                                                level: i - 1,
+                                                description: (ach[allAch]["descp1"] + " " + lvlPrg[ind] + " " + ach[allAch]["descp2"]),
+                                                level: j,
                                                 title: ach[allAch]["ach_name"]
                                             }
-                                        ).then((id) => { console.log("Unlocked achivment") })
+                                        ).then((id) => {})
+
+                                        if(ind <= 0){
+                                            break;
+                                        }
+                                        ind--;
                                     }
+
                                 }
                             }
-
                         }
 
                     }
+
 
 
 
@@ -183,6 +236,7 @@ const Achievements = () => {
         //console.log(active_achs)
         setAllAch(active_achs);
     }
+
 
     // To load an achievment you need to enter the users achivement ids and then their current levels into the 
     // create_ach function 

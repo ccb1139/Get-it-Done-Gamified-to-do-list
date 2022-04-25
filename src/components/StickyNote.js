@@ -97,7 +97,7 @@ const StickyNote = ({ id, idSender, color, hId, tId }) => {
                     onClick={(e) => {
                         updateStickyDenote(0, id, hId, tId);
                     }}
-                >Set as habbit sticky note</MenuItem>
+                >Set as habit sticky note</MenuItem>
                 <MenuItem value="TaskNote"
                     onClick={(e) => {
                         updateStickyDenote(1, id, hId, tId);
