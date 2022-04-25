@@ -1,17 +1,12 @@
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import rewardEx from '../img/landing/rewards.png';
 import taskEx from '../img/landing/task.png';
 import trackerEx from '../img/landing/tracker.png';
 import face from '../img/landing/faces/placeholder.png';
 import john from '../img/landing/faces/johnface.png';
 import michael from '../img/landing/faces/michaelface.jpg';
+import rebecca from '../img/landing/faces/rebeccaface.jpg';
 
-/*
-var sectionStyle = {
-    backgroundImage: `url(${LandingPageSkeleton})`
- }
-
-*/
 
 const Home = () => {
     return (
@@ -76,11 +71,11 @@ const Home = () => {
                     <Row>
                         <Col lg={4} className="p-2" >
                             <Row>
-                                <img src={face} alt="Rebecca Alvez" className="rounded-circle w-50 mx-auto" fluid="true"/>
+                                <img src={rebecca} alt="Rebecca Alves" className="rounded-circle w-50 mx-auto" fluid="true"/>
                             </Row>
                             <Row style={{textAlign: "center"}} className="mx-auto">
 								<h1>Rebecca Alvez</h1>
-								<h3>Programmer</h3>
+								<h3> Developer and Project Manager</h3>
                             </Row>
                         </Col>
         
@@ -90,7 +85,7 @@ const Home = () => {
                             </Row>
                             <Row style={{textAlign: "center"}} className="mx-auto">
 								<h1>Caleb Bergen</h1>
-								<h3>Programmer</h3>
+								<h3>Achievements Developer</h3>
                             </Row>
                         </Col>
 
@@ -100,7 +95,7 @@ const Home = () => {
                             </Row>
                             <Row style={{textAlign: "center"}} className="mx-auto">
 								<h1>Michael McGilvray</h1>
-								<h3>Programmer</h3>
+								<h3>Lead Developer</h3>
                             </Row>
                         </Col>
                     </Row>  
@@ -111,7 +106,7 @@ const Home = () => {
                             </Row>
                             <Row style={{textAlign: "center"}} className="mx-auto">
 								<h1>John O'Neill</h1>
-								<h3>Programmer / Backend</h3>
+								<h3>Developer / Backend</h3>
                             </Row>
                         </Col>
         
@@ -121,7 +116,7 @@ const Home = () => {
                             </Row>
                             <Row style={{textAlign: "center"}} className="mx-auto">
 								<h1>Ankit Lalotra</h1>
-								<h3>Programmer</h3>
+								<h3>Developer</h3>
                             </Row>
                         </Col>
                     </Row>      
