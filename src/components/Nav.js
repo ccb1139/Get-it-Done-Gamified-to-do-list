@@ -58,17 +58,22 @@ const MainNav = () => {
                 <NavDropdown.Item as={Link} to={appname + "/DailyView"}> Daily View </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={appname + "/WeeklyView"}> Weekly View </NavDropdown.Item>
               </NavDropdown>
+
+              <NavDropdown title="Unlockables">
+                <NavDropdown.Item as={Link} to={appname + "/Achievements"}> Achievements </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={appname + "/HallOfFrame"}> Hall Of Fame </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={appname + "/Wheelspin"}> Wheelspin </NavDropdown.Item>
+              </NavDropdown>
               
-              <Nav.Link as={Link} to={appname + "/Achievements"}> Achievements</Nav.Link>
-              {/* Temp wheelspin button on nav bar */}
-              <Nav.Link as={Link} to={appname + "/HallOfFrame"}> Hall Of Fame</Nav.Link>
-              <Nav.Link as={Link} to={appname + "/Wheelspin"}> Wheelspin</Nav.Link>
+              {/* <Nav.Link as={Link} to={appname + "/Achievements"}> Achievements</Nav.Link>
+              <Nav.Link as={Link} to={appname + "/HallOfFrame"}> Hall Of Fame </Nav.Link>
+              <Nav.Link as={Link} to={appname + "/Wheelspin"}> Wheelspin</Nav.Link> */}
             </Nav>
 
             <Nav> 
-              <Nav.Link as={Link} to={appname + "/Settings"}>
+              {/* <Nav.Link as={Link} to={appname + "/Settings"}>
                 <img src={setting} alt="Settings" className = "icons" width="30" height="30"/>  
-              </Nav.Link>
+              </Nav.Link> */}
               
               <Nav.Link href="https://github.com/ccb1139/Get-it-Done-Gamified-to-do-list">
                 <img src={github} alt="Github Link" className = "icons" width="30" height="30"/>  
