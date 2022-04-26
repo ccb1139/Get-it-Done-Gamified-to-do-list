@@ -2,7 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import rewardEx from '../img/landing/rewards.png';
 import taskEx from '../img/landing/task.png';
 import trackerEx from '../img/landing/tracker.png';
-import face from '../img/landing/faces/placeholder.png';
+import face from '../img/landing/faces/Ankit.jpeg';
 import john from '../img/landing/faces/johnface.png';
 import michael from '../img/landing/faces/michaelface.jpg';
 import rebecca from '../img/landing/faces/rebeccaface.jpg';
