@@ -86,7 +86,7 @@ const Home = () => {
                             </Row>
                             <Row style={{textAlign: "center"}} className="mx-auto">
 								<h1>Caleb Bergen</h1>
-								<h3>Achievements Developer</h3>
+								<h3>Unlockables Developer</h3>
                             </Row>
                         </Col>
 
