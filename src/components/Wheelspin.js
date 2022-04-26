@@ -25,6 +25,7 @@ const Wheelspin = () => {
     const [taskStickyId, settId] = useState([]);
 
     const [testguy, setTest] = useState("");
+    const [numOfUnlocks, setnou] = useState(0);
 
     useEffect(() => {
         firebase.getCollection(`users/${userID}/collectables/`).then((result) => {
@@ -124,7 +125,7 @@ const Wheelspin = () => {
                     if ((dueDate.getDate() === today.getDate() && dueDate.getMonth() === today.getMonth() && dueDate.getYear() === today.getYear())) {
                         // Check if the habit is completed
                         if (!habit.completed) {
-                            console.log(habit);
+                            //console.log(habit);
                             completed = false
                         }
                     }
@@ -138,11 +139,17 @@ const Wheelspin = () => {
         return task.completed || completed
     }).length == tasks.length ? true : false;
 
+    // function getUnlockAvail(unlockAvil){
+    //     console.log("from wheelspin: " + unlockAvil)
+    //     var tempdude = unlockAvil;
+    //     //setnou(tempdude)
+    // }
+
     return (
         <div className='container'>
             <div id='WsMain' className='row'>
                 <div id='MysterySticky' className='col-md-6 d-flex align-items-center justify-content-center' onMouseUp={animationEndUpdate} >
-                    <PickOne unlockAvil={unlock_Avil} />
+                    <PickOne unlockAvil={0} />
                 </div>
                 <div className='col-md-6'>
                     <div id='Owned-Items' className="row">
@@ -164,7 +171,7 @@ const Wheelspin = () => {
                     </div>
                 </div>
                 <Tracker _stickies={stickies}></Tracker>
-                <UnlockProgress _canWrite={true}></UnlockProgress>
+                <UnlockProgress _canWrite={true} ></UnlockProgress>
             </div>
         </div>
     )

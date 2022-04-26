@@ -10,8 +10,8 @@ function HOFAchCard({ title, badge, description, level }) {
     const toolTipStr = "You earned this achievment by " + description
 
     return (
-        <div id="HOFCard" className='col-sm-3 border' data-tip={toolTipStr}>
-            <div id="HOFCardHeader" className='row-sm HOFcardInfo'>
+        <div id="HOFCard" className='col-sm-3 border border-dark' data-tip={toolTipStr}>
+            <div id="HOFCardHeader" className='row-sm HOFcardInfo border'>
                 <h3 style={{ fontWeight: "bold" }} >{title + " " + level}</h3>
             </div>
             <div className='row-sm HOFcardInfo'>

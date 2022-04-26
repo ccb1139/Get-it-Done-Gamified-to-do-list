@@ -6,13 +6,23 @@ import React from "react"
 import * as firebase from "../db/firebase";
 import { useState, useEffect } from "react";
 
-function PickOne({unlockAvil, updateFunc}) {
+function PickOne({ unlockAvil, updateFunc }) {
     const userID = firebase.getUserID();
 
     const [stickies, setStickies] = useState([]);
-  
+    const [_unlockAvil, set_unlockAvil]= useState([]);
+    const [_trackers, setTrackers] = useState([]);
 
-    function addSticky(color){
+    useEffect(() => {
+        firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result1) => {
+            //setTrackers(result1);
+            for (var i in result1) {
+                if (result1[i]["ach_id"] == "UNLOCKS") { set_unlockAvil(result1[i]) }
+            }
+        });
+    }, []);
+
+    function addSticky(color) {
         firebase.createDocument(`users/${userID}/collectables/`, color).then((id) => {
 
             // Use the id from the database as the id in the tasks array locally
@@ -21,18 +31,21 @@ function PickOne({unlockAvil, updateFunc}) {
         });
     }
 
+    var canUnlock = false;
+    if (_unlockAvil["unlocksAvail"] > 0) { canUnlock = true; }
+    console.log(_unlockAvil["unlocksAvail"])
 
-    var canUnlock = unlockAvil;
+    //var canUnlock = unlockAvil;
 
     var blurClass = ""
-    if(canUnlock == false){
+    if (canUnlock == false) {
         blurClass = "cosHolder col-md-12 blur"
     } else {
         blurClass = "cosHolder col-md-12"
     }
 
     const onClick = (boxId) => {
-        if(!canUnlock) {
+        if (!canUnlock) {
             return;
         }
 
@@ -60,25 +73,25 @@ function PickOne({unlockAvil, updateFunc}) {
         boxPick.classList.add("boxClicked");
         boxNPick1.classList.add("boxNotClicked");
         boxNPick2.classList.add("boxNotClicked");
-        
+
 
         boxPick.addEventListener("animationend", function (e) {
-            var nc = Math.floor(Math.random()*16777215).toString(16);
+            var nc = Math.floor(Math.random() * 16777215).toString(16);
             //console.log(nc)
             boxPick.src = SNTmp
             boxPick.style.filter = 'opacity(0.5) drop-shadow(0 0 0 #' + nc + ')'
             boxPick.classList.remove("boxClicked")
             boxPick.classList.add("CosPicked");
-            addSticky({color:nc, habit:false, task:false});
-            
+            addSticky({ color: nc, habit: false, task: false });
 
-            nc = Math.floor(Math.random()*16777215).toString(16);
+
+            nc = Math.floor(Math.random() * 16777215).toString(16);
             boxNPick1.src = SNTmp
             boxNPick1.style.filter = 'opacity(0.5) drop-shadow(0 0 0 #' + nc + ')'
             boxNPick1.classList.remove("boxNotClicked");
             boxNPick1.classList.add("CosNotPicked");
 
-            nc = Math.floor(Math.random()*16777215).toString(16);
+            nc = Math.floor(Math.random() * 16777215).toString(16);
             boxNPick2.src = SNTmp
             boxNPick2.style.filter = 'opacity(0.5) drop-shadow(0 0 0 #' + nc + ')'
             boxNPick2.classList.remove("boxNotClicked")
@@ -86,7 +99,10 @@ function PickOne({unlockAvil, updateFunc}) {
 
         })
 
-        canUnlock = false;
+        if((_unlockAvil["unlocksAvail"] - 1) >= 0){
+            firebase.updateDocument(`users/${userID}/inp-Ach-Trackers/${_unlockAvil["id"]}`, { unlocksAvail: (_unlockAvil["unlocksAvail"] - 1) }).then(() => { });
+        }
+        
         //updateFunc();
     }
     return (
@@ -95,9 +111,9 @@ function PickOne({unlockAvil, updateFunc}) {
                 <h3>Pick one to unlock a cosmetic!</h3>
             </div>
             <div id="pickUnlock" className={blurClass} >
-                <img src={MsyBox} id="clickMsBox1" onClick={onClick}></img>
-                <img src={MsyBox} id="clickMsBox2" onClick={onClick}></img>
-                <img src={MsyBox} id="clickMsBox3" onClick={onClick}></img>
+                <img src={MsyBox} className="clickMsBox" id="clickMsBox1" onClick={onClick}></img>
+                <img src={MsyBox} className="clickMsBox" id="clickMsBox2" onClick={onClick}></img>
+                <img src={MsyBox} className="clickMsBox" id="clickMsBox3" onClick={onClick}></img>
             </div>
         </div>
 

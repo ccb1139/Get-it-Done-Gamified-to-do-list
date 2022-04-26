@@ -28,18 +28,18 @@ const Achievement = ({ donut, badge, title, description, level, factor, max, ste
         //   Whole Card
         <div className='achv row border border-dark rounded mb-10'>
             {/* LeftSide */}
-            <div className='achv-info col-lg-4 d-flex align-items-center justify-content-center border' id='achv-progress'>
-                <div className='row d-flex align-items-center'>
-                    <div className="col-md col-lg acvh-iholder d-flex justify-content-center">
+            <div className='achv-info col-lg-4 d-flex align-items-center justify-content-center border'>
+                <div className='row d-flex align-items-center '>
+                    <div className="col-md col-lg acvh-iholder d-flex justify-content-center align-items-center">
                         {donut}
                     </div>
-                    <div className="col-md col-lg acvh-iholder">
+                    <div className="col-md col-lg acvh-iholder d-flex justify-content-center align-items-center">
                         <Badge id="achv-badge" badge_id={badge} badge_level={level}></Badge>
                     </div>
                 </div>
             </div>
             {/* Right Side */}
-            <div className='achv-info col-lg-8' id='achv-achv-description'>
+            <div className='achv-info col-lg-8  ach-left-guy' id='achv-achv-description'>
                 <h1>
                     {title}
                     <div id='ach_info_popup' data-tip data-for={title}>

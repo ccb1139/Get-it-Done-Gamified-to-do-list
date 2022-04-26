@@ -52,7 +52,12 @@ const Signin = ({ showSignin, closeSignin, showSignup, closeSignup, openSignup }
                 firebase.createDocument(`users/${_userID}/inp-Ach-Trackers/`,
                     ({ stUnlocked: 0, ach_id: "001" })).then((id) => { });
                 firebase.createDocument(`users/${_userID}/inp-Ach-Trackers/`,
-                    ({ stUnlocked: 0, ach_id: "004", habit:"ff7575", task:"f8d78b" })).then((id) => { });
+                    ({ stUnlocked: 0, ach_id: "004", habit: "ff7575", task: "f8d78b" })).then((id) => { });
+                firebase.createDocument(`users/${_userID}/inp-Ach-Trackers/`,
+                    ({ stUnlocked: 0, ach_id: "003" })).then((id) => { });
+                //Load unlocks avail (slight spaghetti code)
+                firebase.createDocument(`users/${_userID}/inp-Ach-Trackers/`,
+                    ({ ach_id: "UNLOCKS", unlocksAvail: 0, unlocksEarned: 0 })).then((id) => { });
             }
         });
     }

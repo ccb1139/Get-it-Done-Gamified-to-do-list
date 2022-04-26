@@ -9,7 +9,8 @@ function Badge({ id, badge_id, badge_level }) {
     return (
         <Tilt scale={scale} transitionSpeed={2500}
         glareEnable={true} glareMaxOpacity={0.5}
-        glareColor="#ffffff" glarePosition="bottom" glareBorderRadius="40px">
+        glareColor="#ffffff" glarePosition="bottom" glareBorderRadius="40px"
+        className='badgeTilt'>
             <Image className='col acvh-img' id={id}
                 src={require('../img/badges/' + badge_id + "/" + badge_level +".png")}
             />

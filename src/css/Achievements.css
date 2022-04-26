@@ -9,12 +9,17 @@
   width: auto;
   height: fit-content;
 
+  border-radius: 10px !important;
   margin: 10px;
 }
 
 .achv-info {
   text-align: center;
-
+  
+  border-radius: 10px !important;
+}
+.ach-left-guy {
+  background-color: #94d2bd;
 }
 
 .acvh-img {

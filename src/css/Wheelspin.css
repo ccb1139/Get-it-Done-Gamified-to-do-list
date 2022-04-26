@@ -24,6 +24,9 @@
     background-blend-mode: color;
 }
 
+.clickMsBox{
+    cursor: pointer;
+}
 
 .blur {
     -webkit-filter: blur(5px);

@@ -1,6 +1,6 @@
 [
   {
-    "ach_name": "Chicken' them off",
+    "ach_name": "\"Chicken\" them off",
     "descp1": "Complete",
     "descp2": "tasks total",
     "stp_req": 3,
@@ -20,9 +20,9 @@
     "showStpRq": true
   },
   {
-    "ach_name": "24 / 7 / 365",
-    "descp1": "Finish the day with all habits and tasks completed",
-    "descp2": "times",
+    "ach_name": "Have to \"habit\"",
+    "descp1": "Create",
+    "descp2": "Habits",
     "stp_req": 3,
     "levels": 5,
     "id": "003",
