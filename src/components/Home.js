@@ -6,6 +6,7 @@ import face from '../img/landing/faces/placeholder.png';
 import john from '../img/landing/faces/johnface.png';
 import michael from '../img/landing/faces/michaelface.jpg';
 import rebecca from '../img/landing/faces/rebeccaface.jpg';
+import caleb from '../img/landing/faces/calebface.jpg';
 
 
 const Home = () => {
@@ -81,7 +82,7 @@ const Home = () => {
         
                         <Col lg={4} className="p-2">
                             <Row>
-                                <img src={face} alt="Caleb Bergen" className="rounded-circle w-50 mx-auto" fluid="true"/>  
+                                <img src={caleb} alt="Caleb Bergen" className="rounded-circle w-50 mx-auto" fluid="true"/>  
                             </Row>
                             <Row style={{textAlign: "center"}} className="mx-auto">
 								<h1>Caleb Bergen</h1>
