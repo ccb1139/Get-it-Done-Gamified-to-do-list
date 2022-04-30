@@ -17,9 +17,9 @@ const Task = ({color, task, onDelete, onComplete}) => {
                 </Col>
 
                 <Col className="col-1 ms-auto align-self-center">
-                    <button className="closeButton" onClick={() => onDelete(task.id)}>
+                    {(!task.habit) ? <button className="closeButton" onClick={() => onDelete(task.id)}>
                         <MdClose size={20} className="pr-5"/>
-                    </button>
+                    </button> : null }
                 </Col>
             </Row>
         </div>

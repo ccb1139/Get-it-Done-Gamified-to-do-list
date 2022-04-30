@@ -76,20 +76,22 @@ function ToDoList({Day, curDate, getTasks, updateTasks}) {
     }, []);
 
     function deleteTask(id) {
-        updateTaskLists(tasks.filter((task) => task.id !== id))
 
         tasks.map(task => {
             if (id === task.id) {
-                if (task.habit) {
+                if (task.habit) { 
+                    /*
+                    
                     firebase.getDocument(`users/${userID}/Tasks/${task.parentid}`).then((result) => {
                         const index = task.id.substring(task.id.indexOf("___") + 3);
                         // result.tasks.splice(index, 1);
                         result.tasks[index] = {};
 
                         firebase.updateDocument(`users/${userID}/Tasks/${task.parentid}`, {tasks: result.tasks}).then(() => { });
-                    });
+                    }); */ 
                 } else {
                     firebase.deleteDocument(`users/${userID}/Tasks/${id}`).then(() => { });
+                    updateTaskLists(tasks.filter((task) => task.id !== id))
                 }
             }
         });
@@ -161,13 +163,20 @@ function ToDoList({Day, curDate, getTasks, updateTasks}) {
                 <AddTaskButton onAdd={addTask} dueDate={curDate} color={(curDate.getDate() === today.getDate()) ? todayColor : ""} />
                 <div className="dailyViewTraditional">
                     {tasks.map((task) => 
-                    <Task key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} color={task.habit ? habitColor : taskColor} />)}
+                        <Task key={task.id} 
+                            task={task} 
+                            onDelete={deleteTask}
+                            onComplete={completeTask} 
+                            color={task.habit ? habitColor : taskColor} 
+                        />
+                    )}
                 </div>
 
                 <div className="dailyViewStickyNotes">
                     {tasks.map((task) => <DraggableStickyNote key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} color={task.habit ? habitColor : taskColor} />)}
                 </div>
             </Container>
+            
         </>
     )
 }
