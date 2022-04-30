@@ -74,7 +74,7 @@ const Achievements = () => {
                 });
             });
 
-            console.log("pulling from database")
+            //console.log("pulling from database")
             //create_ach(result);
         });
 
@@ -116,6 +116,8 @@ const Achievements = () => {
 
     // Function creates an array of all the achivments to be displayed
     function create_ach(curr_ach, tracker__info, complete__ach) {
+        var today = new Date();
+        console.log()
         active_achs = [];
         var fully_completed_ach = ["005"];
         for (var usrAch in curr_ach) {
@@ -183,9 +185,10 @@ const Achievements = () => {
                                         firebase.createDocument(`users/${userID}/earned-Achievements/`,
                                             {
                                                 ach_id: curr_ach[usrAch]["id"],
-                                                description: (ach[allAch]["descp1"] + " " + lvlPrg[ind] + " " + ach[allAch]["descp2"]),
+                                                description: (ach[allAch]["earned_d1"] + " " + lvlPrg[ind] + " " + ach[allAch]["earned_d2"]),
                                                 level: j,
-                                                title: ach[allAch]["ach_name"]
+                                                title: ach[allAch]["ach_name"],
+                                                earned_date: (today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear())
                                             }
                                         ).then((id) => { })
 

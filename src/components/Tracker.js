@@ -3,7 +3,6 @@ import * as firebase from "../db/firebase";
 
 function Tracker({ canWrite, _stickies, _tasks }) {
     const userID = firebase.getUserID();
-
     const [_trackers, setTrackers] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [habits, setHabits] = useState([]);
@@ -11,7 +10,7 @@ function Tracker({ canWrite, _stickies, _tasks }) {
 
     useEffect(() => {
         firebase.getCollection(`users/${userID}/inp-Ach-Trackers/`).then((result) => {
-            console.log("Pulling from database trackers")
+            //console.log("Pulling from database trackers")
             setTrackers(result);
         });
         firebase.getCollection(`users/${userID}/Tasks/`).then((result1) => {

@@ -41,14 +41,14 @@ function UnlockProgress({_canWrite, unlockAvailSender}) {
         for(var i = 1; i < tasksCopy["stUnlocked"] + 1; i++){
             //console.log(i);
             if(i % 5 == 0) {
-                console.log("Unlock Avail!")
+                //console.log("Unlock Avail!")
                 aU++
             }
         }
-        console.log(aU )
+        //console.log(aU )
 
         if(aU > unlocksCopy["unlocksEarned"]){
-            console.log(aU - unlocksCopy["unlocksEarned"])
+            //console.log(aU - unlocksCopy["unlocksEarned"])
             
             firebase.updateDocument(`users/${userID}/inp-Ach-Trackers/${unlocksCopy["id"]}`, { unlocksEarned: aU }).then(() => { });
 

@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import UnlockProgress from './UnlockProgress'
 import Badge from './Badge';
 
-function HOFAchCard({ title, badge, description, level }) {
+function HOFAchCard({ title, badge, description, level, date }) {
     
     const toolTipStr = "You earned this achievment by " + description
 
@@ -19,7 +19,7 @@ function HOFAchCard({ title, badge, description, level }) {
                 
             </div>
             <div className='row-sm HOFcardInfo'>
-                <p>75% of users have this</p>
+                <p>Earned on {date}</p>
             </div>
             <ReactTooltip place="bottom" type="dark" effect="solid" />
 

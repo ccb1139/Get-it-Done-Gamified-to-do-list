@@ -20,6 +20,7 @@ const Signin = ({ showSignin, closeSignin, showSignup, closeSignup, openSignup }
     function loadNewAccount(_userID) {
         //console.log(_userID)
         // Load sticky notes
+        var today = new Date();
         firebase.getCollection(`users/${_userID}/collectables/`).then((result) => {
 
             if (result.length === 0) {
@@ -34,10 +35,11 @@ const Signin = ({ showSignin, closeSignin, showSignup, closeSignup, openSignup }
             console.log(result)
             if (result.length === 0) {
                 const placeholder = {
-                    description: "Login for the first time!",
+                    description: "logging in for the first time!",
                     ach_id: "005",
                     level: 1,
-                    title: "First timer"
+                    title: "First timer",
+                    earned_date: (today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear())
                 }
                 result.push(placeholder)
                 firebase.createDocument(`users/${_userID}/earned-Achievements/`, placeholder).then((id) => { })

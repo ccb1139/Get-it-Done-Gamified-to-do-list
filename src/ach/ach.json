@@ -7,17 +7,21 @@
     "levels": 5,
     "id": "001",
     "curve": 1.25,
-    "showStpRq": true
+    "showStpRq": true,
+    "earned_d1": "completeing",
+    "earned_d2": "tasks total"
   },
   {
     "ach_name": "Sticking with it",
     "descp1": "Unlock",
-    "descp2": "sticky note colors by completing donuts",
+    "descp2": "sticky note colors",
     "stp_req": 3,
     "levels": 5,
     "id": "002",
     "curve": 1,
-    "showStpRq": true
+    "showStpRq": true,
+    "earned_d1": "unlocking",
+    "earned_d2": "sticky note colors"
   },
   {
     "ach_name": "Have to \"habit\"",
@@ -27,7 +31,9 @@
     "levels": 5,
     "id": "003",
     "curve": 1,
-    "showStpRq": true
+    "showStpRq": true,
+    "earned_d1": "creating",
+    "earned_d2": "habits total"
   },
   {
     "ach_name": "Make it yours",
@@ -37,7 +43,9 @@
     "levels": 1,
     "id": "004",
     "curve": 1,
-    "showStpRq": false
+    "showStpRq": false,
+    "earned_d1": "changing the color of your",
+    "earned_d2": "habit and task sticky notes"
   },
   {
     "ach_name": "First Timer",
@@ -47,6 +55,8 @@
     "levels": 1,
     "id": "005",
     "curve": 1,
-    "showStpRq": false
+    "showStpRq": false,
+    "earned_d1": "completeing",
+    "earned_d2": "tasks total"
   }
 ]

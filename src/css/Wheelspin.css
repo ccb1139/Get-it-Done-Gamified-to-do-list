@@ -56,6 +56,17 @@
    
 }
 
+#pickoneBTN{
+    margin-bottom: 5px;
+}
+
+.pickoneBTN-show{
+    display: inline-block;
+}
+
+.pickoneBTN-hide{
+    display: none;
+}
 
 .TypeDenoter{
     font-weight: bold;
