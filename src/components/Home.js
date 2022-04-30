@@ -100,7 +100,7 @@ const Home = () => {
                             </Row>
                         </Col>
                     </Row>  
-                    <Row>
+                    <Row className="justify-content-md-center">
                         <Col lg={4} className="p-2" >
                             <Row>
                                 <img src={john} alt="John O'Neill" className="rounded-circle w-50 mx-auto" fluid="true"/>  
