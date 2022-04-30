@@ -5,7 +5,7 @@ import habit from '../img/how/newhabit.png';
 import list from '../img/how/todolist.png';
 import arch from '../img/how/achievement.png';
 
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col} from 'react-bootstrap'
 
 const HowTo = () => {
     return (
@@ -62,7 +62,7 @@ const HowTo = () => {
                 </Container>
             </div>
 
-            <div className>
+            <div>
                 <Container> 
                     <Row className="m-5">
 						<h2 className="text-center m-2"> Achievement <span className="difText">System</span></h2> 
