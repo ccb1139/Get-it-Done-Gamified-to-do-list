@@ -75,7 +75,7 @@ const Home = () => {
                                 <img src={rebecca} alt="Rebecca Alves" className="rounded-circle w-50 mx-auto" fluid="true"/>
                             </Row>
                             <Row style={{textAlign: "center"}} className="mx-auto">
-								<h1>Rebecca Alvez</h1>
+								<h1>Rebecca Alves</h1>
 								<h3> Developer and Project Manager</h3>
                             </Row>
                         </Col>
