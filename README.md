@@ -42,13 +42,13 @@ Instructions on how to [cone a repository](https://docs.github.com/en/repositori
 
 Run the following command:
 
-### `npm install`
+#### `npm install`
 
 ### Run the App in development mode
 
 In your project direction, run the following command:
 
-### `npm start`
+#### `npm start`
 
 # More about React App:
 
