@@ -28,8 +28,6 @@ If the command is not found, install Node.js
 
 ### Install Node.js directly:
 
-[
-
 [Download](https://nodejs.org/en/download/)
 
 ## Step Two:
