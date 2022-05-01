@@ -5,7 +5,7 @@ import habit from '../img/how/newhabit.png';
 import list from '../img/how/todolist.png';
 import arch from '../img/how/achievement.png';
 
-import { Container, Row, Col} from 'react-bootstrap'
+import { Container, Row, Col} from 'react-bootstrap';
 
 const HowTo = () => {
     return (

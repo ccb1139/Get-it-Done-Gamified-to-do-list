@@ -77,6 +77,7 @@ const NewHabit = () => {
             created: new Date(),
             tasks: tasks
         }
+        
         firebase.createDocument(`users/${userID}/Tasks/`, habitAsTask).then((id) => {});
 
 
@@ -144,7 +145,8 @@ const NewHabit = () => {
                     <Col className="col-3">
                         <input className="form-control" 
                         id="frequencyInput" 
-                        type="number" autoComplete="off" 
+                        type="number" 
+                        autoComplete="off" 
                         {...register("frequencyInput", {required: true, min:1, max: 7})}
                         aria-required="true"
                         />

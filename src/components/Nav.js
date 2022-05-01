@@ -53,7 +53,10 @@ const MainNav = () => {
           <>
             <Nav className='navbar-nav nav me-auto'>
               <Nav.Link as={Link} to={appname + "/HowTo"}> How To Use </Nav.Link>
-              <Nav.Link as={Link} to={appname + "/NewHabit"}> New Habit</Nav.Link>
+              <NavDropdown title="Habits">
+                <Nav.Link as={Link} to={appname + "/NewHabit"}> New Habit</Nav.Link>
+                <Nav.Link as={Link} to={appname + "/EditHabits"}> Edit Habits</Nav.Link>
+              </NavDropdown>
               <NavDropdown title="To-Do Lists">
                 <NavDropdown.Item as={Link} to={appname + "/DailyView"}> Daily View </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={appname + "/WeeklyView"}> Weekly View </NavDropdown.Item>
