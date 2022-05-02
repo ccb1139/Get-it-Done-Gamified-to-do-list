@@ -1,4 +1,5 @@
-import { Container, Row, Col, Button} from 'react-bootstrap';
+import "../css/EditHabits.css"
+import { Container, Row, Col, Button, Alert} from 'react-bootstrap';
 import { useState, useEffect } from "react";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import * as firebase from "../db/firebase";
@@ -12,6 +13,7 @@ const EditHabits = () => {
 
     const [habits, setHabits] = useState([]);
     const [tasks, setTasks] = useState([]);
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
         firebase.getCollection(`users/${userID}/Habits`).then((result) => {
@@ -26,12 +28,6 @@ const EditHabits = () => {
             
         });
     }, []);
-
-    function findTaskId () {
-        for (let key of tasks.keys()) {
-            console.log(key);
-        }
-    }
    
     const handleDelete = (item) => {
         var temp; 
@@ -51,6 +47,7 @@ const EditHabits = () => {
 
         //update current list of habits
         setTasks(tasks.filter((task) => task.id !== item.id))
+        setShow(true);
     }
 
     return (
@@ -60,24 +57,26 @@ const EditHabits = () => {
         </div>
            <Container> 
                 {habits.map((habit) => 
-                    <div className="p-2" id ={habit.id} key={habit.id}>
-                    <Row>
+                    <div className= "border-bottom border-dark" id ={habit.id} key={habit.id}>
+                    <Row className="m-4" >
                         <Col>
-                            <span className="">{habit.habit}</span>
+                            <span>{habit.habit}</span>
                         </Col>
-                        <Col>
-                            <Button onClick={() => handleDelete(habit)}>
+                        <Col className="right-allign">
+                            <Button variant="outline-dark" onClick={() => handleDelete(habit)}>
                                 <RiDeleteBack2Line className="" size="25" />
                             </Button>
                         </Col>
                     </Row>
-                    
-                    <Row className="p-5">
-                      
-                    </Row>
                 </div>
                 )}
         </Container>
+        {show ? 
+        <Container className="w-25 mt-5">
+            <Alert variant="success" onClose={() => setShow(false)} dismissible>
+                Habit successfully deleted!
+            </Alert>
+        </Container> : null}
         </>
     );
   }

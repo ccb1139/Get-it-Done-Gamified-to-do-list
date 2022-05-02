@@ -83,7 +83,7 @@ const MainNav = () => {
               </Nav.Link>
     
               
-              <Button id="signIn" size="sm" onClick={userSignOut}> Sign-out </Button> 
+              <Button variant="outline-dark" id="signIn" size="sm" onClick={userSignOut}> Sign-out </Button> 
               
              
             </Nav>
@@ -91,7 +91,7 @@ const MainNav = () => {
           <>
             <Nav className='navbar-nav nav me-auto'></Nav>
             <Nav>
-              <Button id="signIn" size="sm" onClick={openSignin}> Sign-in </Button>
+              <Button variant="outline-dark" id="signIn" size="sm" onClick={openSignin}> Sign-in </Button>
             </Nav>
           </>
           }

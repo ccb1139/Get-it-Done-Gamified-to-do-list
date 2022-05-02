@@ -1,4 +1,6 @@
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
+import { useState } from 'react';
+import Signup from "./Signup";
 import rewardEx from '../img/landing/rewards.png';
 import taskEx from '../img/landing/task.png';
 import trackerEx from '../img/landing/tracker.png';
@@ -10,13 +12,28 @@ import caleb from '../img/landing/faces/calebface.jpg';
 
 
 const Home = () => {
+    const [showSignup, setShowSignup] = useState(false);
+    function openSignup() { setShowSignup(true) }
+    function closeSignup() { setShowSignup(false) }
+    
     return (
         <>
             <div>
                 <Container> 
-                    <Row className="m-5">
+                    <Row className="mt-5">
 						<h1 className="text-center m-2">Get it Done</h1> 
                         <h2 className="text-center m-2">Productivity with a <span className="difText"> Push</span> </h2>
+                    </Row>
+                </Container>
+            </div>
+            <div>
+                <Container> 
+                    <Row className="m-2 mb-4">
+                        <Col></Col>
+						<Col className="text-center"> 
+                            <Button variant="outline-dark" onClick={() => { openSignup(); }}> Get Started Now </Button>
+                        </Col>
+                        <Col></Col>
                     </Row>
                 </Container>
             </div>
@@ -122,6 +139,7 @@ const Home = () => {
                         </Col>
                     </Row>      
                 </Container>
+                {showSignup ? <Signup show={showSignup} close={closeSignup} /> : <></>}
             </div>
         </>
     );
